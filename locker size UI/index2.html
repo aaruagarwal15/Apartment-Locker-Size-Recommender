@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" type="text/css" href="http://weareoutman.github.io/clockpicker/dist/jquery-clockpicker.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="http://weareoutman.github.io/clockpicker/dist/jquery-clockpicker.min.js"></script>
+    <link rel="stylesheet" href="style2.css">
+    <script src="bundle2.js"></script>
+
+    <!-- <script src="bundle.js"></script> -->
+    <title>Property Details</title>
+    <style>
+        .border-3 {
+            border-width: 2px !important;
+            border-color: #17A2B8;
+        }
+    </style>
+    <script type="text/javascript">
+        $('.clockpicker').clockpicker();
+    </script>
+</head>
+
+<body style="background-color: #17A2B8;padding:1%;">
+    <!-- ==================================== HEADER CONTAINER =================================================== -->
+    <div class="container-fluid rounded-pill" id="property_details" style="background-color: #FFF;padding:1%;display:flex;flex-wrap: wrap">
+
+        <!-- ========= App Logo ========= -->
+        <div class="rounded-circle" style="text-align: center;">
+            <img src="logo.jpg" class="rounded-pill" width="43%">
+
+        </div>
+
+        <!-- ========= Property name ========= -->
+        <div style="display: flex;min-width:200px;">
+            <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -8 480 480" width="30px">
+                        <path fill="#17A2B8" d="m440 448v-49.960938c10.546875-6.214843 16.726562-17.816406 16-30.039062 0-17.671875-10.742188-32-24-32s-24 14.328125-24 32c-.726562 12.222656 5.453125 23.824219 16 30.039062v49.960938h-56v-243.054688l-48-24v43.054688h24v16h-24v32h24v16h-24v32h24v16h-24v32h24v16h-24v32h24v16h-24v16h-16v-321.96875l-96-27.421875v29.390625h56v16h-56v32h56v16h-56v32h56v16h-56v32h56v16h-56v32h56v16h-56v32h56v16h-56v32h56v16h-56v16h-16v-448h-144v32h72v16h-72v32h72v16h-72v32h72v16h-72v32h72v16h-72v32h72v16h-72v32h72v16h-72v32h72v16h-72v32h72v16h-72v32h72v16h-72v16h-48v16h480v-16zm0 0"/>
+                    </svg>&nbsp;&nbsp;
+            <p id="p_name">Property Name:</p>
+        </div>
+
+        <!-- ========= Property Address ========= -->
+        <div style="display: flex;margin-left:2%;min-width:200px;">
+            <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="-61 0 443 443.288" width="30px">
+                        <path fill="#FFF"d="m96.144531 136v88h32v-56c0-4.417969 3.582031-8 8-8h48c4.417969 0 8 3.582031 8 8v56h32v-88c0-4.417969 3.582031-8 8-8h8.480469l-80.480469-61.902344-80.480469 61.902344h8.480469c4.417969 0 8 3.582031 8 8zm0 0"/>
+                        <path fill="#17A2B8" d="m144.144531 176h32v48h-32zm0 0"/>
+                        <path fill="#17A2B8" d="m160.144531 443.289062c30.101563-37.585937 160-204.328124 160-283.289062 0-88.367188-71.636719-160-160-160-88.367187 0-160 71.632812-160 160 0 78.976562 129.894531 245.710938 160 283.289062zm-108.878906-313.601562 104-80c2.875-2.214844 6.882813-2.214844 9.757813 0l104 80c2.691406 2.097656 3.757812 5.667969 2.65625 8.894531-1.097657 3.226563-4.125 5.402344-7.535157 5.417969h-24v88c0 4.417969-3.582031 8-8 8h-144c-4.417969 0-8-3.582031-8-8v-88h-24c-3.421875 0-6.464843-2.179688-7.570312-5.421875-1.101563-3.242187-.019531-6.824219 2.691406-8.914063zm0 0"/>
+                    </svg>&nbsp;&nbsp;
+            <p id="p_address">Address:Address:Address:Address:Address:</p>
+        </div>
+
+        <!-- ========= Analyse Button ========= -->
+        <div align="center" style="margin-left:3%;">
+            <button type="button" class="btn btn-info rounded-pill" style="margin-top:1%;">      Analyse Property   </button>
+        </div>
+
+
+
+    </div><br>
+
+
+    <!-- ==================================== DETAILS CONTAINER =================================================== -->
+    <div class="container-scrollable rounded" id="carrier_units_analysis" style="background-color: #FFF;padding:1%;">
+        <div class="row">
+            <div class="col-lg-12 col-xs-12 ">
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-carrier-tab" style="color:#17A2B8;" data-toggle="tab" href="#nav-carrier" role="tab" aria-controls="nav-carrier" aria-selected="true">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp;Carrier Info
+                        </a>
+                        <a class="nav-item nav-link" id="nav-units-tab" style="color:#17A2B8;" data-toggle="tab" href="#nav-units" role="tab" aria-controls="nav-units" aria-selected="false">
+                            <i class="fa fa-building" aria-hidden="true"></i>&nbsp;Units Data
+                        </a>
+                    </div>
+                </nav>
+
+                <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+
+                    <!-- ============================================== CARRIER INFO ====================== -->
+
+                    <div class="tab-pane fade show active" id="nav-carrier" role="tabpanel" aria-labelledby="nav-carrier-tab">
+                        <!-- ==============  ADD NEW BUTTON FOR CARRIER ========= -->
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-placement="bottom" data-target="#newCarrier" style="margin-left: 1%;">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" height="20px" width="20px" x="0px" y="0px" viewBox="0 0 27.963 27.963" style="enable-background:new 0 0 27.963 27.963;" xml:space="preserve">
+                                <g>
+                                    <g id="c140__x2B_">
+                                        <path fill= "#FFF" d="M13.98,0C6.259,0,0,6.26,0,13.982s6.259,13.981,13.98,13.981c7.725,0,13.983-6.26,13.983-13.981    C27.963,6.26,21.705,0,13.98,0z M21.102,16.059h-4.939v5.042h-4.299v-5.042H6.862V11.76h5.001v-4.9h4.299v4.9h4.939v4.299H21.102z    "/>
+                                    </g>
+                                    <g id="Capa_1_9_">
+                                    </g>
+                                </g>                            
+                            </svg>&nbsp;
+                            Add New                    
+                        </button>
+                        <!-- ======================== NEW CARRIER MODAL ============================== -->
+                        <div class="modal fade" id="newCarrier" tabindex="-1" role="dialog" aria-labelledby="carriermodal" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="carriermodal">Add New Carrier</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form>
+                                        <div class="modal-body">
+                                            <div style="display:flex;justify-content: space-evenly;">
+                                                <div>
+                                                    Carrier ID:<br>
+                                                    <input type="text" class="form-control" id="n_carrier_id" />
+                                                </div>
+                                                <div>
+                                                    Carrier Name:<br>
+                                                    <input type="text" class="form-control" id="n_carrier_name" />
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col"></th>
+                                                        <th scope="col">Days</th>
+                                                        <th scope="col">Expected Delivery Time</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- ======= MONDAY ===== -->
+                                                    <tr>
+                                                        <td scope="row"><input class="checkbox" type="checkbox" class="form-check-input" id="check_mon"></td>
+                                                        <td><label class="form-check-label" for="check_mon">Monday</label></td>
+                                                        <td>
+                                                            <input class="carrier_time form-control" id="monStime" value="" style="max-width: 90px;display:inline" data-default="20:48">
+                                                            <!-- &emsp;to&emsp;
+                                                            <input class="carrier_time form-control" id="monEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
+                                                        </td>
+                                                    </tr>
+                                                    <!-- ======= TUESDAY ===== -->
+                                                    <tr>
+                                                        <th scope="row"><input class="checkbox" type="checkbox" class="form-check-input" id="check_tues"></th>
+                                                        <td><label class="form-check-label" for="check_tues">Tuesday</label></td>
+                                                        <td>
+                                                            <input class="carrier_time form-control" id="tuesStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
+                                                            <!-- &emsp;to&emsp;
+                                                            <input class="carrier_time form-control" id="tuesEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
+                                                        </td>
+                                                    </tr>
+                                                    <!-- ======= WEDNESDAY ===== -->
+                                                    <tr>
+                                                        <th scope="row"><input class="checkbox" type="checkbox" class="form-check-input" id="check_wed"></th>
+                                                        <td><label class="form-check-label" for="check_wed">Wednesday</label></td>
+                                                        <td>
+                                                            <input class="carrier_time form-control" id="wedStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
+                                                            <!-- &emsp;to&emsp;
+                                                            <input class="carrier_time form-control" id="wedEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
+                                                        </td>
+                                                    </tr>
+                                                    <!-- ======= THURSDAY ===== -->
+                                                    <tr>
+                                                        <th scope="row"><input class="checkbox" type="checkbox" class="form-check-input" id="check_thurs"></th>
+                                                        <td><label class="form-check-label" for="check_thurs">Thursday</label></td>
+                                                        <td>
+                                                            <input class="carrier_time form-control" id="thursStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
+                                                            <!-- &emsp;to&emsp;
+                                                            <input class="carrier_time form-control" id="thursEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
+                                                        </td>
+                                                    </tr>
+                                                    <!-- ======= FRIDAY ===== -->
+                                                    <tr>
+                                                        <th scope="row"><input class="checkbox" type="checkbox" class="form-check-input" id="check_fri"></th>
+                                                        <td><label class="form-check-label" for="check_fri">Friday</label></td>
+                                                        <td>
+                                                            <input class="carrier_time form-control" id="friStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
+                                                            <!-- &emsp;to&emsp;
+                                                            <input class="carrier_time form-control" id="friEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
+                                                        </td>
+                                                    </tr>
+                                                    <!-- ======= SATURDAY ===== -->
+                                                    <tr>
+                                                        <th scope="row"><input class="checkbox" type="checkbox" class="form-check-input" id="check_sat"></th>
+                                                        <td><label class="form-check-label" for="check_sat">Saturday</label></td>
+                                                        <td>
+                                                            <input class="carrier_time form-control" id="satStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
+                                                            <!-- &emsp;to&emsp;
+                                                            <input class="carrier_time form-control" id="satEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
+                                                        </td>
+                                                    </tr>
+                                                    <!-- ======= SUNDAY ===== -->
+                                                    <tr>
+                                                        <th scope="row"><input class="checkbox" type="checkbox" class="form-check-input" id="check_sun"></th>
+                                                        <td><label class="form-check-label" for="check_sun">Sunday</label></td>
+                                                        <td>
+                                                            <input class="carrier_time form-control" id="sunStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
+                                                            <!-- &emsp;to&emsp;
+                                                            <input class="carrier_time form-control" id="sunEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="add_new_carrier">Add</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- =========================== NEW CARRIER DATA ================= -->
+                        <div id="new_carrier_data" style="margin-top:1%;display:flex; justify-content: space-evenly;flex-wrap: wrap;">
+                            <div class="card" style="margin:1%;min-width: 250px;">
+                                <h4 class="card-header">
+                                    <span id="new_carrier_name">FedEx</span>&emsp;
+                                    <div style="float:right;">
+                                        <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Edit Details"><i class="fa fa-edit"></i></button>&nbsp;&nbsp;
+                                        <button type="button" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Delete Carrier"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    </div>
+                                </h4>
+                                <div class="card-body">
+                                    <h6 class="card-title">Delivery Details:</h6>
+                                    <p class="card-text">
+                                        <!--  <p style="color:white;">With supporting text below below </p> -->
+                                        <div style="display:flex;justify-content: space-evenly;">
+                                            <div>
+                                                <p>Monday</p>
+                                                <p>Tuesday</p>
+                                                <p>Friday</p>
+                                            </div>
+                                            <div>
+                                                <p>4pm </p>
+                                                <p>5pm </p>
+                                                <p>6pm </p>
+
+                                            </div>
+                                        </div>
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card" style="margin:1%;min-width: 250px;">
+                                <h4 class="card-header">
+                                    <span id="new_carrier_name">FedEx</span>&emsp;
+                                    <div style="float:right;">
+                                        <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Edit Details"><i class="fa fa-edit"></i></button>&nbsp;&nbsp;
+                                        <button type="button" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Delete Carrier"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    </div>
+                                </h4>
+                                <div class="card-body">
+                                    <h6 class="card-title">Delivery Details:</h6>
+                                    <p class="card-text">
+                                        <!-- <p style="color:white;">With supporting text below below </p> -->
+                                        <div style="display:flex;justify-content: space-evenly;">
+                                            <div>
+                                                <p>Monday</p>
+                                                <p>Tuesday</p>
+                                                <p>Friday</p>
+                                            </div>
+                                            <div>
+                                                <p>4pm </p>
+                                                <p>5pm </p>
+                                                <p>6pm </p>
+
+                                            </div>
+                                        </div>
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card" style="margin:1%;min-width: 250px;">
+                                <h4 class="card-header">
+                                    <span id="new_carrier_name">FedEx</span>&emsp;
+                                    <div style="float:right;">
+                                        <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Edit Details"><i class="fa fa-edit"></i></button>&nbsp;&nbsp;
+                                        <button type="button" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Delete Carrier"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    </div>
+                                </h4>
+                                <div class="card-body">
+                                    <h6 class="card-title">Delivery Details:</h6>
+                                    <p class="card-text">
+                                        <!--  <p style="color:white;">With supporting text below below </p> -->
+                                        <div style="display:flex;justify-content: space-evenly;">
+                                            <div>
+                                                <p>Monday</p>
+                                                <p>Tuesday</p>
+                                                <p>Friday</p>
+                                            </div>
+                                            <div>
+                                                <p>4pm </p>
+                                                <p>5pm </p>
+                                                <p>6pm </p>
+
+                                            </div>
+                                        </div>
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card" style="margin:1%;min-width: 250px;">
+                                <h4 class="card-header">
+                                    <span id="new_carrier_name">FedEx</span>&emsp;
+                                    <div style="float:right;">
+                                        <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Edit Details"><i class="fa fa-edit"></i></button>&nbsp;&nbsp;
+                                        <button type="button" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Delete Carrier"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    </div>
+                                </h4>
+                                <div class="card-body">
+                                    <h6 class="card-title">Delivery Details:</h6>
+                                    <p class="card-text">
+                                        <!-- <p style="color:white;">With supporting text below below </p> -->
+                                        <div style="display:flex;justify-content: space-evenly;">
+                                            <div>
+                                                <p>Monday</p>
+                                                <p>Tuesday</p>
+                                                <p>Friday</p>
+                                            </div>
+                                            <div>
+                                                <p>4pm </p>
+                                                <p>5pm </p>
+                                                <p>6pm </p>
+
+                                            </div>
+                                        </div>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- ================================== UNITS DATA =========================== -->
+                    <div class="tab-pane fade" id="nav-units" role="tabpanel" aria-labelledby="nav-units-tab">
+
+                        <!-- ==============  ADD NEW BUTTON FOR CARRIER ========= -->
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-placement="bottom" data-target="#newUnit" style="margin-left: 1%;">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" height="20px" width="20px" x="0px" y="0px" viewBox="0 0 27.963 27.963" style="enable-background:new 0 0 27.963 27.963;" xml:space="preserve">
+                                <g>
+                                    <g id="c140__x2B_">
+                                        <path fill= "#FFF" d="M13.98,0C6.259,0,0,6.26,0,13.982s6.259,13.981,13.98,13.981c7.725,0,13.983-6.26,13.983-13.981    C27.963,6.26,21.705,0,13.98,0z M21.102,16.059h-4.939v5.042h-4.299v-5.042H6.862V11.76h5.001v-4.9h4.299v4.9h4.939v4.299H21.102z    "/>
+                                    </g>
+                                    <g id="Capa_1_9_">
+                                    </g>
+                                </g>                            
+                            </svg>&nbsp;
+                            Add New                    
+                        </button>
+                        <!-- ======================== NEW UNITS MODAL ============================== -->
+                        <div class="modal fade" id="newUnit" tabindex="-1" role="dialog" aria-labelledby="unitsmodal" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="unitsmodal">Add New Unit</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form>
+                                        <div class="modal-body">
+                                            Unit ID:<br>
+                                            <input type="text" class="form-control" id="new_unit_id" />
+                                            <br> Unit Name:<br>
+                                            <input type="text" class="form-control" id="new_unit_address" />
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="add_new">Add</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div><br>
+                        <!-- ==================== NEW UNITS DATA =================== -->
+                        <div id="new_units_data" style="margin-top:1%;display:flex; justify-content: space-evenly;flex-wrap: wrap;">
+                            <!-- <div class="card border-3" style="width: 18rem;margin:1%;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Alap Heights</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">UK101</h6>
+
+                                    <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Edit Details"><i class="fa fa-edit"></i></button>&nbsp;&nbsp;
+                                    <button type="button" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Delete Unit"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="modal fade" id="editUnit" tabindex="-1" role="dialog" aria-labelledby="editunitsmodal" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editunitsmodal">Edit Unit Data</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form>
+                                        <div class="modal-body">
+                                            Unit ID:<br>
+                                            <input type="text" class="form-control" id="edit_unit_id" />
+                                            <br> Unit Name:<br>
+                                            <input type="text" class="form-control" id="edit_unit_name" />
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="edit_unit">Edit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <script>
+        var input = $('.carrier_time');
+        input.clockpicker({
+            autoclose: true,
+
+        });
+    </script>
+
+
+</body>
+
+
+</html>
