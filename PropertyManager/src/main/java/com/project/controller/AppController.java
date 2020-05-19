@@ -127,4 +127,42 @@ public class AppController {
 		return result;
 		
 	}
+	
+	@RequestMapping(value = "/save_unit", method = RequestMethod.POST)
+	@ResponseBody
+	public String saveUnit(@RequestParam("Property_Id") String p_id, @RequestParam("Unit_Id") String u_id, @RequestParam("Unit_Name") String u_name) {
+		//System.out.println(u_id);
+		//System.out.println(p_id);
+		//System.out.println(u_name);
+		Unit unit = new Unit();
+	    unit.setU_id(Long.parseLong(u_id));
+	    unit.setP_id(Long.parseLong(p_id));
+	    unit.setU_name(u_name);
+	    try {
+	    	unit_service.unit_save(unit);
+			System.out.println("UNIT ADDED");
+			String gson = new Gson().toJson(unit_service.getUnits(Long.parseLong(p_id)));
+		    return gson;
+	    }catch(Exception e) {
+	    	System.out.println(e);
+	    	return "FAILED";
+	    }
+	    
+	}
+	
+	@RequestMapping(value = "/edit_unit", method = RequestMethod.POST)
+	@ResponseBody
+	public String editUnit(@RequestParam("Property_Id") String p_id, @RequestParam("Unit_Id_old") String u_id_old, @RequestParam("Unit_Id") String u_id, @RequestParam("Unit_Name") String u_name) {
+	    try {
+	    	unit_service.unit_edit(Long.parseLong(u_id_old), Long.parseLong(u_id), u_name);
+			System.out.println("UNIT EDITED");
+			String gson = new Gson().toJson(unit_service.getUnits(Long.parseLong(p_id)));
+		    return gson;
+		    
+	    }catch(Exception e) {
+	    	System.out.println(e);
+	    	return "FAILED";
+	    }
+	    
+	}
 }

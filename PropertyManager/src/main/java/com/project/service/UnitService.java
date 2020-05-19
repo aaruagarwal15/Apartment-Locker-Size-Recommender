@@ -21,8 +21,12 @@ public class UnitService {
         return urepo.findAll();
     }
 	
-	public void save(Unit unit) {
-        urepo.save(unit);
+	public void unit_save(Unit unit) {
+        urepo.saveUnits(unit.getP_id(), unit.getU_id(), unit.getU_name());
+    }
+	
+	public void unit_edit(Long u_id_old, Long u_id, String u_name) {
+        urepo.editUnits(u_id_old, u_id, u_name);
     }
 	
 	public List<Unit> getUnits(Long p_id) {
