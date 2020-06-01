@@ -19,9 +19,14 @@ public class Unit {
 	@Column(name = "u_name") 
     private String u_name;
 	
-    
     public Unit() {
+    	
     }
+	public Unit(Long p_id, Long u_id, String u_name) {
+		this.p_id = p_id;
+		this.u_id = u_id;
+		this.u_name = u_name;
+	}
 
 	
 	public Long getU_id() {
