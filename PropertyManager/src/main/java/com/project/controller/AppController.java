@@ -46,24 +46,38 @@ public class AppController {
 	@RequestMapping(value = "/getall", method = RequestMethod.GET)
 	@ResponseBody
 	public String getAllData() {
-		List<Property> listProperty = property_service.listAll();
-		String gson = new Gson().toJson(listProperty);
-		System.out.println(gson);
-		return gson;
+		try {
+			List<Property> listProperty = property_service.listAll();
+			String gson = new Gson().toJson(listProperty);
+			System.out.println(gson);
+			return gson;
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			return "FAILED";
+		}
+		
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
 	public String saveProperty(@RequestParam("Property_name") String pname,
 			@RequestParam("Property_address") String paddress) {
-		Property property = new Property();
-		property.setP_name(pname);
-		property.setP_address(paddress);
+		try {
+			Property property = new Property();
+			property.setP_name(pname);
+			property.setP_address(paddress);
 
-		property_service.save(property);
-		System.out.println("PROPERTY ADDED");
-		String gson = new Gson().toJson(property_service.listAll());
-		return gson;
+			property_service.save(property);
+			System.out.println("PROPERTY ADDED");
+			String gson = new Gson().toJson(property_service.listAll());
+			return gson;
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			return "FAILED";
+		}
+		
 	}
 
 	public class NameSorter1 implements Comparator<Property> {
@@ -75,12 +89,19 @@ public class AppController {
 	@RequestMapping(value = "/increasing_filter", method = RequestMethod.GET)
 	@ResponseBody
 	public String increasing_filter() {
-		List<Property> filterProperty = property_service.listAll();
-		filterProperty.sort(new NameSorter1());
-		String gson = new Gson().toJson(filterProperty);
-		System.out.println("FILTERED");
-		System.out.println(gson);
-		return gson;
+		try {
+			List<Property> filterProperty = property_service.listAll();
+			filterProperty.sort(new NameSorter1());
+			String gson = new Gson().toJson(filterProperty);
+			System.out.println("FILTERED");
+			System.out.println(gson);
+			return gson;
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			return "FAILED";
+		}
+		
 	}
 
 	public class NameSorter implements Comparator<Property> {
@@ -92,20 +113,34 @@ public class AppController {
 	@RequestMapping(value = "/decreasing_filter", method = RequestMethod.GET)
 	@ResponseBody
 	public String decreasing_filter() {
-		List<Property> filterProperty = property_service.listAll();
-		filterProperty.sort(new NameSorter());
-		String gson = new Gson().toJson(filterProperty);
-		System.out.println("FILTERED");
-		System.out.println(gson);
-		return gson;
+		try {
+
+			List<Property> filterProperty = property_service.listAll();
+			filterProperty.sort(new NameSorter());
+			String gson = new Gson().toJson(filterProperty);
+			System.out.println("FILTERED");
+			System.out.println(gson);
+			return gson;
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			return "FAILED";
+		}
 	}
 
 	@RequestMapping(value = "/fetch_details", method = RequestMethod.GET)
 	@ResponseBody
 	public String fetch_details(@RequestParam("P_id") String p_id) {
-		Property property = property_service.get(Long.parseLong(p_id));
-		String gson = new Gson().toJson(property);
-		return gson;
+		
+		try {
+			Property property = property_service.get(Long.parseLong(p_id));
+			String gson = new Gson().toJson(property);
+			return gson;
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			return "FAILED";
+		}
 	}
 
 	/* ===================== UNITS API's ====================== */
@@ -113,10 +148,16 @@ public class AppController {
 	@RequestMapping(value = "/getallunits", method = RequestMethod.GET)
 	@ResponseBody
 	public String getAllUnitsData(@RequestParam("PId") String p_id) {
-		List<Unit> listUnit = unit_service.getUnits(Long.parseLong(p_id));
-		String gson = new Gson().toJson(listUnit);
-		System.out.println(gson);
-		return gson;
+		
+		try {
+			List<Unit> listUnit = unit_service.getUnits(Long.parseLong(p_id));
+			String gson = new Gson().toJson(listUnit);
+			System.out.println(gson);
+			return gson;
+		}catch(Exception e) {
+			System.out.println(e);
+			return "FAILED";
+		}
 	}
 
 	@RequestMapping(value = "/delete_unit", method = RequestMethod.DELETE)
@@ -176,9 +217,16 @@ public class AppController {
 	@RequestMapping(value = "/fetch_carrier", method = RequestMethod.GET)
 	@ResponseBody
 	public String fetch_carrier(@RequestParam("PId") String p_id) {
-		List<CarrierCombined> ccd = carrier_delivery_service.getCombinedData(Long.parseLong(p_id));
-		String gson = new Gson().toJson(ccd);
-		return gson;
+		
+		try {
+			List<CarrierCombined> ccd = carrier_delivery_service.getCombinedData(Long.parseLong(p_id));
+			String gson = new Gson().toJson(ccd);
+			return gson;
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			return "FAILED";
+		}
 	}
 	
 	
@@ -215,7 +263,7 @@ public class AppController {
 			}
 			else {
 				System.out.println("Carrier Already Exists");
-				return "Carrier Already Exists";
+				return "FAILED";
 			}
 			
 			
@@ -251,13 +299,23 @@ public class AppController {
 	
 	@RequestMapping(value = "/edit_carrier", method = RequestMethod.POST)
 	@ResponseBody
-	public String editCarrier(@RequestParam("Property_Id") String p_id, @RequestParam("Unit_Id_old") String u_id_old,
-			@RequestParam("Unit_Id") String u_id, @RequestParam("Unit_Name") String u_name) {
+	public String editCarrier(@RequestParam("Property_Id") String p_id, @RequestParam("Carrier_Id") String c_id, 
+			 @RequestParam("Days") String[] days, @RequestParam("Time") String[] time) {
 		try {
-			unit_service.unit_edit(Long.parseLong(u_id_old), Long.parseLong(u_id), u_name);
-			System.out.println("UNIT EDITED");
-			String gson = new Gson().toJson(unit_service.getUnits(Long.parseLong(p_id)));
+			carrier_delivery_service.delete(Long.parseLong(c_id), Long.parseLong(p_id));
+			for(int i=0; i<days.length; i++) {
+				Carrier_delivery cd = new Carrier_delivery();
+				cd.setP_id(Long.parseLong(p_id));
+				cd.setCar_id(Long.parseLong(c_id));
+				cd.setDelivery_day(days[i]);
+				cd.setDelivery_time(time[i]);
+				
+				carrier_delivery_service.cd_save(cd);				
+			}
+			List<CarrierCombined> ccd = carrier_delivery_service.getCombinedData(Long.parseLong(p_id));
+			String gson = new Gson().toJson(ccd);
 			return gson;
+			
 
 		} catch (Exception e) {
 			System.out.println(e);

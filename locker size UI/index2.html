@@ -15,11 +15,21 @@
     <script src="http://weareoutman.github.io/clockpicker/dist/jquery-clockpicker.min.js"></script>
     <link rel="stylesheet" href="style2.css">
     <script src="bundle2.js"></script>
-    <title>Property Details</title>
 
+    <!-- <script src="bundle.js"></script> -->
+    <title>Property Details</title>
+    <style>
+        .border-3 {
+            border-width: 2px !important;
+            border-color: #17A2B8;
+        }
+    </style>
+    <script type="text/javascript">
+        $('.clockpicker').clockpicker();
+    </script>
 </head>
 
-<body style="background-color: #17A2B8;padding:1%; !important">
+<body style="background-color: #17A2B8;padding:1%;">
     <!-- ==================================== HEADER CONTAINER =================================================== -->
     <div class="container-fluid rounded-pill" id="property_details" style="background-color: #FFF;padding:1%;display:flex;flex-wrap: wrap">
 
@@ -81,7 +91,7 @@
 
                     <div class="tab-pane fade show active" id="nav-carrier" role="tabpanel" aria-labelledby="nav-carrier-tab">
                         <!-- ==============  ADD NEW BUTTON FOR CARRIER ========= -->
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-placement="bottom" data-target="#newCarrier" style="margin-left: 1%;">
+                        <button type="button" id="new_carrier_btn" class="btn btn-info" data-toggle="modal" data-placement="bottom" data-target="#newCarrier" style="margin-left: 1%;">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 version="1.1" id="Capa_1" height="20px" width="20px" x="0px" y="0px"
                                 viewBox="0 0 27.963 27.963" style="enable-background:new 0 0 27.963 27.963;"
@@ -135,8 +145,9 @@
                                                         <td scope="row"><input class="checkbox_new" type="checkbox" class="form-check-input" id="check_mon"></td>
                                                         <td><label class="form-check-label" for="check_mon">Monday</label></td>
                                                         <td>
-                                                            <input class="carrier_time form-control" id="monStime" value="" style="max-width: 90px;display:inline" data-default="20:48">
-
+                                                            <input class="carrier_time carrier_time_down form-control" id="monStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
+                                                            <!-- &emsp;to&emsp;
+                                                            <input class="carrier_time form-control" id="monEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
                                                         </td>
                                                     </tr>
                                                     <!-- ======= TUESDAY ===== -->
@@ -144,7 +155,9 @@
                                                         <th scope="row"><input class="checkbox_new" type="checkbox" class="form-check-input" id="check_tues"></th>
                                                         <td><label class="form-check-label" for="check_tues">Tuesday</label></td>
                                                         <td>
-                                                            <input class="carrier_time form-control" id="tuesStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
+                                                            <input class="carrier_time carrier_time_down form-control" id="tuesStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
+                                                            <!-- &emsp;to&emsp;
+                                                            <input class="carrier_time form-control" id="tuesEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
                                                         </td>
                                                     </tr>
                                                     <!-- ======= WEDNESDAY ===== -->
@@ -153,6 +166,8 @@
                                                         <td><label class="form-check-label" for="check_wed">Wednesday</label></td>
                                                         <td>
                                                             <input class="carrier_time form-control" id="wedStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
+                                                            <!-- &emsp;to&emsp;
+                                                            <input class="carrier_time form-control" id="wedEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
                                                         </td>
                                                     </tr>
                                                     <!-- ======= THURSDAY ===== -->
@@ -161,6 +176,8 @@
                                                         <td><label class="form-check-label" for="check_thurs">Thursday</label></td>
                                                         <td>
                                                             <input class="carrier_time form-control" id="thursStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
+                                                            <!-- &emsp;to&emsp;
+                                                            <input class="carrier_time form-control" id="thursEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
                                                         </td>
                                                     </tr>
                                                     <!-- ======= FRIDAY ===== -->
@@ -169,6 +186,8 @@
                                                         <td><label class="form-check-label" for="check_fri">Friday</label></td>
                                                         <td>
                                                             <input class="carrier_time form-control" id="friStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
+                                                            <!-- &emsp;to&emsp;
+                                                            <input class="carrier_time form-control" id="friEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
                                                         </td>
                                                     </tr>
                                                     <!-- ======= SATURDAY ===== -->
@@ -177,6 +196,8 @@
                                                         <td><label class="form-check-label" for="check_sat">Saturday</label></td>
                                                         <td>
                                                             <input class="carrier_time form-control" id="satStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
+                                                            <!-- &emsp;to&emsp;
+                                                            <input class="carrier_time form-control" id="satEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
                                                         </td>
                                                     </tr>
                                                     <!-- ======= SUNDAY ===== -->
@@ -185,6 +206,8 @@
                                                         <td><label class="form-check-label" for="check_sun">Sunday</label></td>
                                                         <td>
                                                             <input class="carrier_time form-control" id="sunStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
+                                                            <!-- &emsp;to&emsp;
+                                                            <input class="carrier_time form-control" id="sunEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -194,6 +217,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                             <button type="button" class="btn btn-primary" data-dismiss="modal" id="add_new_carrier">Add</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="edit_new_carrier">Save</button>
                                         </div>
                                     </form>
                                 </div>
@@ -201,39 +225,6 @@
                         </div>
                         <!-- =========================== NEW CARRIER DATA ================= -->
                         <div id="new_carrier_data" style="margin-top:1%;display:flex; justify-content: space-evenly;flex-wrap: wrap;">
-                            <!-- <div class="card" style="margin:1%;min-width: 250px;">
-                                <h4 class="card-header">
-                                    <span id="new_carrier_name">FedEx</span>&emsp;
-                                    <div style="float:right;">
-                                        <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip"
-                                            data-placement="bottom" title="Edit Details"><i
-                                                class="fa fa-edit"></i></button>&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-outline-danger" data-toggle="tooltip"
-                                            data-placement="bottom" title="Delete Carrier"><i class="fa fa-trash"
-                                                aria-hidden="true"></i></button>
-                                    </div>
-                                </h4>
-                                <div class="card-body">
-                                    <h6 class="card-title">Delivery Details:</h6>
-                                    <p class="card-text">
-                                        <div style="display:flex;justify-content: space-evenly;">
-                                            <div>
-                                                <p>Monday</p>
-                                                <p>Tuesday</p>
-                                                <p>Friday</p>
-                                            </div>
-                                            <div>
-                                                <p>4pm </p>
-                                                <p>5pm </p>
-                                                <p>6pm </p>
-
-                                            </div>
-                                        </div>
-
-                                    </p>
-                                </div>
-                            </div> -->
-
                         </div>
                     </div>
 
@@ -333,12 +324,18 @@
 
     </div>
     <script>
-        var input = $('.carrier_time');
-        input.clockpicker({
+        $('.carrier_time_down').clockpicker({
+            placement: 'bottom',
             autoclose: true,
         });
+        var input = $('.carrier_time');
+        input.clockpicker({
+            placement: 'top',
+            autoclose: true,
+
+        });
     </script>
-    <div id="snackbar"></div>
+    <div id="snackbar">Some text some message..</div>
 
 </body>
 
