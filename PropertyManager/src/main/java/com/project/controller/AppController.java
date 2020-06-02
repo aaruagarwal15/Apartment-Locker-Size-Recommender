@@ -181,9 +181,10 @@ public class AppController {
 		return gson;
 	}
 	
-	@RequestMapping(value = "/save_carrier", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/save_carrier", method = RequestMethod.POST)
 	@ResponseBody
-	public String saveCarrier(@RequestParam("Property_Id") String p_id,@RequestParam("Carrier_Id") String c_id, 
+	public String saveCarrier(@RequestParam("Property_Id") String p_id, @RequestParam("Carrier_Id") String c_id, 
 			@RequestParam("Carrier_Name") String c_name, @RequestParam("Days") String[] days, @RequestParam("Time") String[] time ) {
 		try {
 			Carrier c = new Carrier();
@@ -196,21 +197,69 @@ public class AppController {
 				System.out.println(e);
 				System.out.println("Entry already exists");
 			}
-			for(int i=0; i< days.length; i++) {
-				Carrier_delivery cd = new Carrier_delivery();
-				cd.setP_id(Long.parseLong(p_id));
-				cd.setCar_id(Long.parseLong(c_id));
-				cd.setDelivery_day(days[i]);
-				cd.setDelivery_time(time[i]);	
-				carrier_delivery_service.cd_save(cd);				
-			}	
-			System.out.println("CARRIER ADDED");
-			List<CarrierCombined> ccd = carrier_delivery_service.getEntryData(Long.parseLong(p_id), Long.parseLong(c_id));
-			String gson = new Gson().toJson(ccd);
-			return gson;
+			List<Carrier_delivery> car_d = carrier_delivery_service.cd_check(Long.parseLong(c_id), Long.parseLong(p_id));	
+			if(car_d.isEmpty()) {
+				for(int i=0; i<days.length; i++) {
+					Carrier_delivery cd = new Carrier_delivery();
+					cd.setP_id(Long.parseLong(p_id));
+					cd.setCar_id(Long.parseLong(c_id));
+					cd.setDelivery_day(days[i]);
+					cd.setDelivery_time(time[i]);
+					
+					carrier_delivery_service.cd_save(cd);				
+				}	
+				System.out.println("CARRIER ADDED");
+				List<CarrierCombined> ccd = carrier_delivery_service.getEntryData(Long.parseLong(p_id), Long.parseLong(c_id));
+				String gson = new Gson().toJson(ccd);
+				return gson;
+			}
+			else {
+				System.out.println("Carrier Already Exists");
+				return "Carrier Already Exists";
+			}
+			
 			
 		}
 		catch(Exception e) {
+			System.out.println(e);
+			return "FAILED";
+		}
+
+	}
+	
+	
+	@RequestMapping(value = "/delete_carrier", method = RequestMethod.DELETE)
+	@ResponseBody
+	public String deleteCarrierData(@RequestParam("Property_Id") String p_id, @RequestParam("Carrier_Id") String c_id) {
+		String result;
+		try {
+			carrier_delivery_service.delete(Long.parseLong(c_id), Long.parseLong(p_id));
+			List<String> checkinc = carrier_delivery_service.checkforcarrier(Long.parseLong(c_id), Long.parseLong(p_id));
+			if(checkinc.isEmpty()) {
+				carrier_service.deleteCarrier(Long.parseLong(c_id));
+			}
+			System.out.println("SUCCESS");
+			result = "SUCCESS";
+		} catch (Exception e) {
+			System.out.println(e);
+			result = "Error";
+		}
+		return result; 
+
+	}
+	
+	
+	@RequestMapping(value = "/edit_carrier", method = RequestMethod.POST)
+	@ResponseBody
+	public String editCarrier(@RequestParam("Property_Id") String p_id, @RequestParam("Unit_Id_old") String u_id_old,
+			@RequestParam("Unit_Id") String u_id, @RequestParam("Unit_Name") String u_name) {
+		try {
+			unit_service.unit_edit(Long.parseLong(u_id_old), Long.parseLong(u_id), u_name);
+			System.out.println("UNIT EDITED");
+			String gson = new Gson().toJson(unit_service.getUnits(Long.parseLong(p_id)));
+			return gson;
+
+		} catch (Exception e) {
 			System.out.println(e);
 			return "FAILED";
 		}

@@ -31,4 +31,13 @@ public interface CarrierDeliveryRepository extends JpaRepository<Carrier_deliver
 			+ "FROM Carrier c INNER JOIN  c.carrier_deliveries d where d.p_id = :p_id and d.car_id = :c_id")
 	List<CarrierCombined> fetchEntry(@Param("p_id") Long p_id, @Param("c_id") Long c_id);
 	
+	@Query(value="SELECT * FROM carrier_delivery WHERE p_id = :p_id AND car_id = :c_id ", nativeQuery = true)
+	List<Carrier_delivery> checkEntry(@Param("p_id") Long p_id, @Param("c_id") Long c_id);
+	
+	@Modifying
+	@Query(value="DELETE FROM carrier_delivery WHERE p_id = :p_id AND car_id = :c_id", nativeQuery = true)
+	void deleteCarrier(@Param("p_id") Long p_id, @Param("c_id") Long c_id);
+	
+	@Query(value="SELECT * FROM carrier_delivery WHERE p_id <> :p_id AND car_id = :c_id ", nativeQuery = true)
+	List<String> checkforC(@Param("p_id") Long p_id, @Param("c_id") Long c_id);
 }

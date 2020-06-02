@@ -30,7 +30,7 @@ var Unit = /** @class */ (function () {
     return Unit;
 }());
 ;
-/**=========================== CARRIER ================================ */
+/**===========================CARRIER================================ */
 var Carrier = /** @class */ (function () {
     function Carrier(cId, cName, delivery_details) {
         this.cId = cId;
@@ -41,20 +41,20 @@ var Carrier = /** @class */ (function () {
     Carrier.prototype.createCard = function () {
         var mycard = document.createElement('div');
         var cardStructure = '<h4 class="card-header">\
-                                  <span id="new_carrier_name">' + this.cName + '</span>&emsp;\
-                                  <div style="float:right;">\
-                                    <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Edit Details">\
-                                      <i class="fa fa-edit"></i>\
-                                    </button>&nbsp;&nbsp;\
-                                    <button type="button" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Delete Carrier">\
-                                      <i class="fa fa-trash" aria-hidden="true"></i>\
-                                    </button>\
-                                  </div>\
-                                </h4>\
-                                <div class="card-body">\
-                                  <h6 class="card-title">Delivery Details:</h6>\
-                                    <p class="card-text">\
-                                        <div style="display:flex;justify-content: space-evenly;">';
+                                        <span id="new_carrier_name">' + this.cName + '</span>&emsp;\
+                                        <div style="float:right;">\
+                                            <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip"\
+                                                data-placement="bottom" title="Edit Details"><i\
+                                                    class="fa fa-edit"></i></button>&nbsp;&nbsp;\
+                                            <button type="button" class="btn btn-outline-danger" data-toggle="tooltip"\
+                                                data-placement="bottom" title="Delete Carrier"><i class="fa fa-trash"\
+                                                    aria-hidden="true"></i></button>\
+                                        </div>\
+                                    </h4>\
+                                    <div class="card-body">\
+                                        <h6 class="card-title">Delivery Details:</h6>\
+                                        <p class="card-text">\
+                                            <div style="display:flex;justify-content: space-evenly;">';
         cardStructure += '<div>';
         for (var i = 0; i < this.delivery_details_length; i++) {
             cardStructure += '<p>' + this.delivery_details[i].delivery_day + '</p>';
@@ -271,5 +271,60 @@ window.onload = function () {
         }
     })["catch"](function (error) {
         console.log(error);
+    });
+    /**=================================CheckBox-EventListener======================================= */
+    var all_new_checkbox = document.getElementsByClassName("checkbox_new");
+    for (var i = 0; i < all_new_checkbox.length; i++) {
+        all_new_checkbox[i].checked = false;
+        all_new_checkbox[i].parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled = true;
+        all_new_checkbox[i].addEventListener('change', function (e) {
+            e.srcElement.parentNode.parentNode.getElementsByClassName('carrier_time')[0].value = "";
+            e.srcElement.parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled = !e.srcElement.parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled;
+        });
+    }
+    /**=================================ADD CARRIER================================= */
+    document.getElementById('add_new_carrier').addEventListener('click', function (e) {
+        var car_id = document.getElementById('n_carrier_id').value;
+        var car_name = document.getElementById('n_carrier_name').value;
+        if (car_id.length == 0 || car_name.length == 0) {
+            snackbar("Enter valid entries");
+        }
+        else {
+            var all_new_checkbox_1 = document.getElementsByClassName("checkbox_new");
+            var day_array = [];
+            var time_array = [];
+            for (var i = 0; i < all_new_checkbox_1.length; i++) {
+                if (all_new_checkbox_1[i].checked) {
+                    //console.log(all_new_checkbox[i].parentNode.parentNode.getElementsByClassName('carrier_time')[0].value);
+                    time_array.push(all_new_checkbox_1[i].parentNode.parentNode.getElementsByClassName('carrier_time')[0].value);
+                    day_array.push(all_new_checkbox_1[i].parentNode.parentNode.getElementsByClassName('form-check-label')[0].innerHTML);
+                    all_new_checkbox_1[i].parentNode.parentNode.getElementsByClassName('carrier_time')[0].value = "";
+                    all_new_checkbox_1[i].parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled = true;
+                }
+                all_new_checkbox_1[i].checked = false;
+            }
+            if (day_array.length == 0 || time_array.length == 0) {
+                snackbar("Enter valid entries");
+            }
+            else {
+                var params = new URLSearchParams();
+                params.append('Property_Id', propertyId);
+                params.append('Carrier_Id', car_id);
+                params.append('Carrier_Name', car_name);
+                for (var i = 0; i < day_array.length; i++) {
+                    params.append('Days', day_array[i]);
+                    params.append('Time', time_array[i]);
+                }
+                axios_1["default"]({
+                    method: 'POST',
+                    url: 'http://localhost:8080/save_carrier',
+                    data: params
+                }).then(function (response) {
+                    console.log(response.data);
+                });
+                document.getElementById('n_carrier_id').value = "";
+                document.getElementById('n_carrier_name').value = "";
+            }
+        }
     });
 };

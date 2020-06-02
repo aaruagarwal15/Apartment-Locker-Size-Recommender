@@ -24,5 +24,9 @@ public class CarrierService {
 		crepo.saveCarrier(carrier.getId(), carrier.getC_name());
 	}
 	
+	public void deleteCarrier(Long c_id) {
+		crepo.deleteCar(c_id);
+	}
+	
 
 }

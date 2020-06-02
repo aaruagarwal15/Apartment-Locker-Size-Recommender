@@ -19,5 +19,8 @@ public interface CarrierRepository extends JpaRepository<Carrier, Long> {
 	@Query(value= "INSERT INTO carrier VALUES(:c_id, :c_name)", nativeQuery = true)
 	void saveCarrier(@Param("c_id") Long c_id, @Param("c_name") String c_name);
 	
+	@Modifying
+	@Query(value="DELETE from carrier WHERE id = :c_id", nativeQuery = true)
+	void deleteCar(@Param("c_id") Long c_id);
 
 }

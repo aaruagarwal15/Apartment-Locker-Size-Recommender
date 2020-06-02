@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { response } from 'express';
 
 class Unit {
   pId: number;
@@ -25,8 +26,7 @@ class Unit {
 
   }
 };
-
-/**=========================== CARRIER ================================ */
+/**===========================CARRIER================================ */
 class Carrier {
   cId: number;
   cName: string;
@@ -41,20 +41,20 @@ class Carrier {
   createCard(): void {
     let mycard = document.createElement('div');
     let cardStructure: string = '<h4 class="card-header">\
-                                  <span id="new_carrier_name">'+ this.cName + '</span>&emsp;\
-                                  <div style="float:right;">\
-                                    <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Edit Details">\
-                                      <i class="fa fa-edit"></i>\
-                                    </button>&nbsp;&nbsp;\
-                                    <button type="button" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Delete Carrier">\
-                                      <i class="fa fa-trash" aria-hidden="true"></i>\
-                                    </button>\
-                                  </div>\
-                                </h4>\
-                                <div class="card-body">\
-                                  <h6 class="card-title">Delivery Details:</h6>\
-                                    <p class="card-text">\
-                                        <div style="display:flex;justify-content: space-evenly;">'
+                                        <span id="new_carrier_name">'+ this.cName + '</span>&emsp;\
+                                        <div style="float:right;">\
+                                            <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip"\
+                                                data-placement="bottom" title="Edit Details"><i\
+                                                    class="fa fa-edit"></i></button>&nbsp;&nbsp;\
+                                            <button type="button" class="btn btn-outline-danger" data-toggle="tooltip"\
+                                                data-placement="bottom" title="Delete Carrier"><i class="fa fa-trash"\
+                                                    aria-hidden="true"></i></button>\
+                                        </div>\
+                                    </h4>\
+                                    <div class="card-body">\
+                                        <h6 class="card-title">Delivery Details:</h6>\
+                                        <p class="card-text">\
+                                            <div style="display:flex;justify-content: space-evenly;">'
     cardStructure += '<div>'
     for (let i: number = 0; i < this.delivery_details_length; i++) {
       cardStructure += '<p>' + this.delivery_details[i].delivery_day + '</p>';
@@ -286,13 +286,11 @@ window.onload = function () {
     let carrier_array: any = [...response.data];
     carrier_array.sort(ObjComp);
     console.log(carrier_array);
-
     let carrier_array_length: number = carrier_array.length
     if (carrier_array_length != 0) {
       let cur_cid: number = carrier_array[0].c_id;
       let cur_cname = carrier_array[0].c_name;
       let carrier_card_array: any = [{ 'delivery_day': carrier_array[0].delivery_day, 'delivery_time': carrier_array[0].delivery_time }]
-      
       for (let i: number = 1; i < carrier_array_length; i++) {
         if (carrier_array[i].c_id != cur_cid) {
           let carrier = new Carrier(cur_cid, cur_cname, carrier_card_array);
@@ -312,5 +310,64 @@ window.onload = function () {
     console.log(error);
   });
 
+  /**=================================CheckBox-EventListener======================================= */
+
+  let all_new_checkbox: any = document.getElementsByClassName("checkbox_new");
+  for (let i: number = 0; i < all_new_checkbox.length; i++) {
+    all_new_checkbox[i].checked = false;
+    all_new_checkbox[i].parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled = true;
+    all_new_checkbox[i].addEventListener('change', (e) => {
+      e.srcElement.parentNode.parentNode.getElementsByClassName('carrier_time')[0].value = ""
+      e.srcElement.parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled = !e.srcElement.parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled;
+    })
+  }
+
+  /**=================================ADD CARRIER================================= */
+
+  document.getElementById('add_new_carrier').addEventListener('click', (e) => {
+    let car_id: string = (<HTMLSelectElement>document.getElementById('n_carrier_id')).value;
+    let car_name: string = (<HTMLSelectElement>document.getElementById('n_carrier_name')).value;
+    if (car_id.length == 0 || car_name.length == 0) {
+      snackbar("Enter valid entries");
+    }
+    else {
+      let all_new_checkbox: any = document.getElementsByClassName("checkbox_new");
+      let day_array: string[]= [];
+      let time_array: string[] = [];
+      for (let i: number = 0; i < all_new_checkbox.length; i++) {
+        if (all_new_checkbox[i].checked) {
+          //console.log(all_new_checkbox[i].parentNode.parentNode.getElementsByClassName('carrier_time')[0].value);
+          time_array.push(all_new_checkbox[i].parentNode.parentNode.getElementsByClassName('carrier_time')[0].value);
+          day_array.push(all_new_checkbox[i].parentNode.parentNode.getElementsByClassName('form-check-label')[0].innerHTML);
+          all_new_checkbox[i].parentNode.parentNode.getElementsByClassName('carrier_time')[0].value = "";
+          all_new_checkbox[i].parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled = true;
+        }
+        all_new_checkbox[i].checked = false;
+      }
+      if (day_array.length == 0 || time_array.length == 0) {
+        snackbar("Enter valid entries");
+      }
+      else {
+        const params = new URLSearchParams();
+        params.append('Property_Id', propertyId);
+        params.append('Carrier_Id', car_id);
+        params.append('Carrier_Name', car_name);
+        for (let i: number = 0; i < day_array.length; i++) {
+          params.append('Days', day_array[i]);
+          params.append('Time', time_array[i]);
+        }
+        axios({
+          method: 'POST',
+          url: 'http://localhost:8080/save_carrier',
+          data: params
+        }).then((response) => {
+          console.log(response.data);
+        });
+
+        (<HTMLSelectElement>document.getElementById('n_carrier_id')).value = "";
+        (<HTMLSelectElement>document.getElementById('n_carrier_name')).value = "";
+      }
+    }
+  })
 };
 

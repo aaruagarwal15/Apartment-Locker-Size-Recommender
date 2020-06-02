@@ -37,5 +37,16 @@ public class CarrierDeliveryService {
 	public List<CarrierCombined> getEntryData(Long p_id, Long c_id) {
 		return cdrepo.fetchEntry(p_id, c_id);
 	}
-
+	
+	public List<Carrier_delivery> cd_check(Long c_id, Long p_id){
+		return cdrepo.checkEntry(p_id, c_id);
+	}
+	
+	public void delete(Long c_id, Long p_id) {
+		cdrepo.deleteCarrier(p_id, c_id);
+	}
+	
+	public List<String> checkforcarrier(Long c_id, Long p_id){
+		return cdrepo.checkforC(p_id, c_id);
+	}
 }
