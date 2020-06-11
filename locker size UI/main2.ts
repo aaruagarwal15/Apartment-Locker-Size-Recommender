@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { response } from 'express';
 
+/**=========================== UNIT CLASS ================================ */
+
 class Unit {
   pId: number;
   uId: number;
@@ -26,7 +28,8 @@ class Unit {
 
   }
 };
-/**===========================CARRIER================================ */
+
+/**=========================== CARRIER CLASS================================ */
 class Carrier {
   cId: number;
   cName: string;
@@ -66,9 +69,7 @@ class Carrier {
       cardStructure += '<p>' + this.delivery_details[i].delivery_time + '</p>';
     }
     cardStructure += '</div>'
-    cardStructure += '</div>\
-                                        </p>\
-                                    </div>';
+    cardStructure += '</div></p></div>';
     mycard.classList.add('card');
     mycard.classList.add(key);
     mycard.setAttribute('style', 'margin:1%;min-width: 250px;');
@@ -77,6 +78,8 @@ class Carrier {
     return key;
   }
 }
+
+/* ====================== SNACKBARS ================== */
 
 function snackbar(msg, time = 3000) {
 
@@ -94,6 +97,12 @@ function greenSnackbar(msg, time = 3000) {
   setTimeout(function () { x.className = x.className.replace("greenShow", ""); }, time);
 }
 
+
+
+/* ======================================================================= */
+/* ====================== ONLOAD FUNCTION =========================== */
+/* ======================================================================== */
+
 window.onload = function () {
 
   var propertyId = localStorage.getItem("Property_id");
@@ -106,9 +115,13 @@ window.onload = function () {
     document.getElementById('p_name').innerHTML = response.data.p_name;
     document.getElementById('p_address').innerHTML = response.data.p_address;
   }).catch(function (error) {
-    //console.log(error);
+    console.log(error);
   });
 
+  /* ======================================================================= */
+  /* ====================== UNITS DATA =========================== */
+  /* ======================================================================== */
+  
 
   /* ===================== EDIT UNIT DETAILS ================= */
   function setunitData(e) {
@@ -267,8 +280,9 @@ window.onload = function () {
 
 
 
-
-  /* ====================================== CARRIERS =============================== */
+  /* =============================================================================== */
+  /* ====================================== CARRIER DETAILS =============================== */
+  /* =============================================================================== */
 
 
   /**========================= Carrier Edit Point ============================= */
@@ -276,7 +290,7 @@ window.onload = function () {
 
     let baseE = e.srcElement.parentNode.parentNode.parentNode;
     if (e.srcElement.nodeName == 'I') {
-      baseE = baseE.parentNode;
+      baseE = baseE.parentNode;    
     }
     (<HTMLSelectElement>document.getElementById('n_carrier_id')).value = baseE.getElementsByClassName('new_carrier_id')[0].value;
     (<HTMLSelectElement>document.getElementById('n_carrier_name')).value = baseE.getElementsByClassName('new_carrier_name')[0].innerHTML;
@@ -309,6 +323,7 @@ window.onload = function () {
       }
     }
     document.getElementById('edit_new_carrier').addEventListener('click', (e) => {
+
       let car_id: string = (<HTMLSelectElement>document.getElementById('n_carrier_id')).value;
       let car_name: string = (<HTMLSelectElement>document.getElementById('n_carrier_name')).value;
       if (car_id.length == 0 || car_name.length == 0) {
@@ -588,5 +603,13 @@ window.onload = function () {
       }
     }
   })
+
+
+  let analyse = document.getElementById("analyse-btn");
+  analyse.onclick = function(){
+    window.open('index3.html');
+  }
+
+
 };
 

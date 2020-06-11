@@ -195,6 +195,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
 };
 exports.__esModule = true;
 var axios_1 = require("axios");
+/**=========================== UNIT CLASS ================================ */
 var Unit = /** @class */ (function () {
     function Unit(pId, uId, uName) {
         this.pId = pId;
@@ -217,7 +218,7 @@ var Unit = /** @class */ (function () {
     return Unit;
 }());
 ;
-/**===========================CARRIER================================ */
+/**=========================== CARRIER CLASS================================ */
 var Carrier = /** @class */ (function () {
     function Carrier(cId, cName, delivery_details) {
         this.cId = cId;
@@ -253,9 +254,7 @@ var Carrier = /** @class */ (function () {
             cardStructure += '<p>' + this.delivery_details[i].delivery_time + '</p>';
         }
         cardStructure += '</div>';
-        cardStructure += '</div>\
-                                        </p>\
-                                    </div>';
+        cardStructure += '</div></p></div>';
         mycard.classList.add('card');
         mycard.classList.add(key);
         mycard.setAttribute('style', 'margin:1%;min-width: 250px;');
@@ -265,6 +264,7 @@ var Carrier = /** @class */ (function () {
     };
     return Carrier;
 }());
+/* ====================== SNACKBARS ================== */
 function snackbar(msg, time) {
     if (time === void 0) { time = 3000; }
     var x = document.getElementById("snackbar");
@@ -279,6 +279,9 @@ function greenSnackbar(msg, time) {
     x.className = "greenShow";
     setTimeout(function () { x.className = x.className.replace("greenShow", ""); }, time);
 }
+/* ======================================================================= */
+/* ====================== ONLOAD FUNCTION =========================== */
+/* ======================================================================== */
 window.onload = function () {
     var propertyId = localStorage.getItem("Property_id");
     /* ================================ FETCH PROPERTY DETAILS =============================== */
@@ -289,8 +292,11 @@ window.onload = function () {
         document.getElementById('p_name').innerHTML = response.data.p_name;
         document.getElementById('p_address').innerHTML = response.data.p_address;
     })["catch"](function (error) {
-        //console.log(error);
+        console.log(error);
     });
+    /* ======================================================================= */
+    /* ====================== UNITS DATA =========================== */
+    /* ======================================================================== */
     /* ===================== EDIT UNIT DETAILS ================= */
     function setunitData(e) {
         var uid = e.srcElement.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
@@ -424,7 +430,9 @@ window.onload = function () {
             snackbar("Fields cannot be empty");
         }
     };
-    /* ====================================== CARRIERS =============================== */
+    /* =============================================================================== */
+    /* ====================================== CARRIER DETAILS =============================== */
+    /* =============================================================================== */
     /**========================= Carrier Edit Point ============================= */
     function editCarrierBtn(e) {
         var baseE = e.srcElement.parentNode.parentNode.parentNode;
@@ -723,6 +731,10 @@ window.onload = function () {
             }
         }
     });
+    var analyse = document.getElementById("analyse-btn");
+    analyse.onclick = function () {
+        window.open('index3.html');
+    };
 };
 
 },{"axios":3}],3:[function(require,module,exports){

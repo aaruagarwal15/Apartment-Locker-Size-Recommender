@@ -31,7 +31,7 @@
 
 <body style="background-color: #17A2B8;padding:1%;">
     <!-- ==================================== HEADER CONTAINER =================================================== -->
-    <div class="container-fluid rounded-pill" id="property_details" style="background-color: #FFF;padding:1%;display:flex;flex-wrap: wrap">
+    <div class="container-fluid" id="property_details" style="background-color: #FFF;padding:1%;display:flex;flex-wrap: wrap; border-radius: 15px;justify-content: space-evenly;">
 
         <!-- ========= App Logo ========= -->
         <div class="rounded-circle" style="text-align: center;">
@@ -40,7 +40,7 @@
         </div>
 
         <!-- ========= Property name ========= -->
-        <div style="display: flex;min-width:200px;">
+        <div style="display: flex;min-width:250px;">
             <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -8 480 480" width="30px">
                 <path fill="#17A2B8"
                     d="m440 448v-49.960938c10.546875-6.214843 16.726562-17.816406 16-30.039062 0-17.671875-10.742188-32-24-32s-24 14.328125-24 32c-.726562 12.222656 5.453125 23.824219 16 30.039062v49.960938h-56v-243.054688l-48-24v43.054688h24v16h-24v32h24v16h-24v32h24v16h-24v32h24v16h-24v32h24v16h-24v16h-16v-321.96875l-96-27.421875v29.390625h56v16h-56v32h56v16h-56v32h56v16h-56v32h56v16h-56v32h56v16h-56v32h56v16h-56v32h56v16h-56v16h-16v-448h-144v32h72v16h-72v32h72v16h-72v32h72v16h-72v32h72v16h-72v32h72v16h-72v32h72v16h-72v32h72v16h-72v32h72v16h-72v32h72v16h-72v16h-48v16h480v-16zm0 0" />
@@ -49,7 +49,7 @@
         </div>
 
         <!-- ========= Property Address ========= -->
-        <div style="display: flex;margin-left:2%;min-width:200px;">
+        <div style="display: flex;margin-left:2%;min-width:250px;">
             <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="-61 0 443 443.288" width="30px">
                 <path fill="#FFF"
                     d="m96.144531 136v88h32v-56c0-4.417969 3.582031-8 8-8h48c4.417969 0 8 3.582031 8 8v56h32v-88c0-4.417969 3.582031-8 8-8h8.480469l-80.480469-61.902344-80.480469 61.902344h8.480469c4.417969 0 8 3.582031 8 8zm0 0" />
@@ -61,8 +61,8 @@
         </div>
 
         <!-- ========= Analyse Button ========= -->
-        <div align="center" style="margin-left:3%;">
-            <button type="button" class="btn btn-info rounded-pill" style="margin-top:1%;"> Analyse Property </button>
+        <div align="center" style="min-width:250px;">
+            <button type="button" id="analyse-btn" class="btn btn-info rounded-pill" style="margin-top:1%;"> Analyse Property </button>
         </div>
 
 
@@ -112,7 +112,7 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="carriermodal">Add New Carrier</h5>
+                                        <h5 class="modal-title" id="carriermodal">Enter Carrier Details </h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -146,8 +146,6 @@
                                                         <td><label class="form-check-label" for="check_mon">Monday</label></td>
                                                         <td>
                                                             <input class="carrier_time carrier_time_down form-control" id="monStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
-                                                            <!-- &emsp;to&emsp;
-                                                            <input class="carrier_time form-control" id="monEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
                                                         </td>
                                                     </tr>
                                                     <!-- ======= TUESDAY ===== -->
@@ -156,8 +154,6 @@
                                                         <td><label class="form-check-label" for="check_tues">Tuesday</label></td>
                                                         <td>
                                                             <input class="carrier_time carrier_time_down form-control" id="tuesStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
-                                                            <!-- &emsp;to&emsp;
-                                                            <input class="carrier_time form-control" id="tuesEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
                                                         </td>
                                                     </tr>
                                                     <!-- ======= WEDNESDAY ===== -->
@@ -166,8 +162,6 @@
                                                         <td><label class="form-check-label" for="check_wed">Wednesday</label></td>
                                                         <td>
                                                             <input class="carrier_time form-control" id="wedStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
-                                                            <!-- &emsp;to&emsp;
-                                                            <input class="carrier_time form-control" id="wedEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
                                                         </td>
                                                     </tr>
                                                     <!-- ======= THURSDAY ===== -->
@@ -176,8 +170,6 @@
                                                         <td><label class="form-check-label" for="check_thurs">Thursday</label></td>
                                                         <td>
                                                             <input class="carrier_time form-control" id="thursStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
-                                                            <!-- &emsp;to&emsp;
-                                                            <input class="carrier_time form-control" id="thursEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
                                                         </td>
                                                     </tr>
                                                     <!-- ======= FRIDAY ===== -->
@@ -186,8 +178,6 @@
                                                         <td><label class="form-check-label" for="check_fri">Friday</label></td>
                                                         <td>
                                                             <input class="carrier_time form-control" id="friStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
-                                                            <!-- &emsp;to&emsp;
-                                                            <input class="carrier_time form-control" id="friEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
                                                         </td>
                                                     </tr>
                                                     <!-- ======= SATURDAY ===== -->
@@ -196,8 +186,6 @@
                                                         <td><label class="form-check-label" for="check_sat">Saturday</label></td>
                                                         <td>
                                                             <input class="carrier_time form-control" id="satStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
-                                                            <!-- &emsp;to&emsp;
-                                                            <input class="carrier_time form-control" id="satEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
                                                         </td>
                                                     </tr>
                                                     <!-- ======= SUNDAY ===== -->
@@ -206,8 +194,6 @@
                                                         <td><label class="form-check-label" for="check_sun">Sunday</label></td>
                                                         <td>
                                                             <input class="carrier_time form-control" id="sunStime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled>
-                                                            <!-- &emsp;to&emsp;
-                                                            <input class="carrier_time form-control" id="sunEtime" value="" style="max-width: 90px;display:inline" data-default="20:48" disabled> -->
                                                         </td>
                                                     </tr>
                                                 </tbody>
