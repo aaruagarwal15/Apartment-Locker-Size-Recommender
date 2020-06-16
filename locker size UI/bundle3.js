@@ -186,6 +186,892 @@ process.umask = function() { return 0; };
 
 },{}],2:[function(require,module,exports){
 "use strict";
+exports.__esModule = true;
+var Data = /** @class */ (function () {
+    function Data() {
+        var _this = this;
+        this.responses = [
+            {
+                size: "Lockertype1",
+                lockerData: [
+                    {
+                        key: "06-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 10 },
+                            { grpName: 'Failed packets', grpValue: 20 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "07-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 20 },
+                            { grpName: 'Failed packets', grpValue: 30 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "08-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 14 },
+                            { grpName: 'Failed packets', grpValue: 23 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "09-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 32 },
+                            { grpName: 'Failed packets', grpValue: 19 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "10-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 41 },
+                            { grpName: 'Failed packets', grpValue: 55 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "11-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 41 },
+                            { grpName: 'Failed packets', grpValue: 50 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "12-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 20 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "13-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "14-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "15-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "16-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "17-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "04-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 35 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "05-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "06-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "07-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 35 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "08-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "09-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "10-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "11-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    }
+                ]
+            },
+            {
+                size: "Lockertype2",
+                lockerData: [
+                    {
+                        key: "06-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 23 },
+                            { grpName: 'Failed packets', grpValue: 10 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "07-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 20 },
+                            { grpName: 'Failed packets', grpValue: 30 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "08-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 14 },
+                            { grpName: 'Failed packets', grpValue: 23 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "09-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 32 },
+                            { grpName: 'Failed packets', grpValue: 19 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "10-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 41 },
+                            { grpName: 'Failed packets', grpValue: 55 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "11-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 41 },
+                            { grpName: 'Failed packets', grpValue: 50 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "12-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 20 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "13-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "14-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "15-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 67 }
+                        ]
+                    },
+                    {
+                        key: "16-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "17-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "04-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 35 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "05-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "06-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "07-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 35 },
+                            { grpName: 'Failed packets', grpValue: 15 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "08-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 25 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "09-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "10-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "11-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    }
+                ]
+            },
+            {
+                size: "Lockertype3",
+                lockerData: [
+                    {
+                        key: "06-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 35 },
+                            { grpName: 'Failed packets', grpValue: 25 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "07-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 20 },
+                            { grpName: 'Failed packets', grpValue: 30 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "08-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 14 },
+                            { grpName: 'Failed packets', grpValue: 23 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "09-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 32 },
+                            { grpName: 'Failed packets', grpValue: 19 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "10-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 41 },
+                            { grpName: 'Failed packets', grpValue: 55 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "11-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 41 },
+                            { grpName: 'Failed packets', grpValue: 50 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "12-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 20 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "13-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "14-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "15-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "16-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 48 }
+                        ]
+                    },
+                    {
+                        key: "17-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 48 }
+                        ]
+                    },
+                    {
+                        key: "04-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 35 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "05-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "06-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "07-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "08-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 20 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "09-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "10-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "11-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    }
+                ]
+            },
+            {
+                size: "Lockertype4",
+                lockerData: [
+                    {
+                        key: "06-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 14 },
+                            { grpName: 'Failed packets', grpValue: 2 },
+                            { grpName: 'Tolerance', grpValue: 48 }
+                        ]
+                    },
+                    {
+                        key: "07-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 20 },
+                            { grpName: 'Failed packets', grpValue: 30 },
+                            { grpName: 'Tolerance', grpValue: 48 }
+                        ]
+                    },
+                    {
+                        key: "08-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 14 },
+                            { grpName: 'Failed packets', grpValue: 23 },
+                            { grpName: 'Tolerance', grpValue: 48 }
+                        ]
+                    },
+                    {
+                        key: "09-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 32 },
+                            { grpName: 'Failed packets', grpValue: 19 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "10-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 41 },
+                            { grpName: 'Failed packets', grpValue: 55 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "11-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 41 },
+                            { grpName: 'Failed packets', grpValue: 50 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "12-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 20 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 26 }
+                        ]
+                    },
+                    {
+                        key: "13-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 48 }
+                        ]
+                    },
+                    {
+                        key: "14-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 67 }
+                        ]
+                    },
+                    {
+                        key: "15-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 21 }
+                        ]
+                    },
+                    {
+                        key: "16-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "17-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "04-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 35 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "05-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "06-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "07-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "08-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 20 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "09-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "10-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "11-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    }
+                ]
+            },
+            {
+                size: "Lockertype5",
+                lockerData: [
+                    {
+                        key: "06-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 10 },
+                            { grpName: 'Failed packets', grpValue: 20 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "07-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 20 },
+                            { grpName: 'Failed packets', grpValue: 30 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "08-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 14 },
+                            { grpName: 'Failed packets', grpValue: 23 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "09-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 32 },
+                            { grpName: 'Failed packets', grpValue: 19 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "10-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 41 },
+                            { grpName: 'Failed packets', grpValue: 55 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "11-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 41 },
+                            { grpName: 'Failed packets', grpValue: 50 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "12-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 20 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "13-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "14-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "15-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "16-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "17-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "04-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 35 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "05-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "06-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "07-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 35 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "08-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "09-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "10-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "11-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    }
+                ]
+            },
+            {
+                size: "Lockertype6",
+                lockerData: [
+                    {
+                        key: "06-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 23 },
+                            { grpName: 'Failed packets', grpValue: 10 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "07-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 20 },
+                            { grpName: 'Failed packets', grpValue: 30 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "08-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 14 },
+                            { grpName: 'Failed packets', grpValue: 23 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "09-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 32 },
+                            { grpName: 'Failed packets', grpValue: 19 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "10-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 41 },
+                            { grpName: 'Failed packets', grpValue: 55 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "11-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 41 },
+                            { grpName: 'Failed packets', grpValue: 50 },
+                            { grpName: 'Tolerance', grpValue: 87 }
+                        ]
+                    },
+                    {
+                        key: "12-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 20 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "13-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "14-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "15-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 67 }
+                        ]
+                    },
+                    {
+                        key: "16-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "17-01-2019", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 22 }
+                        ]
+                    },
+                    {
+                        key: "04-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 35 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "05-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "06-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "07-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 35 },
+                            { grpName: 'Failed packets', grpValue: 15 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "08-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 30 },
+                            { grpName: 'Failed packets', grpValue: 25 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "09-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "10-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    },
+                    {
+                        key: "11-06-2020", values: [
+                            { grpName: 'Successful packets', grpValue: 25 },
+                            { grpName: 'Failed packets', grpValue: 5 },
+                            { grpName: 'Tolerance', grpValue: 16 }
+                        ]
+                    }
+                ]
+            }
+        ];
+        this.getData = function () {
+            return _this.responses;
+        };
+    }
+    return Data;
+}());
+exports["default"] = Data;
+
+},{}],3:[function(require,module,exports){
+"use strict";
 var __spreadArrays = (this && this.__spreadArrays) || function () {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
     for (var r = Array(s), k = 0, i = 0; i < il; i++)
@@ -196,14 +1082,15 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
 exports.__esModule = true;
 var d3 = require("d3");
 var axios_1 = require("axios");
+var data_1 = require("./data");
 /* ================================ FETCH PROPERTY DETAILS =============================== */
-var propertyId = localStorage.getItem("Property_id");
-var url = 'http://localhost:8080/fetch_details?P_id=';
+var propertyId = localStorage.getItem("PropertyId");
+var url = 'http://localhost:8080/fetchPropertyDetails?propertyId=';
 url = url.concat(propertyId);
 axios_1["default"].get(url).then(function (response) {
     //console.log(response.data);
-    document.getElementById('p_name').innerHTML = response.data.p_name;
-    document.getElementById('p_address').innerHTML = response.data.p_address;
+    document.getElementById('propertyName').innerHTML = response.data.propertyName;
+    document.getElementById('propertyAddress').innerHTML = response.data.propertyAddress;
 })["catch"](function (error) {
     console.log(error);
 });
@@ -230,6 +1117,20 @@ function getDate(date) {
     var day = date.split("-")[0];
     return new Date(year, month, day);
 }
+function createDate(date, format) {
+    if (format === void 0) { format = 1; }
+    var dd = date.getDate().toString().padStart(2, '0');
+    var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = date.getFullYear();
+    var result = "";
+    if (format === 1) {
+        result = dd + '-' + mm + '-' + yyyy;
+    }
+    else if (format === 2) {
+        result = mm + '/' + dd + '/' + yyyy;
+    }
+    return result;
+}
 //DD-MM-YYYY
 function checkDates(start, end, key) {
     var keydate = getDate(key).getTime();
@@ -237,561 +1138,55 @@ function checkDates(start, end, key) {
     var enddate = getDate(end).getTime();
     return (keydate >= startdate && keydate <= enddate);
 }
+function convertData(resp) {
+    response = [];
+    resp.forEach(function (e) {
+        var obj = {
+            size: "0",
+            lockerData: []
+        };
+        obj["size"] = e.size;
+        var ldata = [];
+        e.lockerData.forEach(function (data) {
+            var tolerance = data.values[2].grpValue;
+            data.values = data.values.slice(0, -1);
+            data["tolerance"] = tolerance;
+            var d = {
+                values: [],
+                key: "0",
+                Tolerance: 0
+            };
+            d["values"] = data.values;
+            d["Tolerance"] = tolerance;
+            d["key"] = data.key;
+            ldata.push(d);
+        });
+        obj["lockerData"] = ldata;
+        response.push(obj);
+    });
+    console.log(resp);
+}
+var response = [];
 function dateChanged(start, end) {
+    console.log("[main3.ts] dateChanged");
     document.getElementById('allgraphs').innerHTML = "";
+    //axios request
+    var resp = new data_1["default"]();
+    var mydata = __spreadArrays(resp.getData());
+    convertData(mydata);
     for (var i = 0; i < 6; i++) {
         var graphID = '#graph' + i.toString();
         var heading = response[i].size;
         var Ldata = response[i].lockerData;
         var groupData = __spreadArrays(Ldata).filter(function (data) {
-            //console.log("DATA");
-            //console.log(data);
             return checkDates(start, end, data.key);
         });
-        console.log("GROUP");
-        console.log(groupData);
         if (groupData.length > 0) {
             createGraph(graphID.slice(1), heading);
             updateGraph(groupData, graphID);
         }
     }
 }
-var response = [
-    {
-        size: "Lockertype1",
-        lockerData: [
-            {
-                key: "06-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 30 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "07-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 30 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "08-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 14 },
-                    { grpName: 'Failed packets', grpValue: 23 },
-                ],
-                Tolerance: 15
-            },
-            {
-                key: "09-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 32 },
-                    { grpName: 'Failed packets', grpValue: 19 },
-                ],
-                Tolerance: 25
-            },
-            {
-                key: "10-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 55 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "11-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 50 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "12-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "13-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "14-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 67
-            },
-            {
-                key: "15-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 21
-            },
-            {
-                key: "16-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 22
-            },
-            {
-                key: "17-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 16
-            }
-        ]
-    },
-    {
-        size: "Lockertype2",
-        lockerData: [
-            {
-                key: "06-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 40 },
-                    { grpName: 'Failed packets', grpValue: 20 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "07-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 30 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "08-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 14 },
-                    { grpName: 'Failed packets', grpValue: 23 },
-                ],
-                Tolerance: 15
-            },
-            {
-                key: "09-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 32 },
-                    { grpName: 'Failed packets', grpValue: 19 },
-                ],
-                Tolerance: 25
-            },
-            {
-                key: "10-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 55 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "11-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 50 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "12-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "13-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "14-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 67
-            },
-            {
-                key: "15-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 21
-            },
-            {
-                key: "16-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 22
-            },
-            {
-                key: "17-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 16
-            }
-        ]
-    },
-    {
-        size: "Lockertype3",
-        lockerData: [
-            {
-                key: "06-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 10 },
-                    { grpName: 'Failed packets', grpValue: 20 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "07-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 30 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "08-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 14 },
-                    { grpName: 'Failed packets', grpValue: 23 },
-                ],
-                Tolerance: 15
-            },
-            {
-                key: "09-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 32 },
-                    { grpName: 'Failed packets', grpValue: 19 },
-                ],
-                Tolerance: 25
-            },
-            {
-                key: "10-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 55 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "11-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 50 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "12-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "13-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "14-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 67
-            },
-            {
-                key: "15-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 21
-            },
-            {
-                key: "16-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 22
-            },
-            {
-                key: "17-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 16
-            }
-        ]
-    },
-    {
-        size: "Lockertype4",
-        lockerData: [
-            {
-                key: "06-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 23 },
-                    { grpName: 'Failed packets', grpValue: 10 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "07-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 30 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "08-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 14 },
-                    { grpName: 'Failed packets', grpValue: 23 },
-                ],
-                Tolerance: 15
-            },
-            {
-                key: "09-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 32 },
-                    { grpName: 'Failed packets', grpValue: 19 },
-                ],
-                Tolerance: 25
-            },
-            {
-                key: "10-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 55 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "11-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 50 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "12-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "13-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "14-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 67
-            },
-            {
-                key: "15-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 21
-            },
-            {
-                key: "16-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 22
-            },
-            {
-                key: "17-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 16
-            }
-        ]
-    },
-    {
-        size: "Lockertype5",
-        lockerData: [
-            {
-                key: "06-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 35 },
-                    { grpName: 'Failed packets', grpValue: 25 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "07-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 30 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "08-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 14 },
-                    { grpName: 'Failed packets', grpValue: 23 },
-                ],
-                Tolerance: 15
-            },
-            {
-                key: "09-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 32 },
-                    { grpName: 'Failed packets', grpValue: 19 },
-                ],
-                Tolerance: 25
-            },
-            {
-                key: "10-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 55 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "11-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 50 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "12-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "13-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "14-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 67
-            },
-            {
-                key: "15-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 21
-            },
-            {
-                key: "16-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 22
-            },
-            {
-                key: "17-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 16
-            }
-        ]
-    },
-    {
-        size: "Lockertype6",
-        lockerData: [
-            {
-                key: "06-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 14 },
-                    { grpName: 'Failed packets', grpValue: 2 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "07-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 30 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "08-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 14 },
-                    { grpName: 'Failed packets', grpValue: 23 },
-                ],
-                Tolerance: 15
-            },
-            {
-                key: "09-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 32 },
-                    { grpName: 'Failed packets', grpValue: 19 },
-                ],
-                Tolerance: 25
-            },
-            {
-                key: "10-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 55 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "11-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 50 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "12-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "13-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "14-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 67
-            },
-            {
-                key: "15-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 21
-            },
-            {
-                key: "16-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 22
-            },
-            {
-                key: "17-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 16
-            }
-        ]
-    }
-];
 function updateGraph(groupData, idName) {
     var baseWidth = 550;
     baseWidth = Math.max(baseWidth, baseWidth * (groupData.length / 6));
@@ -860,7 +1255,7 @@ function updateGraph(groupData, idName) {
         .on("mouseover", function (d) {
         console.log("in");
         //console.log(this);
-        d3.select(this).style("fill", "#FC8D62")
+        d3.select(this)
             .select('rect').style('fill', 'white');
         divTooltip.style("left", d3.event.pageX - 10 + "px");
         divTooltip.style("top", d3.event.pageY + 10 + "px");
@@ -893,15 +1288,14 @@ function updateGraph(groupData, idName) {
         .attr("height", function (d) { return height - y(d.grpValue); });
 }
 var today = new Date();
-var dd = today.getDate().toString().padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-var yyyy = today.getFullYear();
-var todaydate = dd + '-' + mm + '-' + yyyy;
-dateChanged(todaydate, todaydate);
+var dateStart = new Date(Date.now() - (7 * 864e5));
+var dateEnd = new Date(Date.now() - 864e5);
+document.getElementById('dateRangeInput').value = createDate(dateStart, 2) + ' - ' + createDate(dateEnd, 2);
+dateChanged(createDate(dateStart), createDate(dateEnd));
 
-},{"axios":3,"d3":60}],3:[function(require,module,exports){
+},{"./data":2,"axios":4,"d3":61}],4:[function(require,module,exports){
 module.exports = require('./lib/axios');
-},{"./lib/axios":5}],4:[function(require,module,exports){
+},{"./lib/axios":6}],5:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1083,7 +1477,7 @@ module.exports = function xhrAdapter(config) {
   });
 };
 
-},{"../core/buildFullPath":11,"../core/createError":12,"./../core/settle":16,"./../helpers/buildURL":20,"./../helpers/cookies":22,"./../helpers/isURLSameOrigin":24,"./../helpers/parseHeaders":26,"./../utils":28}],5:[function(require,module,exports){
+},{"../core/buildFullPath":12,"../core/createError":13,"./../core/settle":17,"./../helpers/buildURL":21,"./../helpers/cookies":23,"./../helpers/isURLSameOrigin":25,"./../helpers/parseHeaders":27,"./../utils":29}],6:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -1138,7 +1532,7 @@ module.exports = axios;
 // Allow use of default import syntax in TypeScript
 module.exports.default = axios;
 
-},{"./cancel/Cancel":6,"./cancel/CancelToken":7,"./cancel/isCancel":8,"./core/Axios":9,"./core/mergeConfig":15,"./defaults":18,"./helpers/bind":19,"./helpers/spread":27,"./utils":28}],6:[function(require,module,exports){
+},{"./cancel/Cancel":7,"./cancel/CancelToken":8,"./cancel/isCancel":9,"./core/Axios":10,"./core/mergeConfig":16,"./defaults":19,"./helpers/bind":20,"./helpers/spread":28,"./utils":29}],7:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1159,7 +1553,7 @@ Cancel.prototype.__CANCEL__ = true;
 
 module.exports = Cancel;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 var Cancel = require('./Cancel');
@@ -1218,14 +1612,14 @@ CancelToken.source = function source() {
 
 module.exports = CancelToken;
 
-},{"./Cancel":6}],8:[function(require,module,exports){
+},{"./Cancel":7}],9:[function(require,module,exports){
 'use strict';
 
 module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1321,7 +1715,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = Axios;
 
-},{"../helpers/buildURL":20,"./../utils":28,"./InterceptorManager":10,"./dispatchRequest":13,"./mergeConfig":15}],10:[function(require,module,exports){
+},{"../helpers/buildURL":21,"./../utils":29,"./InterceptorManager":11,"./dispatchRequest":14,"./mergeConfig":16}],11:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1375,7 +1769,7 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
 
 module.exports = InterceptorManager;
 
-},{"./../utils":28}],11:[function(require,module,exports){
+},{"./../utils":29}],12:[function(require,module,exports){
 'use strict';
 
 var isAbsoluteURL = require('../helpers/isAbsoluteURL');
@@ -1397,7 +1791,7 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
   return requestedURL;
 };
 
-},{"../helpers/combineURLs":21,"../helpers/isAbsoluteURL":23}],12:[function(require,module,exports){
+},{"../helpers/combineURLs":22,"../helpers/isAbsoluteURL":24}],13:[function(require,module,exports){
 'use strict';
 
 var enhanceError = require('./enhanceError');
@@ -1417,7 +1811,7 @@ module.exports = function createError(message, config, code, request, response) 
   return enhanceError(error, config, code, request, response);
 };
 
-},{"./enhanceError":14}],13:[function(require,module,exports){
+},{"./enhanceError":15}],14:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1498,7 +1892,7 @@ module.exports = function dispatchRequest(config) {
   });
 };
 
-},{"../cancel/isCancel":8,"../defaults":18,"./../utils":28,"./transformData":17}],14:[function(require,module,exports){
+},{"../cancel/isCancel":9,"../defaults":19,"./../utils":29,"./transformData":18}],15:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1542,7 +1936,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   return error;
 };
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -1617,7 +2011,7 @@ module.exports = function mergeConfig(config1, config2) {
   return config;
 };
 
-},{"../utils":28}],16:[function(require,module,exports){
+},{"../utils":29}],17:[function(require,module,exports){
 'use strict';
 
 var createError = require('./createError');
@@ -1644,7 +2038,7 @@ module.exports = function settle(resolve, reject, response) {
   }
 };
 
-},{"./createError":12}],17:[function(require,module,exports){
+},{"./createError":13}],18:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1666,7 +2060,7 @@ module.exports = function transformData(data, headers, fns) {
   return data;
 };
 
-},{"./../utils":28}],18:[function(require,module,exports){
+},{"./../utils":29}],19:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1767,7 +2161,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 }).call(this,require('_process'))
-},{"./adapters/http":4,"./adapters/xhr":4,"./helpers/normalizeHeaderName":25,"./utils":28,"_process":1}],19:[function(require,module,exports){
+},{"./adapters/http":5,"./adapters/xhr":5,"./helpers/normalizeHeaderName":26,"./utils":29,"_process":1}],20:[function(require,module,exports){
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -1780,7 +2174,7 @@ module.exports = function bind(fn, thisArg) {
   };
 };
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1853,7 +2247,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   return url;
 };
 
-},{"./../utils":28}],21:[function(require,module,exports){
+},{"./../utils":29}],22:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1869,7 +2263,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
     : baseURL;
 };
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1924,7 +2318,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":28}],23:[function(require,module,exports){
+},{"./../utils":29}],24:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1940,7 +2334,7 @@ module.exports = function isAbsoluteURL(url) {
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
 };
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2010,7 +2404,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":28}],25:[function(require,module,exports){
+},{"./../utils":29}],26:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -2024,7 +2418,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   });
 };
 
-},{"../utils":28}],26:[function(require,module,exports){
+},{"../utils":29}],27:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2079,7 +2473,7 @@ module.exports = function parseHeaders(headers) {
   return parsed;
 };
 
-},{"./../utils":28}],27:[function(require,module,exports){
+},{"./../utils":29}],28:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2108,7 +2502,7 @@ module.exports = function spread(callback) {
   };
 };
 
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 'use strict';
 
 var bind = require('./helpers/bind');
@@ -2454,7 +2848,7 @@ module.exports = {
   trim: trim
 };
 
-},{"./helpers/bind":19}],29:[function(require,module,exports){
+},{"./helpers/bind":20}],30:[function(require,module,exports){
 // https://d3js.org/d3-array/ v1.2.4 Copyright 2018 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -3046,7 +3440,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 // https://d3js.org/d3-axis/ v1.0.12 Copyright 2018 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -3241,7 +3635,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 // https://d3js.org/d3-brush/ v1.1.5 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-dispatch'), require('d3-drag'), require('d3-interpolate'), require('d3-selection'), require('d3-transition')) :
@@ -3860,7 +4254,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{"d3-dispatch":36,"d3-drag":37,"d3-interpolate":45,"d3-selection":52,"d3-transition":57}],32:[function(require,module,exports){
+},{"d3-dispatch":37,"d3-drag":38,"d3-interpolate":46,"d3-selection":53,"d3-transition":58}],33:[function(require,module,exports){
 // https://d3js.org/d3-chord/ v1.0.6 Copyright 2018 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-array'), require('d3-path')) :
@@ -4092,7 +4486,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 
-},{"d3-array":29,"d3-path":46}],33:[function(require,module,exports){
+},{"d3-array":30,"d3-path":47}],34:[function(require,module,exports){
 // https://d3js.org/d3-collection/ v1.0.7 Copyright 2018 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -4311,7 +4705,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 // https://d3js.org/d3-color/ v1.4.1 Copyright 2020 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -4894,7 +5288,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 // https://d3js.org/d3-contour/ v1.3.2 Copyright 2018 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-array')) :
@@ -5327,7 +5721,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 
-},{"d3-array":29}],36:[function(require,module,exports){
+},{"d3-array":30}],37:[function(require,module,exports){
 // https://d3js.org/d3-dispatch/ v1.0.6 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -5424,7 +5818,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{}],37:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 // https://d3js.org/d3-drag/ v1.2.5 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-dispatch'), require('d3-selection')) :
@@ -5660,7 +6054,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{"d3-dispatch":36,"d3-selection":52}],38:[function(require,module,exports){
+},{"d3-dispatch":37,"d3-selection":53}],39:[function(require,module,exports){
 // https://d3js.org/d3-dsv/ v1.2.0 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -5895,7 +6289,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{}],39:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 // https://d3js.org/d3-ease/ v1.0.6 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -6156,7 +6550,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{}],40:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 // https://d3js.org/d3-fetch/ v1.2.0 Copyright 2020 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-dsv')) :
@@ -6261,7 +6655,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{"d3-dsv":38}],41:[function(require,module,exports){
+},{"d3-dsv":39}],42:[function(require,module,exports){
 // https://d3js.org/d3-force/ v1.2.1 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-quadtree'), require('d3-collection'), require('d3-dispatch'), require('d3-timer')) :
@@ -6931,7 +7325,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 
-},{"d3-collection":33,"d3-dispatch":36,"d3-quadtree":48,"d3-timer":56}],42:[function(require,module,exports){
+},{"d3-collection":34,"d3-dispatch":37,"d3-quadtree":49,"d3-timer":57}],43:[function(require,module,exports){
 // https://d3js.org/d3-format/ v1.4.4 Copyright 2020 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -7272,7 +7666,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{}],43:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 // https://d3js.org/d3-geo/ v1.12.1 Copyright 2020 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-array')) :
@@ -10439,7 +10833,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 
-},{"d3-array":29}],44:[function(require,module,exports){
+},{"d3-array":30}],45:[function(require,module,exports){
 // https://d3js.org/d3-hierarchy/ v1.1.9 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -11731,7 +12125,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{}],45:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 // https://d3js.org/d3-interpolate/ v1.4.0 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-color')) :
@@ -12326,7 +12720,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{"d3-color":34}],46:[function(require,module,exports){
+},{"d3-color":35}],47:[function(require,module,exports){
 // https://d3js.org/d3-path/ v1.0.9 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -12469,7 +12863,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{}],47:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 // https://d3js.org/d3-polygon/ v1.0.6 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -12621,7 +13015,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{}],48:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 // https://d3js.org/d3-quadtree/ v1.0.7 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -13042,7 +13436,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{}],49:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 // https://d3js.org/d3-random/ v1.1.2 Copyright 2018 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -13159,7 +13553,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 
-},{}],50:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 // https://d3js.org/d3-scale-chromatic/ v1.5.0 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-interpolate'), require('d3-color')) :
@@ -13682,7 +14076,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{"d3-color":34,"d3-interpolate":45}],51:[function(require,module,exports){
+},{"d3-color":35,"d3-interpolate":46}],52:[function(require,module,exports){
 // https://d3js.org/d3-scale/ v2.2.2 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-collection'), require('d3-array'), require('d3-interpolate'), require('d3-format'), require('d3-time'), require('d3-time-format')) :
@@ -14849,7 +15243,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 
-},{"d3-array":29,"d3-collection":33,"d3-format":42,"d3-interpolate":45,"d3-time":55,"d3-time-format":54}],52:[function(require,module,exports){
+},{"d3-array":30,"d3-collection":34,"d3-format":43,"d3-interpolate":46,"d3-time":56,"d3-time-format":55}],53:[function(require,module,exports){
 // https://d3js.org/d3-selection/ v1.4.1 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -15840,7 +16234,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{}],53:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 // https://d3js.org/d3-shape/ v1.3.7 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-path')) :
@@ -17791,7 +18185,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{"d3-path":46}],54:[function(require,module,exports){
+},{"d3-path":47}],55:[function(require,module,exports){
 // https://d3js.org/d3-time-format/ v2.2.3 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-time')) :
@@ -18500,7 +18894,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{"d3-time":55}],55:[function(require,module,exports){
+},{"d3-time":56}],56:[function(require,module,exports){
 // https://d3js.org/d3-time/ v1.1.0 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -18875,7 +19269,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{}],56:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 // https://d3js.org/d3-timer/ v1.0.10 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -19026,7 +19420,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{}],57:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 // https://d3js.org/d3-transition/ v1.3.2 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-selection'), require('d3-dispatch'), require('d3-timer'), require('d3-interpolate'), require('d3-color'), require('d3-ease')) :
@@ -19908,7 +20302,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{"d3-color":34,"d3-dispatch":36,"d3-ease":39,"d3-interpolate":45,"d3-selection":52,"d3-timer":56}],58:[function(require,module,exports){
+},{"d3-color":35,"d3-dispatch":37,"d3-ease":40,"d3-interpolate":46,"d3-selection":53,"d3-timer":57}],59:[function(require,module,exports){
 // https://d3js.org/d3-voronoi/ v1.1.4 Copyright 2018 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -20909,7 +21303,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 
-},{}],59:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 // https://d3js.org/d3-zoom/ v1.8.3 Copyright 2019 Mike Bostock
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-dispatch'), require('d3-drag'), require('d3-interpolate'), require('d3-selection'), require('d3-transition')) :
@@ -21408,7 +21802,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 
-},{"d3-dispatch":36,"d3-drag":37,"d3-interpolate":45,"d3-selection":52,"d3-transition":57}],60:[function(require,module,exports){
+},{"d3-dispatch":37,"d3-drag":38,"d3-interpolate":46,"d3-selection":53,"d3-transition":58}],61:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -21697,4 +22091,4 @@ Object.keys(d3Zoom).forEach(function (k) {
 });
 exports.version = version;
 
-},{"d3-array":29,"d3-axis":30,"d3-brush":31,"d3-chord":32,"d3-collection":33,"d3-color":34,"d3-contour":35,"d3-dispatch":36,"d3-drag":37,"d3-dsv":38,"d3-ease":39,"d3-fetch":40,"d3-force":41,"d3-format":42,"d3-geo":43,"d3-hierarchy":44,"d3-interpolate":45,"d3-path":46,"d3-polygon":47,"d3-quadtree":48,"d3-random":49,"d3-scale":51,"d3-scale-chromatic":50,"d3-selection":52,"d3-shape":53,"d3-time":55,"d3-time-format":54,"d3-timer":56,"d3-transition":57,"d3-voronoi":58,"d3-zoom":59}]},{},[2]);
+},{"d3-array":30,"d3-axis":31,"d3-brush":32,"d3-chord":33,"d3-collection":34,"d3-color":35,"d3-contour":36,"d3-dispatch":37,"d3-drag":38,"d3-dsv":39,"d3-ease":40,"d3-fetch":41,"d3-force":42,"d3-format":43,"d3-geo":44,"d3-hierarchy":45,"d3-interpolate":46,"d3-path":47,"d3-polygon":48,"d3-quadtree":49,"d3-random":50,"d3-scale":52,"d3-scale-chromatic":51,"d3-selection":53,"d3-shape":54,"d3-time":56,"d3-time-format":55,"d3-timer":57,"d3-transition":58,"d3-voronoi":59,"d3-zoom":60}]},{},[3]);

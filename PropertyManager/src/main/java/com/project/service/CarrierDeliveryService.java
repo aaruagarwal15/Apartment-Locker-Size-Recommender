@@ -12,41 +12,38 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.model.CarrierCombined;
-import com.project.model.Carrier_delivery;
+import com.project.model.CarrierDelivery;
 import com.project.model.Property;
 import com.project.repository.CarrierDeliveryRepository;
 
 @Service
 @Transactional
 public class CarrierDeliveryService {
-	
-	/*private static EntityManagerFactory entityManagerFactory =
-	          Persistence.createEntityManagerFactory("example-unit");*/
-	
+
 	@Autowired
-	private CarrierDeliveryRepository cdrepo;
-	
-	
-	public List<CarrierCombined> getCombinedData(Long p_id) {
-		return cdrepo.fetchDataInnerJoin(p_id);
+	private CarrierDeliveryRepository carrierDeliveryRepository;
+
+	public List<CarrierCombined> getCombinedData(Long propertyId) {
+		return carrierDeliveryRepository.fetchDataInnerJoin(propertyId);
 	}
-	public void cd_save(Carrier_delivery cd) {
-		cdrepo.savecd(cd.getP_id(), cd.getCar_id(), cd.getDelivery_day(), cd.getDelivery_time());
+
+	public void carrierDeliverySave(CarrierDelivery cd) {
+		carrierDeliveryRepository.savecarrierDelivery(cd.getPropertyId(), cd.getCarrierId(), cd.getDeliveryDay(), cd.getDelivery_time());
 	}
-	 
-	public List<CarrierCombined> getEntryData(Long p_id, Long c_id) {
-		return cdrepo.fetchEntry(p_id, c_id);
+
+	public List<CarrierCombined> getEntryData(Long propertyId, Long carrierId) {
+		return carrierDeliveryRepository.fetchEntry(propertyId, carrierId);
 	}
-	
-	public List<Carrier_delivery> cd_check(Long c_id, Long p_id){
-		return cdrepo.checkEntry(p_id, c_id);
+
+	public List<CarrierDelivery> carrierDeliveryCheck(Long carrierId, Long propertyId) {
+		return carrierDeliveryRepository.checkEntry(propertyId, carrierId);
 	}
-	
-	public void delete(Long c_id, Long p_id) {
-		cdrepo.deleteCarrier(p_id, c_id);
+
+	public void delete(Long carrierId, Long propertyId) {
+		carrierDeliveryRepository.deleteCarrier(propertyId, carrierId);
 	}
-	
-	public List<String> checkforcarrier(Long c_id, Long p_id){
-		return cdrepo.checkforC(p_id, c_id);
+
+	public List<String> checkforcarrier(Long carrierId, Long propertyId) {
+		return carrierDeliveryRepository.checkforCarrier(propertyId, carrierId);
 	}
 }

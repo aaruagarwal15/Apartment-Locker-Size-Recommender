@@ -9,14 +9,15 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
 exports.__esModule = true;
 var d3 = require("d3");
 var axios_1 = require("axios");
+var data_1 = require("./data");
 /* ================================ FETCH PROPERTY DETAILS =============================== */
-var propertyId = localStorage.getItem("Property_id");
-var url = 'http://localhost:8080/fetch_details?P_id=';
+var propertyId = localStorage.getItem("PropertyId");
+var url = 'http://localhost:8080/fetchPropertyDetails?propertyId=';
 url = url.concat(propertyId);
 axios_1["default"].get(url).then(function (response) {
     //console.log(response.data);
-    document.getElementById('p_name').innerHTML = response.data.p_name;
-    document.getElementById('p_address').innerHTML = response.data.p_address;
+    document.getElementById('propertyName').innerHTML = response.data.propertyName;
+    document.getElementById('propertyAddress').innerHTML = response.data.propertyAddress;
 })["catch"](function (error) {
     console.log(error);
 });
@@ -43,6 +44,20 @@ function getDate(date) {
     var day = date.split("-")[0];
     return new Date(year, month, day);
 }
+function createDate(date, format) {
+    if (format === void 0) { format = 1; }
+    var dd = date.getDate().toString().padStart(2, '0');
+    var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = date.getFullYear();
+    var result = "";
+    if (format === 1) {
+        result = dd + '-' + mm + '-' + yyyy;
+    }
+    else if (format === 2) {
+        result = mm + '/' + dd + '/' + yyyy;
+    }
+    return result;
+}
 //DD-MM-YYYY
 function checkDates(start, end, key) {
     var keydate = getDate(key).getTime();
@@ -50,561 +65,55 @@ function checkDates(start, end, key) {
     var enddate = getDate(end).getTime();
     return (keydate >= startdate && keydate <= enddate);
 }
+function convertData(resp) {
+    response = [];
+    resp.forEach(function (e) {
+        var obj = {
+            size: "0",
+            lockerData: []
+        };
+        obj["size"] = e.size;
+        var ldata = [];
+        e.lockerData.forEach(function (data) {
+            var tolerance = data.values[2].grpValue;
+            data.values = data.values.slice(0, -1);
+            data["tolerance"] = tolerance;
+            var d = {
+                values: [],
+                key: "0",
+                Tolerance: 0
+            };
+            d["values"] = data.values;
+            d["Tolerance"] = tolerance;
+            d["key"] = data.key;
+            ldata.push(d);
+        });
+        obj["lockerData"] = ldata;
+        response.push(obj);
+    });
+    console.log(resp);
+}
+var response = [];
 function dateChanged(start, end) {
+    console.log("[main3.ts] dateChanged");
     document.getElementById('allgraphs').innerHTML = "";
+    //axios request
+    var resp = new data_1["default"]();
+    var mydata = __spreadArrays(resp.getData());
+    convertData(mydata);
     for (var i = 0; i < 6; i++) {
         var graphID = '#graph' + i.toString();
         var heading = response[i].size;
         var Ldata = response[i].lockerData;
         var groupData = __spreadArrays(Ldata).filter(function (data) {
-            //console.log("DATA");
-            //console.log(data);
             return checkDates(start, end, data.key);
         });
-        console.log("GROUP");
-        console.log(groupData);
         if (groupData.length > 0) {
             createGraph(graphID.slice(1), heading);
             updateGraph(groupData, graphID);
         }
     }
 }
-var response = [
-    {
-        size: "Lockertype1",
-        lockerData: [
-            {
-                key: "06-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 30 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "07-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 30 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "08-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 14 },
-                    { grpName: 'Failed packets', grpValue: 23 },
-                ],
-                Tolerance: 15
-            },
-            {
-                key: "09-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 32 },
-                    { grpName: 'Failed packets', grpValue: 19 },
-                ],
-                Tolerance: 25
-            },
-            {
-                key: "10-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 55 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "11-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 50 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "12-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "13-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "14-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 67
-            },
-            {
-                key: "15-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 21
-            },
-            {
-                key: "16-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 22
-            },
-            {
-                key: "17-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 16
-            }
-        ]
-    },
-    {
-        size: "Lockertype2",
-        lockerData: [
-            {
-                key: "06-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 40 },
-                    { grpName: 'Failed packets', grpValue: 20 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "07-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 30 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "08-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 14 },
-                    { grpName: 'Failed packets', grpValue: 23 },
-                ],
-                Tolerance: 15
-            },
-            {
-                key: "09-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 32 },
-                    { grpName: 'Failed packets', grpValue: 19 },
-                ],
-                Tolerance: 25
-            },
-            {
-                key: "10-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 55 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "11-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 50 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "12-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "13-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "14-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 67
-            },
-            {
-                key: "15-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 21
-            },
-            {
-                key: "16-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 22
-            },
-            {
-                key: "17-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 16
-            }
-        ]
-    },
-    {
-        size: "Lockertype3",
-        lockerData: [
-            {
-                key: "06-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 10 },
-                    { grpName: 'Failed packets', grpValue: 20 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "07-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 30 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "08-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 14 },
-                    { grpName: 'Failed packets', grpValue: 23 },
-                ],
-                Tolerance: 15
-            },
-            {
-                key: "09-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 32 },
-                    { grpName: 'Failed packets', grpValue: 19 },
-                ],
-                Tolerance: 25
-            },
-            {
-                key: "10-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 55 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "11-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 50 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "12-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "13-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "14-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 67
-            },
-            {
-                key: "15-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 21
-            },
-            {
-                key: "16-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 22
-            },
-            {
-                key: "17-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 16
-            }
-        ]
-    },
-    {
-        size: "Lockertype4",
-        lockerData: [
-            {
-                key: "06-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 23 },
-                    { grpName: 'Failed packets', grpValue: 10 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "07-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 30 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "08-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 14 },
-                    { grpName: 'Failed packets', grpValue: 23 },
-                ],
-                Tolerance: 15
-            },
-            {
-                key: "09-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 32 },
-                    { grpName: 'Failed packets', grpValue: 19 },
-                ],
-                Tolerance: 25
-            },
-            {
-                key: "10-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 55 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "11-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 50 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "12-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "13-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "14-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 67
-            },
-            {
-                key: "15-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 21
-            },
-            {
-                key: "16-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 22
-            },
-            {
-                key: "17-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 16
-            }
-        ]
-    },
-    {
-        size: "Lockertype5",
-        lockerData: [
-            {
-                key: "06-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 35 },
-                    { grpName: 'Failed packets', grpValue: 25 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "07-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 30 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "08-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 14 },
-                    { grpName: 'Failed packets', grpValue: 23 },
-                ],
-                Tolerance: 15
-            },
-            {
-                key: "09-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 32 },
-                    { grpName: 'Failed packets', grpValue: 19 },
-                ],
-                Tolerance: 25
-            },
-            {
-                key: "10-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 55 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "11-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 50 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "12-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "13-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "14-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 67
-            },
-            {
-                key: "15-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 21
-            },
-            {
-                key: "16-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 22
-            },
-            {
-                key: "17-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 16
-            }
-        ]
-    },
-    {
-        size: "Lockertype6",
-        lockerData: [
-            {
-                key: "06-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 14 },
-                    { grpName: 'Failed packets', grpValue: 2 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "07-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 30 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "08-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 14 },
-                    { grpName: 'Failed packets', grpValue: 23 },
-                ],
-                Tolerance: 15
-            },
-            {
-                key: "09-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 32 },
-                    { grpName: 'Failed packets', grpValue: 19 },
-                ],
-                Tolerance: 25
-            },
-            {
-                key: "10-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 55 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "11-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 41 },
-                    { grpName: 'Failed packets', grpValue: 50 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "12-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 20 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 26
-            },
-            {
-                key: "13-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 48
-            },
-            {
-                key: "14-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 67
-            },
-            {
-                key: "15-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 21
-            },
-            {
-                key: "16-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 22
-            },
-            {
-                key: "17-01-2019", values: [
-                    { grpName: 'Successful packets', grpValue: 30 },
-                    { grpName: 'Failed packets', grpValue: 5 },
-                ],
-                Tolerance: 16
-            }
-        ]
-    }
-];
 function updateGraph(groupData, idName) {
     var baseWidth = 550;
     baseWidth = Math.max(baseWidth, baseWidth * (groupData.length / 6));
@@ -673,7 +182,7 @@ function updateGraph(groupData, idName) {
         .on("mouseover", function (d) {
         console.log("in");
         //console.log(this);
-        d3.select(this).style("fill", "#FC8D62")
+        d3.select(this)
             .select('rect').style('fill', 'white');
         divTooltip.style("left", d3.event.pageX - 10 + "px");
         divTooltip.style("top", d3.event.pageY + 10 + "px");
@@ -706,8 +215,7 @@ function updateGraph(groupData, idName) {
         .attr("height", function (d) { return height - y(d.grpValue); });
 }
 var today = new Date();
-var dd = today.getDate().toString().padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-var yyyy = today.getFullYear();
-var todaydate = dd + '-' + mm + '-' + yyyy;
-dateChanged(todaydate, todaydate);
+var dateStart = new Date(Date.now() - (7 * 864e5));
+var dateEnd = new Date(Date.now() - 864e5);
+document.getElementById('dateRangeInput').value = createDate(dateStart, 2) + ' - ' + createDate(dateEnd, 2);
+dateChanged(createDate(dateStart), createDate(dateEnd));

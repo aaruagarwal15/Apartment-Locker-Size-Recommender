@@ -12,28 +12,28 @@ import com.project.repository.PropertyRepository;
 @Service
 @Transactional
 public class PropertyService {
-	 
-	@Autowired
-    private PropertyRepository repo;
-     
+
+    @Autowired
+    private PropertyRepository propertyRepository;
+
     public List<Property> listAll() {
-        return repo.findAll();
+        return propertyRepository.findAll();
     }
-     
+
     public void save(Property property) {
-        repo.save(property);
+    	propertyRepository.save(property);
     }
-     
-    public Property get(Long p_id) {
-        return repo.findById(p_id).get();
+
+    public Property getProperty(Long propertyId) {
+        return propertyRepository.findById(propertyId).get();
     }
-     
-    public void delete(long p_id) {
-        repo.deleteById(p_id);
-    }	
-    /*public List<Property> listFiltered(String status){
-    	return repo.findByStatus(status);
-    }*/
+
+    public void delete(long propertyId) {
+    	propertyRepository.deleteById(propertyId);
+    }
+    /*
+     * public List<Property> listFiltered(String status){ return
+     * repo.findByStatus(status); }
+     */
 
 }
-

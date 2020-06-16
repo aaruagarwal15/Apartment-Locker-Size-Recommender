@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-AppMain<PropertyManager>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.project.AppMain",
+            "projectName": "PropertyManager",
+            "args": ""
+        }
+    ]
+}

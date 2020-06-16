@@ -13,20 +13,23 @@ import com.project.repository.CarrierRepository;
 @Service
 @Transactional
 public class CarrierService {
-	
+
 	@Autowired
-	private CarrierRepository crepo;
-	
-	/*public List<CarrierCombined> getCombinedData(Long p_id) {
-		return crepo.getData(p_id);
-    }*/
-	public void carrier_save(Carrier carrier) {
-		crepo.saveCarrier(carrier.getId(), carrier.getC_name());
+	private CarrierRepository carrierRepository;
+
+	/*
+	 * public List<CarrierCombined> getCombinedData(Long propertyId) { return
+	 * crepo.getData(propertyId); }
+	 */
+	public void carrierSave(Carrier carrier) {
+		carrierRepository.saveCarrier(carrier.getId(), carrier.getcarrierName());
 	}
-	
-	public void deleteCarrier(Long c_id) {
-		crepo.deleteCar(c_id);
+
+	public void deleteCarrier(Long carrierId) {
+		carrierRepository.deleteCar(carrierId);
 	}
-	
+	public List<String> getAllNames(){
+		return carrierRepository.allCarrierNames();
+	}
 
 }

@@ -18,41 +18,40 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "carrier")
 public class Carrier implements Serializable {
-	
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name = "c_name")
-	private String c_name;
-	
 
-	@OneToMany(targetEntity = Carrier_delivery.class, mappedBy = "car_id", orphanRemoval = false, fetch = FetchType.LAZY)
-	private Set<Carrier_delivery> carrier_deliveries;
-	
-	
+	@Column(name = "carrierName")
+	private String carrierName;
 
-	public Set<Carrier_delivery> getCarrier_deliveries() {
-		return carrier_deliveries;
+	@OneToMany(targetEntity = CarrierDelivery.class, mappedBy = "carrierId", orphanRemoval = false, fetch = FetchType.LAZY)
+	private Set<CarrierDelivery> carrierDeliveries;
+
+	public Set<CarrierDelivery> getCarrierDeliveries() {
+		return carrierDeliveries;
 	}
 
-	public void setCarrier_deliveries(Set<Carrier_delivery> carrier_deliveries) {
-		this.carrier_deliveries = carrier_deliveries;
+	public void setCarrierDeliveries(Set<CarrierDelivery> carrierDeliveries) {
+		this.carrierDeliveries = carrierDeliveries;
 	}
 
-	
 	public Long getId() {
 		return id;
 	}
-	public void setId(Long c_id) {
-		this.id = c_id;
+
+	public void setId(Long carrierId) {
+		this.id = carrierId;
 	}
-	public String getC_name() {
-		return c_name;
+
+	public String getcarrierName() {
+		return carrierName;
 	}
-	public void setC_name(String c_name) {
-		this.c_name = c_name;
-	} 
-	
+
+	public void setcarrierName(String carrierName) {
+		this.carrierName = carrierName;
+	}
+
 }

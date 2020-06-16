@@ -2,10 +2,10 @@
     margin-top: 1%;
     width: 47%;
     border-radius: 10px;
-    border-color: black;
-    border-width: 3px;
     padding: 1%;
     background-color: papayawhip;
+    box-sizing: border-box;
+    border: medium solid #17A2B8;
     /* overflow-x: scroll; */
 }
 

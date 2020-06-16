@@ -9,40 +9,38 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "property")
 public class Property {
-	private Long p_id;
-    private String p_name;
-    private String p_address;
- 
-    public Property() {
-    }
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getP_id() {
-		return p_id;
+	private Long propertyId;
+	private String propertyName;
+	private String propertyAddress;
+
+	public Property() {
 	}
 
-	public void setP_id(Long p_id) {
-		this.p_id = p_id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	public Long getPropertyId() {
+		return propertyId;
 	}
 
-	public String getP_name() {
-		return p_name;
+	public void setPropertyId(Long propertyId) {
+		this.propertyId = propertyId;
 	}
 
-	public void setP_name(String p_name) {
-		this.p_name = p_name;
+	public String getPropertyName() {
+		return propertyName;
 	}
 
-	public String getP_address() {
-		return p_address;
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
 	}
 
-	public void setP_address(String p_address) {
-		this.p_address = p_address;
+	public String getPropertyAddress() {
+		return propertyAddress;
 	}
- 
-    
-	
-    
+
+	public void setPropertyAddress(String propertyAddress) {
+		this.propertyAddress = propertyAddress;
+	}
+
 }

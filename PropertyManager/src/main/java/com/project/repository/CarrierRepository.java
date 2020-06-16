@@ -13,14 +13,18 @@ import com.project.model.CarrierCombined;
 
 @Repository
 public interface CarrierRepository extends JpaRepository<Carrier, Long> {
-	
-	
+
 	@Modifying
-	@Query(value= "INSERT INTO carrier VALUES(:c_id, :c_name)", nativeQuery = true)
-	void saveCarrier(@Param("c_id") Long c_id, @Param("c_name") String c_name);
-	
+	@Query(value = "INSERT INTO carrier VALUES(:carrierId, :carrierName)", nativeQuery = true)
+	void saveCarrier(@Param("carrierId") Long carrierId, @Param("carrierName") String carrierName);
+
 	@Modifying
-	@Query(value="DELETE from carrier WHERE id = :c_id", nativeQuery = true)
-	void deleteCar(@Param("c_id") Long c_id);
+	@Query(value = "DELETE from carrier WHERE id = :carrierId", nativeQuery = true)
+	void deleteCar(@Param("carrierId") Long carrierId);
+	
+	
+	
+	@Query(value = "SELECT carrierName FROM carrier", nativeQuery = true)
+	List<String> allCarrierNames();
 
 }

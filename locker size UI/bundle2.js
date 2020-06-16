@@ -197,16 +197,15 @@ exports.__esModule = true;
 var axios_1 = require("axios");
 /**=========================== UNIT CLASS ================================ */
 var Unit = /** @class */ (function () {
-    function Unit(pId, uId, uName) {
-        this.pId = pId;
-        this.uId = uId;
-        this.uName = uName;
+    function Unit(propertyId, unitId, unitName) {
+        this.propertyId = propertyId;
+        this.unitId = unitId;
+        this.unitName = unitName;
     }
     Unit.prototype.createList = function () {
-        var st;
         var key = 'a' + Math.random().toString(36).slice(2);
         var card = document.createElement('div');
-        var card_html = "<div class='card-body'><h5 class='card-title'>" + this.uName + "</h5><h6 class='card-subtitle mb-2 text-muted'>" + this.uId.toString() + "</h6><button type='button' class='btn btn-outline-secondary edit_unit_data' data-toggle='modal' data-placement='bottom' data-target='#editUnit' title='Edit Details'><i class='fa fa-edit'></i></button>&nbsp;&nbsp;<button type='button' class='btn btn-outline-danger delete_unit_data' data-toggle='tooltip' data-placement='bottom' title='Delete Unit'><i class='fa fa-trash' aria-hidden='true'></i></button></div>";
+        var card_html = "<div class='card-body'><h5 class='card-title'>" + this.unitName + "</h5><h6 class='card-subtitle mb-2 text-muted'>" + this.unitId.toString() + "</h6><button type='button' class='btn btn-outline-secondary edit_unit_data' data-toggle='modal' data-placement='bottom' data-target='#editUnit' title='Edit Details'><i class='fa fa-edit'></i></button>&nbsp;&nbsp;<button type='button' class='btn btn-outline-danger delete_unit_data' data-toggle='tooltip' data-placement='bottom' title='Delete Unit'><i class='fa fa-trash' aria-hidden='true'></i></button></div>";
         card.innerHTML = card_html;
         card.classList.add(key);
         card.classList.add("card");
@@ -218,7 +217,7 @@ var Unit = /** @class */ (function () {
     return Unit;
 }());
 ;
-/**=========================== CARRIER CLASS================================ */
+/**=========================== CARRIER CLASS ================================ */
 var Carrier = /** @class */ (function () {
     function Carrier(cId, cName, delivery_details) {
         this.cId = cId;
@@ -247,17 +246,17 @@ var Carrier = /** @class */ (function () {
                                             <div class="carrier_details" style="display:flex;justify-content: space-evenly;">';
         cardStructure += '<div>';
         for (var i = 0; i < this.delivery_details_length; i++) {
-            cardStructure += '<p>' + this.delivery_details[i].delivery_day + '</p>';
+            cardStructure += '<p>' + this.delivery_details[i].deliveryDay + '</p>';
         }
         cardStructure += '</div><div>';
         for (var i = 0; i < this.delivery_details_length; i++) {
-            cardStructure += '<p>' + this.delivery_details[i].delivery_time + '</p>';
+            cardStructure += '<p>' + this.delivery_details[i].deliveryTime + '</p>';
         }
         cardStructure += '</div>';
         cardStructure += '</div></p></div>';
         mycard.classList.add('card');
         mycard.classList.add(key);
-        mycard.setAttribute('style', 'margin:1%;min-width: 250px;');
+        mycard.setAttribute('style', 'margin:1%;width: 380px;');
         mycard.innerHTML = cardStructure;
         document.getElementById('new_carrier_data').insertBefore(mycard, document.getElementById('new_carrier_data').firstChild);
         return key;
@@ -283,14 +282,14 @@ function greenSnackbar(msg, time) {
 /* ====================== ONLOAD FUNCTION =========================== */
 /* ======================================================================== */
 window.onload = function () {
-    var propertyId = localStorage.getItem("Property_id");
+    var propertyId = localStorage.getItem("PropertyId");
     /* ================================ FETCH PROPERTY DETAILS =============================== */
-    var url = 'http://localhost:8080/fetch_details?P_id=';
+    var url = 'http://localhost:8080/fetchPropertyDetails?propertyId=';
     url = url.concat(propertyId);
     axios_1["default"].get(url).then(function (response) {
         //console.log(response.data);
-        document.getElementById('p_name').innerHTML = response.data.p_name;
-        document.getElementById('p_address').innerHTML = response.data.p_address;
+        document.getElementById('propertyName').innerHTML = response.data.propertyName;
+        document.getElementById('propertyAddress').innerHTML = response.data.propertyAddress;
     })["catch"](function (error) {
         console.log(error);
     });
@@ -305,16 +304,16 @@ window.onload = function () {
         document.getElementById('edit_unit_name').value = uname;
         document.getElementById('add_edit_unit').onclick = function () {
             var params = new URLSearchParams();
-            var u_id = document.getElementById('edit_unit_id').value;
-            var u_name = document.getElementById('edit_unit_name').value;
-            if (u_name != "" && u_id != "") {
-                params.append('Property_Id', propertyId);
-                params.append('Unit_Id_old', uid);
-                params.append('Unit_Id', u_id);
-                params.append('Unit_Name', u_name);
+            var unitId = document.getElementById('edit_unit_id').value;
+            var unitName = document.getElementById('edit_unit_name').value;
+            if (unitName != "" && unitId != "") {
+                params.append('PropertyId', propertyId);
+                params.append('UnitIdold', uid);
+                params.append('UnitId', unitId);
+                params.append('UnitName', unitName);
                 axios_1["default"]({
                     method: 'POST',
-                    url: 'http://localhost:8080/edit_unit',
+                    url: 'http://localhost:8080/editUnit',
                     data: params
                 }).then(function (response) {
                     console.log(response.data);
@@ -324,7 +323,7 @@ window.onload = function () {
                     else {
                         document.getElementById('new_units_data').innerHTML = "";
                         for (var i = 0; i < response.data.length; i++) {
-                            var p = new Unit(response.data[i].p_id, response.data[i].u_id, response.data[i].u_name);
+                            var p = new Unit(response.data[i].propertyId, response.data[i].unitId, response.data[i].unitName);
                             var key = p.createList();
                             var edit_button = document.querySelector('.' + key + ' .edit_unit_data');
                             var delete_button = document.querySelector('.' + key + ' .delete_unit_data');
@@ -349,13 +348,13 @@ window.onload = function () {
     /* ===================== DELETE UNIT DETAILS ================= */
     function deleteUnitData(e) {
         var cardNode = e.srcElement.parentNode.parentNode;
-        var u_id = e.srcElement.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
+        var unitId = e.srcElement.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
         if (e.srcElement.nodeName == 'I') {
             cardNode = e.srcElement.parentNode.parentNode.parentElement;
-            u_id = e.srcElement.parentNode.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
+            unitId = e.srcElement.parentNode.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
         }
-        var url2 = 'http://localhost:8080/delete_unit?U_Id=';
-        url2 = url2.concat(u_id);
+        var url2 = 'http://localhost:8080/deleteUnit?unitId=';
+        url2 = url2.concat(unitId);
         axios_1["default"]["delete"](url2).then(function (response) {
             if (response.data.toString() == "SUCCESS") {
                 console.log(cardNode);
@@ -370,11 +369,11 @@ window.onload = function () {
         });
     }
     /* ======================== RETRIEVE ALL UNITS DATA ================================== */
-    var url = 'http://localhost:8080/getallunits?PId=';
+    var url = 'http://localhost:8080/getallunits?propertyId=';
     url = url.concat(propertyId);
     axios_1["default"].get(url).then(function (response) {
         for (var i = 0; i < response.data.length; i++) {
-            var p = new Unit(response.data[i].p_id, response.data[i].u_id, response.data[i].u_name);
+            var p = new Unit(response.data[i].propertyId, response.data[i].unitId, response.data[i].unitName);
             var key = p.createList();
             var edit_button = document.querySelector('.' + key + ' .edit_unit_data');
             var delete_button = document.querySelector('.' + key + ' .delete_unit_data');
@@ -392,15 +391,15 @@ window.onload = function () {
     /* ==================================== ADD NEW UNIT ========================================== */
     document.getElementById('add_new_unit').onclick = function () {
         var params = new URLSearchParams();
-        var u_id = document.getElementById('new_unit_id').value;
-        var u_name = document.getElementById('new_unit_name').value;
-        if (u_name != "" && u_id != "") {
-            params.append('Property_Id', propertyId);
-            params.append('Unit_Id', u_id);
-            params.append('Unit_Name', u_name);
+        var unitId = document.getElementById('new_unit_id').value;
+        var unitName = document.getElementById('new_unit_name').value;
+        if (unitName != "" && unitId != "") {
+            params.append('PropertyId', propertyId);
+            params.append('UnitId', unitId);
+            params.append('UnitName', unitName);
             axios_1["default"]({
                 method: 'POST',
-                url: 'http://localhost:8080/save_unit',
+                url: 'http://localhost:8080/saveUnit',
                 data: params
             }).then(function (response) {
                 if (response.data == "FAILED") {
@@ -408,7 +407,7 @@ window.onload = function () {
                 }
                 else {
                     console.log(response.data);
-                    var p = new Unit(response.data.p_id, response.data.u_id, response.data.u_name);
+                    var p = new Unit(response.data.propertyId, response.data.unitId, response.data.unitName);
                     var key = p.createList();
                     var edit_button = document.querySelector('.' + key + ' .edit_unit_data');
                     var delete_button = document.querySelector('.' + key + ' .delete_unit_data');
@@ -441,10 +440,17 @@ window.onload = function () {
         }
         document.getElementById('n_carrier_id').value = baseE.getElementsByClassName('new_carrier_id')[0].value;
         document.getElementById('n_carrier_name').value = baseE.getElementsByClassName('new_carrier_name')[0].innerHTML;
-        document.getElementById('n_carrier_id').disabled = true;
+        /*  (<HTMLSelectElement>document.getElementById('n_carrier_id')).disabled = true; */
         document.getElementById('n_carrier_name').disabled = true;
         document.getElementById('add_new_carrier').style.display = 'none';
         document.getElementById('edit_new_carrier').style.display = 'block';
+        console.log("BASE E");
+        console.log(baseE);
+        /* let selectedCarrierName:string = baseE.getElementsByClassName('new_carrier_name')[0].value;
+        (<HTMLSelectElement>document.getElementById('carrierSelect')).innerHTML = "<option value="+ selectedCarrierName
+                                                                                              +" selected disabled>"+selectedCarrierName+"</option>";
+    
+     */
         var details_block = baseE.getElementsByClassName('carrier_details')[0];
         var days_block = details_block.children[0].children;
         var times_block = details_block.children[1].children;
@@ -470,9 +476,9 @@ window.onload = function () {
             }
         }
         document.getElementById('edit_new_carrier').addEventListener('click', function (e) {
-            var car_id = document.getElementById('n_carrier_id').value;
+            var carrierId = document.getElementById('n_carrier_id').value;
             var car_name = document.getElementById('n_carrier_name').value;
-            if (car_id.length == 0 || car_name.length == 0) {
+            if (carrierId.length == 0 || car_name.length == 0) {
                 snackbar("Enter valid entries");
             }
             else {
@@ -498,15 +504,15 @@ window.onload = function () {
                 else {
                     console.log(time_array, day_array);
                     var params = new URLSearchParams();
-                    params.append('Property_Id', propertyId);
-                    params.append('Carrier_Id', car_id);
+                    params.append('PropertyId', propertyId);
+                    params.append('CarrierId', carrierId);
                     for (var i_1 = 0; i_1 < day_array.length; i_1++) {
                         params.append('Days', day_array[i_1]);
                         params.append('Time', time_array[i_1]);
                     }
                     axios_1["default"]({
                         method: 'POST',
-                        url: 'http://localhost:8080/edit_carrier',
+                        url: 'http://localhost:8080/editCarrier',
                         data: params
                     }).then(function (response) {
                         var carrier_array = __spreadArrays(response.data);
@@ -515,11 +521,11 @@ window.onload = function () {
                         var carrier_array_length = carrier_array.length;
                         document.getElementById('new_carrier_data').innerHTML = "";
                         if (carrier_array_length != 0) {
-                            var cur_cid = carrier_array[0].c_id;
-                            var cur_cname = carrier_array[0].c_name;
-                            var carrier_card_array = [{ 'delivery_day': carrier_array[0].delivery_day, 'delivery_time': carrier_array[0].delivery_time }];
+                            var cur_cid = carrier_array[0].carrierId;
+                            var cur_cname = carrier_array[0].carrierName;
+                            var carrier_card_array = [{ 'deliveryDay': carrier_array[0].deliveryDay, 'deliveryTime': carrier_array[0].deliveryTime }];
                             for (var i_2 = 1; i_2 < carrier_array_length; i_2++) {
-                                if (carrier_array[i_2].c_id != cur_cid) {
+                                if (carrier_array[i_2].carrierId != cur_cid) {
                                     var carrier_1 = new Carrier(cur_cid, cur_cname, carrier_card_array);
                                     var key_1 = carrier_1.createCard();
                                     var edit_button_1 = document.querySelector('.' + key_1 + ' .carrier_edit_btn');
@@ -530,12 +536,12 @@ window.onload = function () {
                                     delete_button_1.addEventListener('click', function (e) {
                                         deleteCarrierBtn(e);
                                     });
-                                    cur_cid = carrier_array[i_2].c_id;
-                                    cur_cname = carrier_array[i_2].c_name;
-                                    carrier_card_array = [{ 'delivery_day': carrier_array[i_2].delivery_day, 'delivery_time': carrier_array[i_2].delivery_time }];
+                                    cur_cid = carrier_array[i_2].carrierId;
+                                    cur_cname = carrier_array[i_2].carrierName;
+                                    carrier_card_array = [{ 'deliveryDay': carrier_array[i_2].deliveryDay, 'deliveryTime': carrier_array[i_2].deliveryTime }];
                                 }
                                 else {
-                                    carrier_card_array.push({ 'delivery_day': carrier_array[i_2].delivery_day, 'delivery_time': carrier_array[i_2].delivery_time });
+                                    carrier_card_array.push({ 'deliveryDay': carrier_array[i_2].deliveryDay, 'deliveryTime': carrier_array[i_2].deliveryTime });
                                 }
                             }
                             var carrier = new Carrier(cur_cid, cur_cname, carrier_card_array);
@@ -558,14 +564,14 @@ window.onload = function () {
     /**============================ Carrier Delete =================================== */
     function deleteCarrierBtn(e) {
         var cardNode = e.srcElement.parentNode.parentNode.parentNode;
-        var c_id = e.srcElement.parentNode.parentNode.parentNode.getElementsByClassName('new_carrier_id')[0].value;
+        var carrierId = e.srcElement.parentNode.parentNode.parentNode.getElementsByClassName('new_carrier_id')[0].value;
         if (e.srcElement.nodeName == 'I') {
             cardNode = e.srcElement.parentNode.parentNode.parentNode.parentElement;
-            c_id = e.srcElement.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('new_carrier_id')[0].value;
+            carrierId = e.srcElement.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('new_carrier_id')[0].value;
         }
-        var url2 = 'http://localhost:8080/delete_carrier?Property_Id=';
+        var url2 = 'http://localhost:8080/deleteCarrier?PropertyId=';
         url2 = url2.concat(propertyId);
-        url2 = url2.concat('&Carrier_Id=' + c_id);
+        url2 = url2.concat('&CarrierId=' + carrierId);
         axios_1["default"]["delete"](url2).then(function (response) {
             if (response.data.toString() == "SUCCESS") {
                 console.log(cardNode);
@@ -581,14 +587,14 @@ window.onload = function () {
     }
     /* ========================== Object Sorter ================================== */
     function ObjComp(a, b) {
-        if (a.c_id < b.c_id)
+        if (a.carrierId < b.carrierId)
             return -1;
-        else if (a.c_id > b.c_id)
+        else if (a.carrierId > b.carrierId)
             return 1;
         return 0;
     }
     /* ====================================== CARRIER API RETRIEVE =============================== */
-    var url = 'http://localhost:8080/fetch_carrier?PId=';
+    var url = 'http://localhost:8080/fetchCarrier?PropertyId=';
     url = url.concat(propertyId);
     axios_1["default"].get(url).then(function (response) {
         var carrier_array = __spreadArrays(response.data);
@@ -596,11 +602,11 @@ window.onload = function () {
         console.log(carrier_array);
         var carrier_array_length = carrier_array.length;
         if (carrier_array_length != 0) {
-            var cur_cid = carrier_array[0].c_id;
-            var cur_cname = carrier_array[0].c_name;
-            var carrier_card_array = [{ 'delivery_day': carrier_array[0].delivery_day, 'delivery_time': carrier_array[0].delivery_time }];
+            var cur_cid = carrier_array[0].carrierId;
+            var cur_cname = carrier_array[0].carrierName;
+            var carrier_card_array = [{ 'deliveryDay': carrier_array[0].deliveryDay, 'deliveryTime': carrier_array[0].deliveryTime }];
             for (var i = 1; i < carrier_array_length; i++) {
-                if (carrier_array[i].c_id != cur_cid) {
+                if (carrier_array[i].carrierId != cur_cid) {
                     var carrier_2 = new Carrier(cur_cid, cur_cname, carrier_card_array);
                     var key_2 = carrier_2.createCard();
                     var edit_button_2 = document.querySelector('.' + key_2 + ' .carrier_edit_btn');
@@ -611,12 +617,12 @@ window.onload = function () {
                     delete_button_2.addEventListener('click', function (e) {
                         deleteCarrierBtn(e);
                     });
-                    cur_cid = carrier_array[i].c_id;
-                    cur_cname = carrier_array[i].c_name;
-                    carrier_card_array = [{ 'delivery_day': carrier_array[i].delivery_day, 'delivery_time': carrier_array[i].delivery_time }];
+                    cur_cid = carrier_array[i].carrierId;
+                    cur_cname = carrier_array[i].carrierName;
+                    carrier_card_array = [{ 'deliveryDay': carrier_array[i].deliveryDay, 'deliveryTime': carrier_array[i].deliveryTime }];
                 }
                 else {
-                    carrier_card_array.push({ 'delivery_day': carrier_array[i].delivery_day, 'delivery_time': carrier_array[i].delivery_time });
+                    carrier_card_array.push({ 'deliveryDay': carrier_array[i].deliveryDay, 'deliveryTime': carrier_array[i].deliveryTime });
                 }
             }
             var carrier = new Carrier(cur_cid, cur_cname, carrier_card_array);
@@ -644,12 +650,24 @@ window.onload = function () {
             e.srcElement.parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled = !e.srcElement.parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled;
         });
     }
+    /**================================= ADD NEW CARRIER ====================================================== */
     document.getElementById('new_carrier_btn').addEventListener('click', function () {
-        document.getElementById('n_carrier_id').disabled = false;
+        /* (<HTMLSelectElement>document.getElementById('n_carrier_id')).disabled = false; */
         document.getElementById('n_carrier_name').disabled = false;
+        var carrierSelect = "<option value=\"\" selected disabled>Choose carrier</option>";
+        var url = 'http://localhost:8080/allCarrier';
+        axios_1["default"].get(url).then(function (response) {
+            console.log(response.data);
+            for (var i = 0; i < response.data.length; i++) {
+                carrierSelect += " <option value=\"" + response.data[i] + "\">" + response.data[i] + "</option>";
+            }
+            document.getElementById('n_carrier_name').innerHTML = carrierSelect;
+        })["catch"](function (error) {
+            console.log(error);
+        });
         document.getElementById('add_new_carrier').style.display = 'block';
         document.getElementById('edit_new_carrier').style.display = 'none';
-        document.getElementById('n_carrier_id').value = "";
+        /* (<HTMLSelectElement>document.getElementById('n_carrier_id')).value = ""; */
         document.getElementById('n_carrier_name').value = "";
         var all_new_checkbox = document.getElementsByClassName("checkbox_new");
         for (var i = 0; i < all_new_checkbox.length; i++) {
@@ -658,11 +676,10 @@ window.onload = function () {
             all_new_checkbox[i].parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled = true;
         }
     });
-    /**================================= ADD NEW CARRIER ====================================================== */
     document.getElementById('add_new_carrier').addEventListener('click', function (e) {
-        var car_id = document.getElementById('n_carrier_id').value;
+        var carrierId = document.getElementById('n_carrier_id').value;
         var car_name = document.getElementById('n_carrier_name').value;
-        if (car_id.length == 0 || car_name.length == 0) {
+        if (carrierId.length == 0 || car_name.length == 0) {
             snackbar("Enter valid entries");
         }
         else {
@@ -684,16 +701,16 @@ window.onload = function () {
             }
             else {
                 var params = new URLSearchParams();
-                params.append('Property_Id', propertyId);
-                params.append('Carrier_Id', car_id);
-                params.append('Carrier_Name', car_name);
+                params.append('PropertyId', propertyId);
+                params.append('CarrierId', carrierId);
+                params.append('CarrierName', car_name);
                 for (var i = 0; i < day_array.length; i++) {
                     params.append('Days', day_array[i]);
                     params.append('Time', time_array[i]);
                 }
                 axios_1["default"]({
                     method: 'POST',
-                    url: 'http://localhost:8080/save_carrier',
+                    url: 'http://localhost:8080/saveCarrier',
                     data: params
                 }).then(function (response) {
                     if (response.data == "FAILED") {
@@ -703,11 +720,11 @@ window.onload = function () {
                         var carrier_array = __spreadArrays(response.data);
                         var carrier_array_length = carrier_array.length;
                         if (carrier_array_length != 0) {
-                            var cur_cid = carrier_array[0].c_id;
-                            var cur_cname = carrier_array[0].c_name;
-                            var carrier_card_array = [{ 'delivery_day': carrier_array[0].delivery_day, 'delivery_time': carrier_array[0].delivery_time }];
+                            var cur_cid = carrier_array[0].carrierId;
+                            var cur_cname = carrier_array[0].carrierName;
+                            var carrier_card_array = [{ 'deliveryDay': carrier_array[0].deliveryDay, 'deliveryTime': carrier_array[0].deliveryTime }];
                             for (var i = 1; i < carrier_array_length; i++) {
-                                carrier_card_array.push({ 'delivery_day': carrier_array[i].delivery_day, 'delivery_time': carrier_array[i].delivery_time });
+                                carrier_card_array.push({ 'deliveryDay': carrier_array[i].deliveryDay, 'deliveryTime': carrier_array[i].deliveryTime });
                             }
                             var carrier = new Carrier(cur_cid, cur_cname, carrier_card_array);
                             var key = carrier.createCard();
@@ -726,7 +743,7 @@ window.onload = function () {
                         }
                     }
                 });
-                document.getElementById('n_carrier_id').value = "";
+                /* (<HTMLSelectElement>document.getElementById('n_carrier_id')).value = ""; */
                 document.getElementById('n_carrier_name').value = "";
             }
         }

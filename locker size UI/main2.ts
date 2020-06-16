@@ -4,19 +4,18 @@ import { response } from 'express';
 /**=========================== UNIT CLASS ================================ */
 
 class Unit {
-  pId: number;
-  uId: number;
-  uName: string;
-  constructor(pId: number, uId: number, uName: string) {
-    this.pId = pId;
-    this.uId = uId;
-    this.uName = uName;
+  propertyId: number;
+  unitId: number;
+  unitName: string;
+  constructor(propertyId: number, unitId: number, unitName: string) {
+    this.propertyId = propertyId;
+    this.unitId = unitId;
+    this.unitName = unitName;
   }
   createList(): string {
-    var st: string;
     var key: string = 'a' + Math.random().toString(36).slice(2);
     let card = document.createElement('div');
-    let card_html = "<div class='card-body'><h5 class='card-title'>" + this.uName + "</h5><h6 class='card-subtitle mb-2 text-muted'>" + this.uId.toString() + "</h6><button type='button' class='btn btn-outline-secondary edit_unit_data' data-toggle='modal' data-placement='bottom' data-target='#editUnit' title='Edit Details'><i class='fa fa-edit'></i></button>&nbsp;&nbsp;<button type='button' class='btn btn-outline-danger delete_unit_data' data-toggle='tooltip' data-placement='bottom' title='Delete Unit'><i class='fa fa-trash' aria-hidden='true'></i></button></div>"
+    let card_html = "<div class='card-body'><h5 class='card-title'>" + this.unitName + "</h5><h6 class='card-subtitle mb-2 text-muted'>" + this.unitId.toString() + "</h6><button type='button' class='btn btn-outline-secondary edit_unit_data' data-toggle='modal' data-placement='bottom' data-target='#editUnit' title='Edit Details'><i class='fa fa-edit'></i></button>&nbsp;&nbsp;<button type='button' class='btn btn-outline-danger delete_unit_data' data-toggle='tooltip' data-placement='bottom' title='Delete Unit'><i class='fa fa-trash' aria-hidden='true'></i></button></div>"
     card.innerHTML = card_html
     card.classList.add(key)
     card.classList.add("card")
@@ -29,7 +28,7 @@ class Unit {
   }
 };
 
-/**=========================== CARRIER CLASS================================ */
+/**=========================== CARRIER CLASS ================================ */
 class Carrier {
   cId: number;
   cName: string;
@@ -62,17 +61,17 @@ class Carrier {
                                             <div class="carrier_details" style="display:flex;justify-content: space-evenly;">'
     cardStructure += '<div>'
     for (let i: number = 0; i < this.delivery_details_length; i++) {
-      cardStructure += '<p>' + this.delivery_details[i].delivery_day + '</p>';
+      cardStructure += '<p>' + this.delivery_details[i].deliveryDay + '</p>';
     }
     cardStructure += '</div><div>'
     for (let i: number = 0; i < this.delivery_details_length; i++) {
-      cardStructure += '<p>' + this.delivery_details[i].delivery_time + '</p>';
+      cardStructure += '<p>' + this.delivery_details[i].deliveryTime + '</p>';
     }
     cardStructure += '</div>'
     cardStructure += '</div></p></div>';
     mycard.classList.add('card');
     mycard.classList.add(key);
-    mycard.setAttribute('style', 'margin:1%;min-width: 250px;');
+    mycard.setAttribute('style', 'margin:1%;width: 380px;');
     mycard.innerHTML = cardStructure;
     document.getElementById('new_carrier_data').insertBefore(mycard, document.getElementById('new_carrier_data').firstChild);
     return key;
@@ -105,15 +104,15 @@ function greenSnackbar(msg, time = 3000) {
 
 window.onload = function () {
 
-  var propertyId = localStorage.getItem("Property_id");
+  var propertyId = localStorage.getItem("PropertyId");
 
   /* ================================ FETCH PROPERTY DETAILS =============================== */
-  var url: string = 'http://localhost:8080/fetch_details?P_id=';
+  var url: string = 'http://localhost:8080/fetchPropertyDetails?propertyId=';
   url = url.concat(propertyId);
   axios.get(url).then(function (response) {
     //console.log(response.data);
-    document.getElementById('p_name').innerHTML = response.data.p_name;
-    document.getElementById('p_address').innerHTML = response.data.p_address;
+    document.getElementById('propertyName').innerHTML = response.data.propertyName;
+    document.getElementById('propertyAddress').innerHTML = response.data.propertyAddress;
   }).catch(function (error) {
     console.log(error);
   });
@@ -121,7 +120,7 @@ window.onload = function () {
   /* ======================================================================= */
   /* ====================== UNITS DATA =========================== */
   /* ======================================================================== */
-  
+
 
   /* ===================== EDIT UNIT DETAILS ================= */
   function setunitData(e) {
@@ -132,17 +131,17 @@ window.onload = function () {
 
     document.getElementById('add_edit_unit').onclick = function () {
       const params = new URLSearchParams();
-      var u_id: string = (<HTMLSelectElement>document.getElementById('edit_unit_id')).value;
-      var u_name: string = (<HTMLSelectElement>document.getElementById('edit_unit_name')).value;
-      if (u_name != "" && u_id != "") {
-        params.append('Property_Id', propertyId);
-        params.append('Unit_Id_old', uid);
-        params.append('Unit_Id', u_id);
-        params.append('Unit_Name', u_name);
+      var unitId: string = (<HTMLSelectElement>document.getElementById('edit_unit_id')).value;
+      var unitName: string = (<HTMLSelectElement>document.getElementById('edit_unit_name')).value;
+      if (unitName != "" && unitId != "") {
+        params.append('PropertyId', propertyId);
+        params.append('UnitIdold', uid);
+        params.append('UnitId', unitId);
+        params.append('UnitName', unitName);
 
         axios({
           method: 'POST',
-          url: 'http://localhost:8080/edit_unit',
+          url: 'http://localhost:8080/editUnit',
           data: params
         }).then(function (response) {
           console.log(response.data);
@@ -152,7 +151,7 @@ window.onload = function () {
           else {
             document.getElementById('new_units_data').innerHTML = "";
             for (var i: number = 0; i < response.data.length; i++) {
-              let p = new Unit(response.data[i].p_id, response.data[i].u_id, response.data[i].u_name);
+              let p = new Unit(response.data[i].propertyId, response.data[i].unitId, response.data[i].unitName);
               let key: string = p.createList();
               let edit_button: HTMLElement = document.querySelector('.' + key + ' .edit_unit_data');
               let delete_button: HTMLElement = document.querySelector('.' + key + ' .delete_unit_data');
@@ -185,13 +184,13 @@ window.onload = function () {
   function deleteUnitData(e) {
 
     let cardNode: HTMLElement = e.srcElement.parentNode.parentNode;
-    let u_id = e.srcElement.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
+    let unitId = e.srcElement.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
     if (e.srcElement.nodeName == 'I') {
       cardNode = e.srcElement.parentNode.parentNode.parentElement;
-      u_id = e.srcElement.parentNode.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
+      unitId = e.srcElement.parentNode.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
     }
-    let url2: string = 'http://localhost:8080/delete_unit?U_Id=';
-    url2 = url2.concat(u_id);
+    let url2: string = 'http://localhost:8080/deleteUnit?unitId=';
+    url2 = url2.concat(unitId);
 
     axios.delete(url2).then(function (response) {
       if (response.data.toString() == "SUCCESS") {
@@ -209,11 +208,11 @@ window.onload = function () {
 
 
   /* ======================== RETRIEVE ALL UNITS DATA ================================== */
-  var url: string = 'http://localhost:8080/getallunits?PId=';
+  var url: string = 'http://localhost:8080/getallunits?propertyId=';
   url = url.concat(propertyId);
   axios.get(url).then(function (response) {
     for (var i: number = 0; i < response.data.length; i++) {
-      let p = new Unit(response.data[i].p_id, response.data[i].u_id, response.data[i].u_name);
+      let p = new Unit(response.data[i].propertyId, response.data[i].unitId, response.data[i].unitName);
       let key: string = p.createList();
       let edit_button: HTMLElement = document.querySelector('.' + key + ' .edit_unit_data');
       let delete_button: HTMLElement = document.querySelector('.' + key + ' .delete_unit_data');
@@ -233,17 +232,17 @@ window.onload = function () {
   /* ==================================== ADD NEW UNIT ========================================== */
   document.getElementById('add_new_unit').onclick = function () {
     const params = new URLSearchParams();
-    var u_id: string = (<HTMLSelectElement>document.getElementById('new_unit_id')).value;
-    var u_name: string = (<HTMLSelectElement>document.getElementById('new_unit_name')).value;
+    var unitId: string = (<HTMLSelectElement>document.getElementById('new_unit_id')).value;
+    var unitName: string = (<HTMLSelectElement>document.getElementById('new_unit_name')).value;
 
-    if (u_name != "" && u_id != "") {
-      params.append('Property_Id', propertyId);
-      params.append('Unit_Id', u_id);
-      params.append('Unit_Name', u_name);
+    if (unitName != "" && unitId != "") {
+      params.append('PropertyId', propertyId);
+      params.append('UnitId', unitId);
+      params.append('UnitName', unitName);
 
       axios({
         method: 'POST',
-        url: 'http://localhost:8080/save_unit',
+        url: 'http://localhost:8080/saveUnit',
         data: params
       }).then(function (response) {
         if (response.data == "FAILED") {
@@ -251,7 +250,7 @@ window.onload = function () {
         }
         else {
           console.log(response.data)
-          let p = new Unit(response.data.p_id, response.data.u_id, response.data.u_name);
+          let p = new Unit(response.data.propertyId, response.data.unitId, response.data.unitName);
           let key: string = p.createList();
           let edit_button: HTMLElement = document.querySelector('.' + key + ' .edit_unit_data');
           let delete_button: HTMLElement = document.querySelector('.' + key + ' .delete_unit_data');
@@ -290,14 +289,21 @@ window.onload = function () {
 
     let baseE = e.srcElement.parentNode.parentNode.parentNode;
     if (e.srcElement.nodeName == 'I') {
-      baseE = baseE.parentNode;    
+      baseE = baseE.parentNode;
     }
     (<HTMLSelectElement>document.getElementById('n_carrier_id')).value = baseE.getElementsByClassName('new_carrier_id')[0].value;
     (<HTMLSelectElement>document.getElementById('n_carrier_name')).value = baseE.getElementsByClassName('new_carrier_name')[0].innerHTML;
-    (<HTMLSelectElement>document.getElementById('n_carrier_id')).disabled = true;
+   /*  (<HTMLSelectElement>document.getElementById('n_carrier_id')).disabled = true; */
     (<HTMLSelectElement>document.getElementById('n_carrier_name')).disabled = true;
     document.getElementById('add_new_carrier').style.display = 'none';
     document.getElementById('edit_new_carrier').style.display = 'block';
+    console.log("BASE E");
+    console.log(baseE);
+    /* let selectedCarrierName:string = baseE.getElementsByClassName('new_carrier_name')[0].value;
+    (<HTMLSelectElement>document.getElementById('carrierSelect')).innerHTML = "<option value="+ selectedCarrierName
+                                                                                          +" selected disabled>"+selectedCarrierName+"</option>";
+
+ */
     let details_block: HTMLElement = baseE.getElementsByClassName('carrier_details')[0];
     let days_block: any = details_block.children[0].children;
     let times_block: any = details_block.children[1].children;
@@ -324,9 +330,9 @@ window.onload = function () {
     }
     document.getElementById('edit_new_carrier').addEventListener('click', (e) => {
 
-      let car_id: string = (<HTMLSelectElement>document.getElementById('n_carrier_id')).value;
+      let carrierId: string = (<HTMLSelectElement>document.getElementById('n_carrier_id')).value;
       let car_name: string = (<HTMLSelectElement>document.getElementById('n_carrier_name')).value;
-      if (car_id.length == 0 || car_name.length == 0) {
+      if (carrierId.length == 0 || car_name.length == 0) {
         snackbar("Enter valid entries");
       }
       else {
@@ -352,15 +358,15 @@ window.onload = function () {
         else {
           console.log(time_array, day_array);
           const params = new URLSearchParams();
-          params.append('Property_Id', propertyId);
-          params.append('Carrier_Id', car_id);
+          params.append('PropertyId', propertyId);
+          params.append('CarrierId', carrierId);
           for (let i: number = 0; i < day_array.length; i++) {
             params.append('Days', day_array[i]);
             params.append('Time', time_array[i]);
           }
           axios({
             method: 'POST',
-            url: 'http://localhost:8080/edit_carrier',
+            url: 'http://localhost:8080/editCarrier',
             data: params
           }).then((response) => {
             let carrier_array: any = [...response.data];
@@ -370,11 +376,11 @@ window.onload = function () {
             document.getElementById('new_carrier_data').innerHTML = "";
 
             if (carrier_array_length != 0) {
-              let cur_cid: number = carrier_array[0].c_id;
-              let cur_cname = carrier_array[0].c_name;
-              let carrier_card_array: any = [{ 'delivery_day': carrier_array[0].delivery_day, 'delivery_time': carrier_array[0].delivery_time }]
+              let cur_cid: number = carrier_array[0].carrierId;
+              let cur_cname = carrier_array[0].carrierName;
+              let carrier_card_array: any = [{ 'deliveryDay': carrier_array[0].deliveryDay, 'deliveryTime': carrier_array[0].deliveryTime }]
               for (let i: number = 1; i < carrier_array_length; i++) {
-                if (carrier_array[i].c_id != cur_cid) {
+                if (carrier_array[i].carrierId != cur_cid) {
                   let carrier = new Carrier(cur_cid, cur_cname, carrier_card_array);
                   let key: string = carrier.createCard();
                   let edit_button: HTMLElement = document.querySelector('.' + key + ' .carrier_edit_btn');
@@ -385,12 +391,12 @@ window.onload = function () {
                   delete_button.addEventListener('click', function (e) {
                     deleteCarrierBtn(e);
                   });
-                  cur_cid = carrier_array[i].c_id;
-                  cur_cname = carrier_array[i].c_name;
-                  carrier_card_array = [{ 'delivery_day': carrier_array[i].delivery_day, 'delivery_time': carrier_array[i].delivery_time }];
+                  cur_cid = carrier_array[i].carrierId;
+                  cur_cname = carrier_array[i].carrierName;
+                  carrier_card_array = [{ 'deliveryDay': carrier_array[i].deliveryDay, 'deliveryTime': carrier_array[i].deliveryTime }];
                 }
                 else {
-                  carrier_card_array.push({ 'delivery_day': carrier_array[i].delivery_day, 'delivery_time': carrier_array[i].delivery_time });
+                  carrier_card_array.push({ 'deliveryDay': carrier_array[i].deliveryDay, 'deliveryTime': carrier_array[i].deliveryTime });
                 }
               }
               let carrier = new Carrier(cur_cid, cur_cname, carrier_card_array);
@@ -414,15 +420,15 @@ window.onload = function () {
 
   function deleteCarrierBtn(e) {
     let cardNode: HTMLElement = e.srcElement.parentNode.parentNode.parentNode;
-    let c_id = e.srcElement.parentNode.parentNode.parentNode.getElementsByClassName('new_carrier_id')[0].value;
+    let carrierId = e.srcElement.parentNode.parentNode.parentNode.getElementsByClassName('new_carrier_id')[0].value;
     if (e.srcElement.nodeName == 'I') {
       cardNode = e.srcElement.parentNode.parentNode.parentNode.parentElement;
-      c_id = e.srcElement.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('new_carrier_id')[0].value;
+      carrierId = e.srcElement.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('new_carrier_id')[0].value;
     }
 
-    let url2: string = 'http://localhost:8080/delete_carrier?Property_Id=';
+    let url2: string = 'http://localhost:8080/deleteCarrier?PropertyId=';
     url2 = url2.concat(propertyId);
-    url2 = url2.concat('&Carrier_Id=' + c_id);
+    url2 = url2.concat('&CarrierId=' + carrierId);
     axios.delete(url2).then(function (response) {
       if (response.data.toString() == "SUCCESS") {
         console.log(cardNode);
@@ -441,9 +447,9 @@ window.onload = function () {
   /* ========================== Object Sorter ================================== */
 
   function ObjComp(a, b) {
-    if (a.c_id < b.c_id)
+    if (a.carrierId < b.carrierId)
       return -1;
-    else if (a.c_id > b.c_id)
+    else if (a.carrierId > b.carrierId)
       return 1;
     return 0;
   }
@@ -451,7 +457,7 @@ window.onload = function () {
   /* ====================================== CARRIER API RETRIEVE =============================== */
 
 
-  var url: string = 'http://localhost:8080/fetch_carrier?PId=';
+  var url: string = 'http://localhost:8080/fetchCarrier?PropertyId=';
   url = url.concat(propertyId);
   axios.get(url).then(function (response) {
 
@@ -460,12 +466,12 @@ window.onload = function () {
     console.log(carrier_array);
     let carrier_array_length: number = carrier_array.length
     if (carrier_array_length != 0) {
-      let cur_cid: number = carrier_array[0].c_id;
-      let cur_cname = carrier_array[0].c_name;
-      let carrier_card_array: any = [{ 'delivery_day': carrier_array[0].delivery_day, 'delivery_time': carrier_array[0].delivery_time }]
-      
+      let cur_cid: number = carrier_array[0].carrierId;
+      let cur_cname = carrier_array[0].carrierName;
+      let carrier_card_array: any = [{ 'deliveryDay': carrier_array[0].deliveryDay, 'deliveryTime': carrier_array[0].deliveryTime }]
+
       for (let i: number = 1; i < carrier_array_length; i++) {
-        if (carrier_array[i].c_id != cur_cid) {
+        if (carrier_array[i].carrierId != cur_cid) {
           let carrier = new Carrier(cur_cid, cur_cname, carrier_card_array);
           let key: string = carrier.createCard();
           let edit_button: HTMLElement = document.querySelector('.' + key + ' .carrier_edit_btn');
@@ -476,12 +482,12 @@ window.onload = function () {
           delete_button.addEventListener('click', function (e) {
             deleteCarrierBtn(e);
           });
-          cur_cid = carrier_array[i].c_id;
-          cur_cname = carrier_array[i].c_name;
-          carrier_card_array = [{ 'delivery_day': carrier_array[i].delivery_day, 'delivery_time': carrier_array[i].delivery_time }];
+          cur_cid = carrier_array[i].carrierId;
+          cur_cname = carrier_array[i].carrierName;
+          carrier_card_array = [{ 'deliveryDay': carrier_array[i].deliveryDay, 'deliveryTime': carrier_array[i].deliveryTime }];
         }
         else {
-          carrier_card_array.push({ 'delivery_day': carrier_array[i].delivery_day, 'delivery_time': carrier_array[i].delivery_time });
+          carrier_card_array.push({ 'deliveryDay': carrier_array[i].deliveryDay, 'deliveryTime': carrier_array[i].deliveryTime });
         }
       }
       let carrier = new Carrier(cur_cid, cur_cname, carrier_card_array);
@@ -511,14 +517,31 @@ window.onload = function () {
       e.srcElement.parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled = !e.srcElement.parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled;
     })
   }
+  
+
+  /**================================= ADD NEW CARRIER ====================================================== */
 
   document.getElementById('new_carrier_btn').addEventListener('click', () => {
 
-    (<HTMLSelectElement>document.getElementById('n_carrier_id')).disabled = false;
+    /* (<HTMLSelectElement>document.getElementById('n_carrier_id')).disabled = false; */
     (<HTMLSelectElement>document.getElementById('n_carrier_name')).disabled = false;
+    
+    let carrierSelect:string = `<option value="" selected disabled>Choose carrier</option>`;
+    var url: string = 'http://localhost:8080/allCarrier';
+    axios.get(url).then(function (response) {
+      console.log(response.data);
+      for (var i: number = 0; i < response.data.length; i++) {
+        carrierSelect += ` <option value="${response.data[i]}">${response.data[i]}</option>`
+      }      
+      (<HTMLSelectElement>document.getElementById('n_carrier_name')).innerHTML = carrierSelect;
+    }).catch(function (error) {
+      console.log(error);
+    });
+
+
     document.getElementById('add_new_carrier').style.display = 'block';
     document.getElementById('edit_new_carrier').style.display = 'none';
-    (<HTMLSelectElement>document.getElementById('n_carrier_id')).value = "";
+    /* (<HTMLSelectElement>document.getElementById('n_carrier_id')).value = ""; */
     (<HTMLSelectElement>document.getElementById('n_carrier_name')).value = "";
     let all_new_checkbox: any = document.getElementsByClassName("checkbox_new");
     for (let i: number = 0; i < all_new_checkbox.length; i++) {
@@ -526,14 +549,12 @@ window.onload = function () {
       all_new_checkbox[i].parentNode.parentNode.getElementsByClassName('carrier_time')[0].value = ""
       all_new_checkbox[i].parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled = true;
     }
-  })
-
-  /**================================= ADD NEW CARRIER ====================================================== */
+  });
 
   document.getElementById('add_new_carrier').addEventListener('click', (e) => {
-    let car_id: string = (<HTMLSelectElement>document.getElementById('n_carrier_id')).value;
+    let carrierId: string = (<HTMLSelectElement>document.getElementById('n_carrier_id')).value;
     let car_name: string = (<HTMLSelectElement>document.getElementById('n_carrier_name')).value;
-    if (car_id.length == 0 || car_name.length == 0) {
+    if (carrierId.length == 0 || car_name.length == 0) {
       snackbar("Enter valid entries");
     }
     else {
@@ -555,16 +576,16 @@ window.onload = function () {
       }
       else {
         const params = new URLSearchParams();
-        params.append('Property_Id', propertyId);
-        params.append('Carrier_Id', car_id);
-        params.append('Carrier_Name', car_name);
+        params.append('PropertyId', propertyId);
+        params.append('CarrierId', carrierId);
+        params.append('CarrierName', car_name);
         for (let i: number = 0; i < day_array.length; i++) {
           params.append('Days', day_array[i]);
           params.append('Time', time_array[i]);
         }
         axios({
           method: 'POST',
-          url: 'http://localhost:8080/save_carrier',
+          url: 'http://localhost:8080/saveCarrier',
           data: params
         }).then((response) => {
           if (response.data == "FAILED") {
@@ -574,11 +595,11 @@ window.onload = function () {
             let carrier_array: any = [...response.data];
             let carrier_array_length: number = carrier_array.length
             if (carrier_array_length != 0) {
-              let cur_cid: number = carrier_array[0].c_id;
-              let cur_cname = carrier_array[0].c_name;
-              let carrier_card_array: any = [{ 'delivery_day': carrier_array[0].delivery_day, 'delivery_time': carrier_array[0].delivery_time }]
+              let cur_cid: number = carrier_array[0].carrierId;
+              let cur_cname = carrier_array[0].carrierName;
+              let carrier_card_array: any = [{ 'deliveryDay': carrier_array[0].deliveryDay, 'deliveryTime': carrier_array[0].deliveryTime }]
               for (let i: number = 1; i < carrier_array_length; i++) {
-                carrier_card_array.push({ 'delivery_day': carrier_array[i].delivery_day, 'delivery_time': carrier_array[i].delivery_time });
+                carrier_card_array.push({ 'deliveryDay': carrier_array[i].deliveryDay, 'deliveryTime': carrier_array[i].deliveryTime });
               }
               let carrier = new Carrier(cur_cid, cur_cname, carrier_card_array);
               let key: string = carrier.createCard();
@@ -598,7 +619,7 @@ window.onload = function () {
           }
         });
 
-        (<HTMLSelectElement>document.getElementById('n_carrier_id')).value = "";
+        /* (<HTMLSelectElement>document.getElementById('n_carrier_id')).value = ""; */
         (<HTMLSelectElement>document.getElementById('n_carrier_name')).value = "";
       }
     }
@@ -606,7 +627,7 @@ window.onload = function () {
 
 
   let analyse = document.getElementById("analyse-btn");
-  analyse.onclick = function(){
+  analyse.onclick = function () {
     window.open('index3.html');
   }
 
