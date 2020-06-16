@@ -456,7 +456,6 @@ window.onload = function () {
 
   /* ====================================== CARRIER API RETRIEVE =============================== */
 
-
   var url: string = 'http://localhost:8080/fetchCarrier?PropertyId=';
   url = url.concat(propertyId);
   axios.get(url).then(function (response) {

@@ -147,7 +147,6 @@ window.onload = function () {
         }
       })
     }
-
   }
   document.getElementById('txt-search').addEventListener('keyup', searchkey);
 
