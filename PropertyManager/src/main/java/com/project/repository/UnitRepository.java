@@ -13,17 +13,23 @@ import com.project.model.Unit;
 @Repository
 public interface UnitRepository extends JpaRepository<Unit, Long> {
 
-	@Query(value = "SELECT * FROM unit WHERE propertyId = :propertyId", nativeQuery = true)
+	@Query(value = "SELECT * FROM unitsData WHERE propertyId = :propertyId", nativeQuery = true)
 	List<Unit> findByPropertyId(@Param("propertyId") Long propertyId);
 
 	@Modifying
-	@Query(value = "INSERT INTO unit VALUES(:propertyId, :unitId, :unitName)", nativeQuery = true)
-	void saveUnits(@Param("propertyId") Long propertyId, @Param("unitId") Long unitId,
-			@Param("unitName") String unitName);
-
+	@Query(value = "INSERT INTO unitsData(propertyId, unitNumber, buildingNumber, addressId) VALUES(:propertyId, :unitNumber, :buildingNumber, :addressId)", nativeQuery = true)
+	void saveUnits(@Param("propertyId") Long propertyId, @Param("unitNumber") Long unitNumber, 
+			@Param("buildingNumber") Long buildingNumber, @Param("addressId") String addressId);
+	
 	@Modifying
+	@Query(value="DELETE FROM unitsData WHERE propertyId = :propertyId AND unitNumber = :unitNumber AND buildingNumber = :buildingNumber", nativeQuery = true)
+	void deleteUnit(@Param("unitNumber") Long unitNumber, @Param("buildingNumber") Long buildingNumber, @Param("propertyId") Long propertyId);
+
+	/*@Modifying
 	@Query(value = "UPDATE unit SET unitId = :unitId , unitName = :unitName WHERE unitId = :unitIdold", nativeQuery = true)
 	void editUnits(@Param("unitIdold") Long unitId_old, @Param("unitId") Long unitId,
-			@Param("unitName") String unitName);
-
+			@Param("unitName") String unitName);*/
+	
+	@Query(value = "SELECT * FROM unitsData WHERE propertyId = :propertyId AND unitNumber = :unitNumber AND buildingNumber = :buildingNumber", nativeQuery = true)
+	List<Unit> getExistingUnits(@Param("propertyId") Long propertyId, @Param("unitNumber") Long unitNumber, @Param("buildingNumber") Long buildingNumber);
 }

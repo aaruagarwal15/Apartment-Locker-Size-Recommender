@@ -19,20 +19,24 @@ public class UnitService {
     public List<Unit> listAll() {
         return unitRepository.findAll();
     }
+    
+    public List<Unit> getExistingUnits(Long propertyId, Long unitNumber, Long buildingNumber){
+    	return unitRepository.getExistingUnits(propertyId, unitNumber, buildingNumber);
+    }
 
     public void unitSave(Unit unit) {
-    	unitRepository.saveUnits(unit.getPropertyId(), unit.getunitId(), unit.getunitName());
+    	unitRepository.saveUnits(unit.getPropertyId(), unit.getUnitNumber(), unit.getBuildingNumber(), unit.getAddressId());
     }
 
-    public void unitEdit(Long unitId_old, Long unitId, String unitName) {
+   /* public void unitEdit(Long unitId_old, Long unitId, String unitName) {
     	unitRepository.editUnits(unitId_old, unitId, unitName);
-    }
+    }*/
 
     public List<Unit> getUnits(Long propertyId) {
         return unitRepository.findByPropertyId(propertyId);
     }
 
-    public void delete(long unitId) {
-    	unitRepository.deleteById(unitId);
+    public void deleteUnit(long unitNumber, long buildingNumber, long propertyId) {
+    	unitRepository.deleteUnit(unitNumber, buildingNumber, propertyId);
     }
 }

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "unit")
+@Table(name = "unitsData")
 public class Unit {
 	@Column(name = "propertyId")
 	private Long propertyId;
@@ -16,34 +16,25 @@ public class Unit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long unitId;
-
-	@Column(name = "unitName")
-	private String unitName;
+	
+	@Column(name = "unitNumber")
+	private Long unitNumber;
+	
+	@Column(name = "buildingNumber")
+	private Long buildingNumber;
+	
+	@Column(name = "addressId")
+	private String addressId;
 
 	public Unit() {
 
 	}
 
-	public Unit(Long propertyId, Long unitId, String unitName) {
+	public Unit(Long propertyId, Long unitNumber, Long buildingNumber, String addressId) {
 		this.propertyId = propertyId;
-		this.unitId = unitId;
-		this.unitName = unitName;
-	}
-
-	public Long getunitId() {
-		return unitId;
-	}
-
-	public void setunitId(Long unitId) {
-		this.unitId = unitId;
-	}
-
-	public String getunitName() {
-		return unitName;
-	}
-
-	public void setunitName(String unitName) {
-		this.unitName = unitName;
+		this.buildingNumber = buildingNumber;
+		this.unitNumber = unitNumber;
+		this.addressId = addressId;
 	}
 
 	public Long getPropertyId() {
@@ -54,4 +45,37 @@ public class Unit {
 		this.propertyId = propertyId;
 	}
 
+	public Long getUnitId() {
+		return unitId;
+	}
+
+	public void setUnitId(Long unitId) {
+		this.unitId = unitId;
+	}
+
+	public Long getUnitNumber() {
+		return unitNumber;
+	}
+
+	public void setUnitNumber(Long unitNumber) {
+		this.unitNumber = unitNumber;
+	}
+
+	public Long getBuildingNumber() {
+		return buildingNumber;
+	}
+
+	public void setBuildingNumber(Long buildingNumber) {
+		this.buildingNumber = buildingNumber;
+	}
+
+	public String getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(String addressId) {
+		this.addressId = addressId;
+	}
+
+	
 }

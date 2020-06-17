@@ -109,3 +109,21 @@ body {
         opacity: 0;
     }
 }
+
+.dropdown {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 60%;
+    outline: none;
+    color: #000;
+}
+
+.dropdown>option {
+    outline: none;
+}
+
+select:focus,
+.dropdown:focus {
+    outline: none;
+}

@@ -20,13 +20,13 @@ import com.project.service.CarrierService;
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:5500")
 public class CarrierController {
-	
+
 	@Autowired
 	private CarrierService carrierService;
 
 	@Autowired
 	private CarrierDeliveryService carrierDeliveryService;
-	
+
 	@RequestMapping(value = "/fetchCarrier", method = RequestMethod.GET)
 	@ResponseBody
 	public String fetch_carrier(@RequestParam("PropertyId") String propertyId) {
@@ -51,14 +51,14 @@ public class CarrierController {
 			Carrier carrier = new Carrier();
 			carrier.setId(Long.parseLong(carrierId));
 			carrier.setcarrierName(carrierName);
-			try {
-				carrierService.carrierSave(carrier);
-			} catch (Exception e) {
-				System.out.println(e);
-				System.out.println("Entry already exists");
-			}
-			List<CarrierDelivery> carrierDelivery = carrierDeliveryService.carrierDeliveryCheck(Long.parseLong(carrierId),
-					Long.parseLong(propertyId));
+			// try {
+			// carrierService.carrierSave(carrier);
+			// } catch (Exception e) {
+			// System.out.println(e);
+			// System.out.println("Entry already exists");
+			// }
+			List<CarrierDelivery> carrierDelivery = carrierDeliveryService
+					.carrierDeliveryCheck(Long.parseLong(carrierId), Long.parseLong(propertyId));
 			if (carrierDelivery.isEmpty()) {
 				for (int i = 0; i < days.length; i++) {
 					CarrierDelivery newCarrierDelivery = new CarrierDelivery();
@@ -95,9 +95,9 @@ public class CarrierController {
 			carrierDeliveryService.delete(Long.parseLong(carrierId), Long.parseLong(propertyId));
 			List<String> checkInCarrier = carrierDeliveryService.checkforcarrier(Long.parseLong(carrierId),
 					Long.parseLong(propertyId));
-			if (checkInCarrier.isEmpty()) {
-				carrierService.deleteCarrier(Long.parseLong(carrierId));
-			}
+			// if (checkInCarrier.isEmpty()) {
+			// carrierService.deleteCarrier(Long.parseLong(carrierId));
+			// }
 			System.out.println("SUCCESS");
 			result = "SUCCESS";
 		} catch (Exception e) {
@@ -134,6 +134,7 @@ public class CarrierController {
 		}
 
 	}
+
 	@RequestMapping(value = "/allCarrier", method = RequestMethod.GET)
 	@ResponseBody
 	public String allCarrier() {
@@ -147,6 +148,5 @@ public class CarrierController {
 		}
 
 	}
-	
 
 }

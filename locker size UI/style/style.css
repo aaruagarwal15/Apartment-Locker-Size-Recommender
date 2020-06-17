@@ -1,0 +1,163 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.container-fluid {
+    padding-top: 1%;
+    padding-left: 1%;
+}
+
+.card {
+    width: 15rem;
+    margin-top: 1%;
+}
+#propertyDisplay{
+    display:flex;
+    justify-content: flex-start;
+    flex-wrap:wrap;
+    padding:1%;
+}
+#top_header{
+    background-color: #17A2B8;
+    display:flex;
+    justify-content: space-evenly; 
+    align-items: center;
+    flex-wrap:wrap;
+    padding:1%;
+}
+#top_header .logo{
+    width: 13%;
+    min-width: 130px
+}
+#top_header .header-container{
+    width: 50%;
+    min-width: 200px;
+    max-height: 45px;
+    flex-wrap: wrap;
+}
+#top_header .header-container > div{
+    margin: 0;
+}
+#top_header .header-container input{
+    border-radius: 10px
+}
+.sort-btn-grp{
+    margin-left: 0px;
+}
+
+#increasingOrder i, 
+#decreasingOrder i{
+    font-size:30px;
+    color:white
+}
+#top_header > button > svg{
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
+}
+#top_header > button{
+    display: flex;
+    align-items: center;
+}
+.card{
+    margin: 1%;
+}
+
+/* -------------------------SNACKBAR------------------------------------ */
+/* Snackbar */
+
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    border-radius: 10px;
+}
+
+#snackbar.greenShow {
+    background-color: rgb(69, 207, 69);
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* --------------------Media Queries-------------------------------- */
+@media  (min-width: 1200px){
+    .sort-btn-grp{
+        margin-left: -40px;
+    }
+        
+}
+
+@media (max-width: 780px){
+    .card{
+        width: 18rem;
+    }
+    #increasingOrder, 
+    #decreasingOrder{
+        padding: 3px;
+    }
+    #increasingOrder i, 
+    #decreasingOrder i{
+        font-size:25px;
+    }
+    #top_header > button{
+        font-size: 0.87rem;
+    }
+    #top_header > button > svg{
+        height: 18px;
+        width: 18px;
+        margin-right: 3px;
+    }
+}
+
+@media (max-width: 450px){
+    .card{
+        width: 19rem;
+        margin-left: 10px;
+    }
+    .header-container{
+        margin-top: 5px;
+        width: 200px;
+        flex-basis: 80%;
+    }
+    #top_header > button{
+        content: "";
+        position: fixed;
+        bottom: 20px;
+        right: 18px;
+        z-index: 100;
+        transition: all 0.3s ease-in-out;
+        font-size: 0px;
+        background-color: transparent;
+        border: 0;
+        padding: 0;
+        border-radius: 50%;
+    }
+    #top_header > button > svg{
+        height: 35px;
+        width: 35px;
+    }
+    #top_header > button >svg:hover{
+        border-radius: 50%;
+        box-shadow: 1px 1px 10px rgb(97, 234, 255);
+        scale: 1.08;
+    }
+}

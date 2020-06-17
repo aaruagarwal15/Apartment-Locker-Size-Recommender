@@ -40,10 +40,11 @@ public class UnitController {
 
 	@RequestMapping(value = "/deleteUnit", method = RequestMethod.DELETE)
 	@ResponseBody
-	public String deleteUnitsData(@RequestParam("unitId") String unitId) {
+	public String deleteUnitsData(@RequestParam("unitNumber") String unitNumber, 
+			@RequestParam("buildingNumber") String buildingNumber, @RequestParam("propertyId") String propertyId ) {
 		String result;
 		try {
-			unitService.delete(Long.parseLong(unitId));
+			unitService.deleteUnit(Long.parseLong(unitNumber), Long.parseLong(buildingNumber), Long.parseLong(propertyId) );
 			result = "SUCCESS";
 		} catch (Exception e) {
 			System.out.println(e);
@@ -55,15 +56,24 @@ public class UnitController {
 
 	@RequestMapping(value = "/saveUnit", method = RequestMethod.POST)
 	@ResponseBody
-	public String saveUnit(@RequestParam("PropertyId") String propertyId, @RequestParam("UnitId") String unitId,
-			@RequestParam("UnitName") String unitName) {
+	public String saveUnit(@RequestParam("PropertyId") String propertyId, @RequestParam("UnitNumber") String unitNumber,
+			@RequestParam("BuildingNumber") String buildingNumber) {
 		try {
-			Unit unit = new Unit(Long.parseLong(propertyId), Long.parseLong(unitId), unitName);
-			unitService.unitSave(unit);
-			System.out.println("UNIT ADDED");
-			Unit munit = new Unit(Long.parseLong(propertyId), Long.parseLong(unitId), unitName);
-			String gson = new Gson().toJson(munit);
-			return gson;
+			List<Unit> fetchUnits = unitService.getExistingUnits(Long.parseLong(propertyId), Long.parseLong(unitNumber), Long.parseLong(buildingNumber));
+			if(fetchUnits.size() == 0) {
+				String addressId = "AdI"+propertyId+unitNumber+buildingNumber;
+				Unit unit = new Unit(Long.parseLong(propertyId), Long.parseLong(unitNumber), Long.parseLong(buildingNumber), addressId);
+				unitService.unitSave(unit);
+				System.out.println("UNIT ADDED");
+				Unit newUnit = new Unit(Long.parseLong(propertyId), Long.parseLong(unitNumber), Long.parseLong(buildingNumber),addressId);
+				String gson = new Gson().toJson(newUnit);
+				System.out.println(gson);
+				return gson;
+			}
+			else {
+				return "FAILED";
+			}
+			
 		} catch (Exception e) {
 			System.out.println(e);
 			return "FAILED";
@@ -71,7 +81,7 @@ public class UnitController {
 
 	}
 
-	@RequestMapping(value = "/editUnit", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/editUnit", method = RequestMethod.POST)
 	@ResponseBody
 	public String editUnit(@RequestParam("PropertyId") String propertyId,
 			@RequestParam("UnitIdold") String unitId_old, @RequestParam("UnitId") String unitId,
@@ -87,6 +97,6 @@ public class UnitController {
 			return "FAILED";
 		}
 
-	}
+	}*/
 
 }

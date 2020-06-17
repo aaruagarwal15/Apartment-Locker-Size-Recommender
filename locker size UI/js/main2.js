@@ -10,15 +10,16 @@ exports.__esModule = true;
 var axios_1 = require("axios");
 /**=========================== UNIT CLASS ================================ */
 var Unit = /** @class */ (function () {
-    function Unit(propertyId, unitId, unitName) {
+    function Unit(propertyId, unitNumber, buildingNumber) {
         this.propertyId = propertyId;
-        this.unitId = unitId;
-        this.unitName = unitName;
+        this.unitNumber = unitNumber;
+        this.buildingNumber = buildingNumber;
     }
     Unit.prototype.createList = function () {
         var key = 'a' + Math.random().toString(36).slice(2);
         var card = document.createElement('div');
-        var card_html = "<div class='card-body'><h5 class='card-title'>" + this.unitName + "</h5><h6 class='card-subtitle mb-2 text-muted'>" + this.unitId.toString() + "</h6><button type='button' class='btn btn-outline-secondary edit_unit_data' data-toggle='modal' data-placement='bottom' data-target='#editUnit' title='Edit Details'><i class='fa fa-edit'></i></button>&nbsp;&nbsp;<button type='button' class='btn btn-outline-danger delete_unit_data' data-toggle='tooltip' data-placement='bottom' title='Delete Unit'><i class='fa fa-trash' aria-hidden='true'></i></button></div>";
+        var card_html = "<div class='card-body'><h5 class='card-title'>" + "Unit Number: " + this.unitNumber + "</h5><h6 class='card-subtitle mb-2 text-muted'>" + "Building Number: " + this.buildingNumber + "</h6>" +
+            "<button type='button' class='btn btn-outline-danger delete_unit_data' data-toggle='tooltip' data-placement='bottom' title='Delete Unit'><i class='fa fa-trash' aria-hidden='true'></i></button></div>";
         card.innerHTML = card_html;
         card.classList.add(key);
         card.classList.add("card");
@@ -110,75 +111,86 @@ window.onload = function () {
     /* ====================== UNITS DATA =========================== */
     /* ======================================================================== */
     /* ===================== EDIT UNIT DETAILS ================= */
-    function setunitData(e) {
-        var uid = e.srcElement.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
-        var uname = e.srcElement.parentNode.parentNode.getElementsByTagName('h5')[0].innerHTML;
-        document.getElementById('edit_unit_id').value = uid;
-        document.getElementById('edit_unit_name').value = uname;
-        document.getElementById('add_edit_unit').onclick = function () {
-            var params = new URLSearchParams();
-            var unitId = document.getElementById('edit_unit_id').value;
-            var unitName = document.getElementById('edit_unit_name').value;
-            if (unitName != "" && unitId != "") {
-                params.append('PropertyId', propertyId);
-                params.append('UnitIdold', uid);
-                params.append('UnitId', unitId);
-                params.append('UnitName', unitName);
-                axios_1["default"]({
-                    method: 'POST',
-                    url: 'http://localhost:8080/editUnit',
-                    data: params
-                }).then(function (response) {
-                    console.log(response.data);
-                    if (response.data == "FAILED") {
-                        snackbar("Oops!! Something went wrong. Check your entries.", 4000);
-                    }
-                    else {
-                        document.getElementById('new_units_data').innerHTML = "";
-                        for (var i = 0; i < response.data.length; i++) {
-                            var p = new Unit(response.data[i].propertyId, response.data[i].unitId, response.data[i].unitName);
-                            var key = p.createList();
-                            var edit_button = document.querySelector('.' + key + ' .edit_unit_data');
-                            var delete_button = document.querySelector('.' + key + ' .delete_unit_data');
-                            edit_button.addEventListener('click', function (e) {
-                                setunitData(e);
-                            });
-                            delete_button.addEventListener('click', function (e) {
-                                deleteUnitData(e);
-                            });
-                        }
-                        greenSnackbar("Changes saved");
-                    }
-                })["catch"](function (error) {
-                    console.log(error);
-                });
+    /* function setunitData(e) {
+      var uid = e.srcElement.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
+      var uname = e.srcElement.parentNode.parentNode.getElementsByTagName('h5')[0].innerHTML;
+      (<HTMLSelectElement>document.getElementById('edit_unit_number')).value = uid;
+      (<HTMLSelectElement>document.getElementById('edit_building_number')).value = uname;
+  
+      document.getElementById('add_edit_unit').onclick = function () {
+        const params = new URLSearchParams();
+        var unitId: string = (<HTMLSelectElement>document.getElementById('edit_unit_number')).value;
+        var unitName: string = (<HTMLSelectElement>document.getElementById('edit_building_number')).value;
+        if (unitName != "" && unitId != "") {
+          params.append('PropertyId', propertyId);
+          params.append('UnitIdold', uid);
+          params.append('UnitId', unitId);
+          params.append('UnitName', unitName);
+  
+          axios({
+            method: 'POST',
+            url: 'http://localhost:8080/editUnit',
+            data: params
+          }).then(function (response) {
+            console.log(response.data);
+            if (response.data == "FAILED") {
+              snackbar("Oops!! Something went wrong. Check your entries.", 4000);
             }
             else {
-                snackbar("Fields cannot be empty");
+              document.getElementById('new_units_data').innerHTML = "";
+              for (var i: number = 0; i < response.data.length; i++) {
+                let p = new Unit(response.data[i].propertyId, response.data[i].unitId, response.data[i].unitName);
+                let key: string = p.createList();
+                let edit_button: HTMLElement = document.querySelector('.' + key + ' .edit_unit_data');
+                let delete_button: HTMLElement = document.querySelector('.' + key + ' .delete_unit_data');
+                edit_button.addEventListener('click', function (e) {
+                  setunitData(e);
+                })
+                delete_button.addEventListener('click', function (e) {
+                  deleteUnitData(e);
+                })
+              }
+              greenSnackbar("Changes saved")
             }
-        };
-    }
+  
+          }).catch(function (error) {
+            console.log(error);
+          });
+        }
+        else {
+          snackbar("Fields cannot be empty");
+        }
+  
+      }
+    } */
     /* ===================== DELETE UNIT DETAILS ================= */
     function deleteUnitData(e) {
         var cardNode = e.srcElement.parentNode.parentNode;
-        var unitId = e.srcElement.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
+        e.srcElement.parentNode.parentNode.getElementsByTagName('h5')[0].innerHTML.substring(13);
+        var unitNumber = e.srcElement.parentNode.parentNode.getElementsByTagName('h5')[0].innerHTML.substring(13);
+        var buildingNumber = e.srcElement.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML.substring(17);
         if (e.srcElement.nodeName == 'I') {
             cardNode = e.srcElement.parentNode.parentNode.parentElement;
-            unitId = e.srcElement.parentNode.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
+            unitNumber = e.srcElement.parentNode.parentNode.parentNode.getElementsByTagName('h5')[0].innerHTML;
+            buildingNumber = e.srcElement.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
         }
-        var url2 = 'http://localhost:8080/deleteUnit?unitId=';
-        url2 = url2.concat(unitId);
+        var url2 = 'http://localhost:8080/deleteUnit?unitNumber=';
+        url2 = url2.concat(unitNumber);
+        url2 = url2.concat("&buildingNumber=");
+        url2 = url2.concat(buildingNumber);
+        url2 = url2.concat("&propertyId=");
+        url2 = url2.concat(propertyId);
         axios_1["default"]["delete"](url2).then(function (response) {
             if (response.data.toString() == "SUCCESS") {
-                console.log(cardNode);
                 cardNode.parentElement.removeChild(cardNode);
-                greenSnackbar("Successfully deleted a Unit.");
+                greenSnackbar("Successfully deleted.");
             }
             else {
                 snackbar("Oops Something went wrong. Please Try againg after sometime.", 4000);
             }
         })["catch"](function (error) {
-            console.log(error);
+            snackbar("Oops!! Something went wrong. Please try again later.");
+            //console.log(error);
         });
     }
     /* ======================== RETRIEVE ALL UNITS DATA ================================== */
@@ -186,30 +198,30 @@ window.onload = function () {
     url = url.concat(propertyId);
     axios_1["default"].get(url).then(function (response) {
         for (var i = 0; i < response.data.length; i++) {
-            var p = new Unit(response.data[i].propertyId, response.data[i].unitId, response.data[i].unitName);
+            var p = new Unit(response.data[i].propertyId, response.data[i].unitNumber, response.data[i].buildingNumber);
             var key = p.createList();
-            var edit_button = document.querySelector('.' + key + ' .edit_unit_data');
+            /* let edit_button: HTMLElement = document.querySelector('.' + key + ' .edit_unit_data'); */
             var delete_button = document.querySelector('.' + key + ' .delete_unit_data');
-            edit_button.addEventListener('click', function (e) {
-                setunitData(e);
-            });
+            /* edit_button.addEventListener('click', function (e) {
+              setunitData(e);
+            }) */
             delete_button.addEventListener('click', function (e) {
                 deleteUnitData(e);
             });
         }
     })["catch"](function (error) {
         snackbar("Oops!! Something went wrong. Please try again later.", 5000);
-        console.log(error);
+        //console.log(error);
     });
     /* ==================================== ADD NEW UNIT ========================================== */
     document.getElementById('add_new_unit').onclick = function () {
         var params = new URLSearchParams();
-        var unitId = document.getElementById('new_unit_id').value;
-        var unitName = document.getElementById('new_unit_name').value;
-        if (unitName != "" && unitId != "") {
+        var unitNumber = document.getElementById('new_unit_number').value;
+        var buildingNumber = document.getElementById('new_building_number').value;
+        if (buildingNumber != "" && unitNumber != "") {
             params.append('PropertyId', propertyId);
-            params.append('UnitId', unitId);
-            params.append('UnitName', unitName);
+            params.append('UnitNumber', unitNumber);
+            params.append('BuildingNumber', buildingNumber);
             axios_1["default"]({
                 method: 'POST',
                 url: 'http://localhost:8080/saveUnit',
@@ -219,23 +231,23 @@ window.onload = function () {
                     snackbar("Enter Valid Entries");
                 }
                 else {
-                    console.log(response.data);
-                    var p = new Unit(response.data.propertyId, response.data.unitId, response.data.unitName);
+                    var p = new Unit(response.data.propertyId, response.data.unitNumber, response.data.buildingNumber);
                     var key = p.createList();
-                    var edit_button = document.querySelector('.' + key + ' .edit_unit_data');
+                    /* let edit_button: HTMLElement = document.querySelector('.' + key + ' .edit_unit_data'); */
                     var delete_button = document.querySelector('.' + key + ' .delete_unit_data');
-                    edit_button.addEventListener('click', function (e) {
-                        setunitData(e);
-                    });
+                    /*  edit_button.addEventListener('click', function (e) {
+                       setunitData(e);
+                     }); */
                     delete_button.addEventListener('click', function (e) {
                         deleteUnitData(e);
                     });
-                    document.getElementById('new_unit_id').value = "";
-                    document.getElementById('new_unit_name').value = "";
+                    document.getElementById('new_unit_number').value = "";
+                    document.getElementById('new_building_number').value = "";
                     greenSnackbar("Unit added successfully!");
                 }
             })["catch"](function (error) {
-                console.log(error);
+                //console.log(error);
+                snackbar("Oops!! Something went wrong. Please try again later.");
             });
         }
         else {
@@ -252,13 +264,10 @@ window.onload = function () {
             baseE = baseE.parentNode;
         }
         document.getElementById('n_carrier_id').value = baseE.getElementsByClassName('new_carrier_id')[0].value;
-        document.getElementById('n_carrier_name').value = baseE.getElementsByClassName('new_carrier_name')[0].innerHTML;
-        /*  (<HTMLSelectElement>document.getElementById('n_carrier_id')).disabled = true; */
+        document.getElementById('n_carrier_name').value = baseE.getElementsByClassName('new_carrier_id')[0].value;
         document.getElementById('n_carrier_name').disabled = true;
         document.getElementById('add_new_carrier').style.display = 'none';
         document.getElementById('edit_new_carrier').style.display = 'block';
-        console.log("BASE E");
-        console.log(baseE);
         /* let selectedCarrierName:string = baseE.getElementsByClassName('new_carrier_name')[0].value;
         (<HTMLSelectElement>document.getElementById('carrierSelect')).innerHTML = "<option value="+ selectedCarrierName
                                                                                               +" selected disabled>"+selectedCarrierName+"</option>";
@@ -463,6 +472,18 @@ window.onload = function () {
             e.srcElement.parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled = !e.srcElement.parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled;
         });
     }
+    /**=========================================ALL CARRIER RETRIEVE=============================================== */
+    var carrierSelect = "<option value=\"\" selected disabled>Choose carrier</option>";
+    var url = 'http://localhost:8080/allCarrier';
+    axios_1["default"].get(url).then(function (response) {
+        console.log(response.data);
+        for (var i = 0; i < response.data.length; i++) {
+            carrierSelect += " <option value=\"" + response.data[i][1] + "\">" + response.data[i][0] + "</option>";
+        }
+        document.getElementById('n_carrier_name').innerHTML = carrierSelect;
+    })["catch"](function (error) {
+        console.log(error);
+    });
     /**================================= ADD NEW CARRIER ====================================================== */
     document.getElementById('new_carrier_btn').addEventListener('click', function () {
         /* (<HTMLSelectElement>document.getElementById('n_carrier_id')).disabled = false; */
@@ -472,7 +493,7 @@ window.onload = function () {
         axios_1["default"].get(url).then(function (response) {
             console.log(response.data);
             for (var i = 0; i < response.data.length; i++) {
-                carrierSelect += " <option value=\"" + response.data[i] + "\">" + response.data[i] + "</option>";
+                carrierSelect += " <option value=\"" + response.data[i][1] + "\">" + response.data[i][0] + "</option>";
             }
             document.getElementById('n_carrier_name').innerHTML = carrierSelect;
         })["catch"](function (error) {
@@ -490,8 +511,9 @@ window.onload = function () {
         }
     });
     document.getElementById('add_new_carrier').addEventListener('click', function (e) {
-        var carrierId = document.getElementById('n_carrier_id').value;
-        var car_name = document.getElementById('n_carrier_name').value;
+        var carrierId = document.getElementById('n_carrier_name').value;
+        var select_element = document.getElementById('n_carrier_name');
+        var car_name = select_element.options[select_element.selectedIndex].text;
         if (carrierId.length == 0 || car_name.length == 0) {
             snackbar("Enter valid entries");
         }
@@ -521,6 +543,7 @@ window.onload = function () {
                     params.append('Days', day_array[i]);
                     params.append('Time', time_array[i]);
                 }
+                console.log(carrierId, propertyId, car_name);
                 axios_1["default"]({
                     method: 'POST',
                     url: 'http://localhost:8080/saveCarrier',

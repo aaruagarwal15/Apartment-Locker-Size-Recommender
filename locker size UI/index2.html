@@ -15,8 +15,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="http://weareoutman.github.io/clockpicker/dist/jquery-clockpicker.min.js"></script>
-    <link rel="stylesheet" href="style2.css">
-    <script src="bundle2.js"></script>
+    <link rel="stylesheet" href="style/style2.css">
+    <script src="bundle/bundle2.js"></script>
 
     <!-- <script src="bundle.js"></script> -->
     <title>Property Details</title>
@@ -122,19 +122,18 @@
                                     </div>
                                     <form>
                                         <div class="modal-body">
-                                            <!-- <div>
-                                                Carrier ID:<br>
-                                                <input type="text" class="form-control" id="n_carrier_id" />
-                                            </div> -->
+                                            <div>
+                                                <input type="text" class="form-control" id="n_carrier_id" hidden />
+                                            </div>
 
                                             <div style="text-align: center;">
                                                 <select class="ui search selection dropdown" id="n_carrier_name" height="50px">
                                                     <option value="" selected disabled>Choose carrier</option>
-                                                    <option value="AL">Alabama</option>
+                                                    <!-- <option value="AL">Alabama</option>
                                                     <option value="AK">Alaska</option>
                                                     <option value="AZ">Arizona</option>
                                                     <option value="AR">Arkansas</option>
-                                                    <option value="CA">California</option>
+                                                    <option value="CA">California</option> -->
                                                 </select>
                                             </div>
 
@@ -262,10 +261,10 @@
                                     </div>
                                     <form>
                                         <div class="modal-body">
-                                            Unit ID:<br>
-                                            <input type="text" class="form-control" id="new_unit_id" />
-                                            <br> Unit Name:<br>
-                                            <input type="text" class="form-control" id="new_unit_name" />
+                                            Unit Number:<br>
+                                            <input type="text" class="form-control" id="new_unit_number" />
+                                            <br> Building Number:<br>
+                                            <input type="text" class="form-control" id="new_building_number" />
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -302,9 +301,9 @@
                                     <form>
                                         <div class="modal-body">
                                             Unit ID:<br>
-                                            <input type="text" class="form-control" id="edit_unit_id" />
+                                            <input type="text" class="form-control" id="edit_unit_number" />
                                             <br> Unit Name:<br>
-                                            <input type="text" class="form-control" id="edit_unit_name" />
+                                            <input type="text" class="form-control" id="edit_building_number" />
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

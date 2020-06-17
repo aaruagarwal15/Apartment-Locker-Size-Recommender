@@ -5,17 +5,18 @@ import { response } from 'express';
 
 class Unit {
   propertyId: number;
-  unitId: number;
-  unitName: string;
-  constructor(propertyId: number, unitId: number, unitName: string) {
+  unitNumber: number;
+  buildingNumber: number;
+  constructor(propertyId: number, unitNumber: number, buildingNumber: number) {
     this.propertyId = propertyId;
-    this.unitId = unitId;
-    this.unitName = unitName;
+    this.unitNumber = unitNumber;
+    this.buildingNumber = buildingNumber;
   }
   createList(): string {
     var key: string = 'a' + Math.random().toString(36).slice(2);
     let card = document.createElement('div');
-    let card_html = "<div class='card-body'><h5 class='card-title'>" + this.unitName + "</h5><h6 class='card-subtitle mb-2 text-muted'>" + this.unitId.toString() + "</h6><button type='button' class='btn btn-outline-secondary edit_unit_data' data-toggle='modal' data-placement='bottom' data-target='#editUnit' title='Edit Details'><i class='fa fa-edit'></i></button>&nbsp;&nbsp;<button type='button' class='btn btn-outline-danger delete_unit_data' data-toggle='tooltip' data-placement='bottom' title='Delete Unit'><i class='fa fa-trash' aria-hidden='true'></i></button></div>"
+    let card_html = "<div class='card-body'><h5 class='card-title'>" + "Unit Number: " + this.unitNumber + "</h5><h6 class='card-subtitle mb-2 text-muted'>" + "Building Number: " + this.buildingNumber + "</h6>" +
+      "<button type='button' class='btn btn-outline-danger delete_unit_data' data-toggle='tooltip' data-placement='bottom' title='Delete Unit'><i class='fa fa-trash' aria-hidden='true'></i></button></div>"
     card.innerHTML = card_html
     card.classList.add(key)
     card.classList.add("card")
@@ -117,22 +118,24 @@ window.onload = function () {
     console.log(error);
   });
 
+
+
   /* ======================================================================= */
   /* ====================== UNITS DATA =========================== */
   /* ======================================================================== */
 
 
   /* ===================== EDIT UNIT DETAILS ================= */
-  function setunitData(e) {
+  /* function setunitData(e) {
     var uid = e.srcElement.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
     var uname = e.srcElement.parentNode.parentNode.getElementsByTagName('h5')[0].innerHTML;
-    (<HTMLSelectElement>document.getElementById('edit_unit_id')).value = uid;
-    (<HTMLSelectElement>document.getElementById('edit_unit_name')).value = uname;
+    (<HTMLSelectElement>document.getElementById('edit_unit_number')).value = uid;
+    (<HTMLSelectElement>document.getElementById('edit_building_number')).value = uname;
 
     document.getElementById('add_edit_unit').onclick = function () {
       const params = new URLSearchParams();
-      var unitId: string = (<HTMLSelectElement>document.getElementById('edit_unit_id')).value;
-      var unitName: string = (<HTMLSelectElement>document.getElementById('edit_unit_name')).value;
+      var unitId: string = (<HTMLSelectElement>document.getElementById('edit_unit_number')).value;
+      var unitName: string = (<HTMLSelectElement>document.getElementById('edit_building_number')).value;
       if (unitName != "" && unitId != "") {
         params.append('PropertyId', propertyId);
         params.append('UnitIdold', uid);
@@ -174,35 +177,40 @@ window.onload = function () {
       }
 
     }
-
-
-
-  }
+  } */
 
   /* ===================== DELETE UNIT DETAILS ================= */
 
   function deleteUnitData(e) {
 
     let cardNode: HTMLElement = e.srcElement.parentNode.parentNode;
-    let unitId = e.srcElement.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
+    e.srcElement.parentNode.parentNode.getElementsByTagName('h5')[0].innerHTML.substring(13)
+    let unitNumber = e.srcElement.parentNode.parentNode.getElementsByTagName('h5')[0].innerHTML.substring(13);
+    let buildingNumber = e.srcElement.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML.substring(17);
+
     if (e.srcElement.nodeName == 'I') {
       cardNode = e.srcElement.parentNode.parentNode.parentElement;
-      unitId = e.srcElement.parentNode.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
+      unitNumber = e.srcElement.parentNode.parentNode.parentNode.getElementsByTagName('h5')[0].innerHTML;
+      buildingNumber = e.srcElement.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
     }
-    let url2: string = 'http://localhost:8080/deleteUnit?unitId=';
-    url2 = url2.concat(unitId);
+    let url2: string = 'http://localhost:8080/deleteUnit?unitNumber=';
+    url2 = url2.concat(unitNumber);
+    url2 = url2.concat("&buildingNumber=");
+    url2 = url2.concat(buildingNumber);
+    url2 = url2.concat("&propertyId=");
+    url2 = url2.concat(propertyId);
 
     axios.delete(url2).then(function (response) {
       if (response.data.toString() == "SUCCESS") {
-        console.log(cardNode);
         cardNode.parentElement.removeChild(cardNode);
-        greenSnackbar("Successfully deleted a Unit.")
+        greenSnackbar("Successfully deleted.")
       }
       else {
         snackbar("Oops Something went wrong. Please Try againg after sometime.", 4000);
       }
     }).catch(function (error) {
-      console.log(error);
+      snackbar("Oops!! Something went wrong. Please try again later.");
+      //console.log(error);
     });
   }
 
@@ -212,33 +220,33 @@ window.onload = function () {
   url = url.concat(propertyId);
   axios.get(url).then(function (response) {
     for (var i: number = 0; i < response.data.length; i++) {
-      let p = new Unit(response.data[i].propertyId, response.data[i].unitId, response.data[i].unitName);
+      let p = new Unit(response.data[i].propertyId, response.data[i].unitNumber, response.data[i].buildingNumber);
       let key: string = p.createList();
-      let edit_button: HTMLElement = document.querySelector('.' + key + ' .edit_unit_data');
+      /* let edit_button: HTMLElement = document.querySelector('.' + key + ' .edit_unit_data'); */
       let delete_button: HTMLElement = document.querySelector('.' + key + ' .delete_unit_data');
-      edit_button.addEventListener('click', function (e) {
+      /* edit_button.addEventListener('click', function (e) {
         setunitData(e);
-      })
+      }) */
       delete_button.addEventListener('click', function (e) {
         deleteUnitData(e);
       })
     }
   }).catch(function (error) {
     snackbar("Oops!! Something went wrong. Please try again later.", 5000);
-    console.log(error);
+    //console.log(error);
   });
 
 
   /* ==================================== ADD NEW UNIT ========================================== */
   document.getElementById('add_new_unit').onclick = function () {
     const params = new URLSearchParams();
-    var unitId: string = (<HTMLSelectElement>document.getElementById('new_unit_id')).value;
-    var unitName: string = (<HTMLSelectElement>document.getElementById('new_unit_name')).value;
+    var unitNumber: string = (<HTMLSelectElement>document.getElementById('new_unit_number')).value;
+    var buildingNumber: string = (<HTMLSelectElement>document.getElementById('new_building_number')).value;
 
-    if (unitName != "" && unitId != "") {
+    if (buildingNumber != "" && unitNumber != "") {
       params.append('PropertyId', propertyId);
-      params.append('UnitId', unitId);
-      params.append('UnitName', unitName);
+      params.append('UnitNumber', unitNumber);
+      params.append('BuildingNumber', buildingNumber);
 
       axios({
         method: 'POST',
@@ -249,24 +257,24 @@ window.onload = function () {
           snackbar("Enter Valid Entries");
         }
         else {
-          console.log(response.data)
-          let p = new Unit(response.data.propertyId, response.data.unitId, response.data.unitName);
+          let p = new Unit(response.data.propertyId, response.data.unitNumber, response.data.buildingNumber);
           let key: string = p.createList();
-          let edit_button: HTMLElement = document.querySelector('.' + key + ' .edit_unit_data');
+          /* let edit_button: HTMLElement = document.querySelector('.' + key + ' .edit_unit_data'); */
           let delete_button: HTMLElement = document.querySelector('.' + key + ' .delete_unit_data');
-          edit_button.addEventListener('click', function (e) {
-            setunitData(e);
-          });
+          /*  edit_button.addEventListener('click', function (e) {
+             setunitData(e);
+           }); */
           delete_button.addEventListener('click', function (e) {
             deleteUnitData(e);
           });
-          (<HTMLSelectElement>document.getElementById('new_unit_id')).value = "";
-          (<HTMLSelectElement>document.getElementById('new_unit_name')).value = "";
+          (<HTMLSelectElement>document.getElementById('new_unit_number')).value = "";
+          (<HTMLSelectElement>document.getElementById('new_building_number')).value = "";
           greenSnackbar("Unit added successfully!")
         }
 
       }).catch(function (error) {
-        console.log(error);
+        //console.log(error);
+        snackbar("Oops!! Something went wrong. Please try again later.");
       });
     }
     else {
@@ -292,13 +300,10 @@ window.onload = function () {
       baseE = baseE.parentNode;
     }
     (<HTMLSelectElement>document.getElementById('n_carrier_id')).value = baseE.getElementsByClassName('new_carrier_id')[0].value;
-    (<HTMLSelectElement>document.getElementById('n_carrier_name')).value = baseE.getElementsByClassName('new_carrier_name')[0].innerHTML;
-   /*  (<HTMLSelectElement>document.getElementById('n_carrier_id')).disabled = true; */
+    (<HTMLSelectElement>document.getElementById('n_carrier_name')).value = baseE.getElementsByClassName('new_carrier_id')[0].value;
     (<HTMLSelectElement>document.getElementById('n_carrier_name')).disabled = true;
     document.getElementById('add_new_carrier').style.display = 'none';
     document.getElementById('edit_new_carrier').style.display = 'block';
-    console.log("BASE E");
-    console.log(baseE);
     /* let selectedCarrierName:string = baseE.getElementsByClassName('new_carrier_name')[0].value;
     (<HTMLSelectElement>document.getElementById('carrierSelect')).innerHTML = "<option value="+ selectedCarrierName
                                                                                           +" selected disabled>"+selectedCarrierName+"</option>";
@@ -516,7 +521,20 @@ window.onload = function () {
       e.srcElement.parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled = !e.srcElement.parentNode.parentNode.getElementsByClassName('carrier_time')[0].disabled;
     })
   }
-  
+
+  /**=========================================ALL CARRIER RETRIEVE=============================================== */
+  let carrierSelect: string = `<option value="" selected disabled>Choose carrier</option>`;
+  var url: string = 'http://localhost:8080/allCarrier';
+  axios.get(url).then(function (response) {
+    console.log(response.data);
+    for (var i: number = 0; i < response.data.length; i++) {
+      carrierSelect += ` <option value="${response.data[i][1]}">${response.data[i][0]}</option>`
+    }
+    (<HTMLSelectElement>document.getElementById('n_carrier_name')).innerHTML = carrierSelect;
+  }).catch(function (error) {
+    console.log(error);
+  });
+
 
   /**================================= ADD NEW CARRIER ====================================================== */
 
@@ -524,19 +542,18 @@ window.onload = function () {
 
     /* (<HTMLSelectElement>document.getElementById('n_carrier_id')).disabled = false; */
     (<HTMLSelectElement>document.getElementById('n_carrier_name')).disabled = false;
-    
-    let carrierSelect:string = `<option value="" selected disabled>Choose carrier</option>`;
+
+    let carrierSelect: string = `<option value="" selected disabled>Choose carrier</option>`;
     var url: string = 'http://localhost:8080/allCarrier';
     axios.get(url).then(function (response) {
       console.log(response.data);
       for (var i: number = 0; i < response.data.length; i++) {
-        carrierSelect += ` <option value="${response.data[i]}">${response.data[i]}</option>`
-      }      
+        carrierSelect += ` <option value="${response.data[i][1]}">${response.data[i][0]}</option>`
+      }
       (<HTMLSelectElement>document.getElementById('n_carrier_name')).innerHTML = carrierSelect;
     }).catch(function (error) {
       console.log(error);
-    });
-
+    })
 
     document.getElementById('add_new_carrier').style.display = 'block';
     document.getElementById('edit_new_carrier').style.display = 'none';
@@ -551,8 +568,10 @@ window.onload = function () {
   });
 
   document.getElementById('add_new_carrier').addEventListener('click', (e) => {
-    let carrierId: string = (<HTMLSelectElement>document.getElementById('n_carrier_id')).value;
-    let car_name: string = (<HTMLSelectElement>document.getElementById('n_carrier_name')).value;
+    let carrierId: string = (<HTMLSelectElement>document.getElementById('n_carrier_name')).value;
+    let select_element: HTMLSelectElement = (<HTMLSelectElement>document.getElementById('n_carrier_name'));
+    let car_name: string = select_element.options[select_element.selectedIndex].text;
+
     if (carrierId.length == 0 || car_name.length == 0) {
       snackbar("Enter valid entries");
     }
@@ -582,6 +601,7 @@ window.onload = function () {
           params.append('Days', day_array[i]);
           params.append('Time', time_array[i]);
         }
+        console.log(carrierId, propertyId, car_name);
         axios({
           method: 'POST',
           url: 'http://localhost:8080/saveCarrier',
