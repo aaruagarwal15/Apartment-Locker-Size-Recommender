@@ -1,0 +1,114 @@
+"2020-06-19 00:13:02 [main] INFO  com.project.AppMain - Starting AppMain on DESKTOP-DMETKHU with PID 7444 (started by Aarushi Agarwal in C:\Users\Aarushi Agarwal\Desktop\Apartment Locker Size Recommender\PropertyManager)
+""2020-06-19 00:13:02 [main] DEBUG com.project.AppMain - Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+""2020-06-19 00:13:02 [main] INFO  com.project.AppMain - No active profile set, falling back to default profiles: default
+""2020-06-19 00:13:09 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:13:11 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:13:11 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:13:11 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:13:11 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:13:11 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:13:11 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:13:11 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:13:11 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:13:11 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:13:15 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2020-06-19 00:13:15 [main] INFO  com.project.AppMain - Started AppMain in 14.486 seconds (JVM running for 15.465)
+""2020-06-19 00:14:24 [http-nio-8080-exec-1] INFO  c.p.controller.PropertyController - All properties retrieved successfully
+""2020-06-19 00:14:26 [http-nio-8080-exec-3] INFO  c.project.controller.UnitController - All units fetched successfully
+""2020-06-19 00:14:26 [http-nio-8080-exec-4] INFO  c.p.controller.PropertyController - Property details for header fetched
+""2020-06-19 00:14:26 [http-nio-8080-exec-5] INFO  c.p.controller.CarrierController - Carrier Data fetched successfully
+""2020-06-19 00:14:26 [http-nio-8080-exec-6] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+""2020-06-19 00:47:25 [main] INFO  com.project.AppMain - Starting AppMain on DESKTOP-DMETKHU with PID 5876 (started by Aarushi Agarwal in C:\Users\Aarushi Agarwal\Desktop\Apartment Locker Size Recommender\PropertyManager)
+""2020-06-19 00:47:25 [main] DEBUG com.project.AppMain - Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+""2020-06-19 00:47:25 [main] INFO  com.project.AppMain - No active profile set, falling back to default profiles: default
+""2020-06-19 00:47:33 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:47:34 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:47:34 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:47:34 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:47:34 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:47:34 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:47:34 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:47:34 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:47:34 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:47:34 [main] WARN  o.a.t.jdbc.pool.PooledConnection - Not loading a JDBC driver as driverClassName property is null.
+""2020-06-19 00:47:37 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2020-06-19 00:47:38 [main] INFO  com.project.AppMain - Started AppMain in 13.219 seconds (JVM running for 14.452)
+""2020-06-19 00:47:45 [http-nio-8080-exec-1] INFO  c.p.controller.PropertyController - All properties retrieved successfully
+""2020-06-19 00:47:50 [http-nio-8080-exec-2] INFO  c.p.controller.PropertyController - Property details for header fetched
+""2020-06-19 00:47:50 [http-nio-8080-exec-5] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+""2020-06-19 00:47:50 [http-nio-8080-exec-3] INFO  c.project.controller.UnitController - All units fetched successfully
+""2020-06-19 00:47:50 [http-nio-8080-exec-4] INFO  c.p.controller.CarrierController - Carrier Data fetched successfully
+""2020-06-19 00:47:52 [http-nio-8080-exec-6] INFO  c.p.controller.PropertyController - Properties sorted in increasing order
+""2020-06-19 00:47:53 [http-nio-8080-exec-7] INFO  c.p.controller.PropertyController - Properties sorted in decreasing order
+""2020-06-19 00:48:16 [http-nio-8080-exec-8] INFO  c.p.controller.PropertyController - New property added succesfully
+""2020-06-19 00:48:47 [http-nio-8080-exec-9] INFO  c.p.controller.PropertyController - New property added succesfully
+""2020-06-19 00:48:52 [http-nio-8080-exec-5] INFO  c.p.controller.PropertyController - Property details for header fetched
+""2020-06-19 00:48:53 [http-nio-8080-exec-3] INFO  c.project.controller.UnitController - All units fetched successfully
+""2020-06-19 00:48:53 [http-nio-8080-exec-4] INFO  c.p.controller.CarrierController - Carrier Data fetched successfully
+""2020-06-19 00:48:53 [http-nio-8080-exec-6] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+""2020-06-19 00:49:06 [http-nio-8080-exec-7] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+""2020-06-19 00:49:23 [http-nio-8080-exec-8] INFO  c.p.controller.PropertyController - All properties retrieved successfully
+""2020-06-19 00:49:24 [http-nio-8080-exec-9] INFO  c.p.controller.PropertyController - Property details for header fetched
+""2020-06-19 00:49:24 [http-nio-8080-exec-10] INFO  c.project.controller.UnitController - All units fetched successfully
+""2020-06-19 00:49:24 [http-nio-8080-exec-1] INFO  c.p.controller.CarrierController - Carrier Data fetched successfully
+""2020-06-19 00:49:24 [http-nio-8080-exec-2] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+""2020-06-19 00:49:30 [http-nio-8080-exec-5] INFO  c.p.controller.PropertyController - Property details for header fetched
+""2020-06-19 00:49:30 [http-nio-8080-exec-3] INFO  c.project.controller.UnitController - All units fetched successfully
+""2020-06-19 00:49:30 [http-nio-8080-exec-4] INFO  c.p.controller.CarrierController - Carrier Data fetched successfully
+""2020-06-19 00:49:30 [http-nio-8080-exec-6] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+""2020-06-19 00:49:30 [http-nio-8080-exec-7] INFO  c.p.controller.PropertyController - All properties retrieved successfully
+""2020-06-19 00:49:36 [http-nio-8080-exec-8] INFO  c.p.controller.PropertyController - Property details for header fetched
+""2020-06-19 00:49:36 [http-nio-8080-exec-10] INFO  c.p.controller.CarrierController - Carrier Data fetched successfully
+""2020-06-19 00:49:36 [http-nio-8080-exec-9] INFO  c.project.controller.UnitController - All units fetched successfully
+""2020-06-19 00:49:36 [http-nio-8080-exec-1] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+""2020-06-19 00:49:36 [http-nio-8080-exec-2] INFO  c.p.controller.PropertyController - All properties retrieved successfully
+""2020-06-19 00:49:39 [http-nio-8080-exec-5] INFO  c.p.controller.PropertyController - All properties retrieved successfully
+""2020-06-19 00:49:39 [http-nio-8080-exec-4] INFO  c.project.controller.UnitController - All units fetched successfully
+""2020-06-19 00:49:39 [http-nio-8080-exec-3] INFO  c.p.controller.PropertyController - Property details for header fetched
+""2020-06-19 00:49:39 [http-nio-8080-exec-6] INFO  c.p.controller.CarrierController - Carrier Data fetched successfully
+""2020-06-19 00:49:39 [http-nio-8080-exec-7] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+""2020-06-19 00:49:54 [http-nio-8080-exec-8] INFO  c.p.controller.PropertyController - Property details for header fetched
+""2020-06-19 00:49:54 [http-nio-8080-exec-9] INFO  c.p.controller.CarrierController - Carrier Data fetched successfully
+""2020-06-19 00:49:54 [http-nio-8080-exec-10] INFO  c.project.controller.UnitController - All units fetched successfully
+""2020-06-19 00:49:54 [http-nio-8080-exec-1] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+""2020-06-19 00:49:55 [http-nio-8080-exec-2] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+""2020-06-19 00:50:20 [http-nio-8080-exec-7] INFO  c.p.controller.PropertyController - Property details for header fetched
+""2020-06-19 00:50:20 [http-nio-8080-exec-8] INFO  c.project.controller.UnitController - All units fetched successfully
+""2020-06-19 00:50:20 [http-nio-8080-exec-9] INFO  c.p.controller.CarrierController - Carrier Data fetched successfully
+""2020-06-19 00:50:20 [http-nio-8080-exec-10] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+""2020-06-19 00:50:21 [http-nio-8080-exec-1] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+""2020-06-19 00:50:29 [http-nio-8080-exec-2] INFO  c.p.controller.CarrierController - New Carrier Details added successfully
+""2020-06-19 00:50:40 [http-nio-8080-exec-4] INFO  c.p.controller.CarrierController - Carrier edited successfully
+""2020-06-19 00:50:43 [http-nio-8080-exec-3] INFO  c.p.controller.CarrierController - Carrier deleted successfully
+""2020-06-19 00:50:54 [http-nio-8080-exec-6] INFO  c.project.controller.UnitController - New Unit is successfully added
+""2020-06-19 00:50:56 [http-nio-8080-exec-8] INFO  c.project.controller.UnitController - Unit is successfully deleted
+""2020-06-19 00:51:00 [http-nio-8080-exec-9] INFO  c.p.controller.PropertyController - Property details for header fetched
+""2020-06-19 00:52:27 [http-nio-8080-exec-5] INFO  c.p.controller.PropertyController - Property details for header fetched
+""2020-06-19 00:52:27 [http-nio-8080-exec-3] INFO  c.project.controller.UnitController - All units fetched successfully
+""2020-06-19 00:52:27 [http-nio-8080-exec-7] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+""2020-06-19 00:52:27 [http-nio-8080-exec-6] INFO  c.p.controller.CarrierController - Carrier Data fetched successfully
+""2020-06-19 00:52:27 [http-nio-8080-exec-8] INFO  c.p.controller.PropertyController - All properties retrieved successfully
+""2020-06-19 00:52:57 [http-nio-8080-exec-9] INFO  c.p.controller.PropertyController - All properties retrieved successfully
+""2020-06-19 00:52:57 [http-nio-8080-exec-10] INFO  c.p.controller.PropertyController - Property details for header fetched
+""2020-06-19 00:52:57 [http-nio-8080-exec-1] INFO  c.project.controller.UnitController - All units fetched successfully
+""2020-06-19 00:52:57 [http-nio-8080-exec-2] INFO  c.p.controller.CarrierController - Carrier Data fetched successfully
+""2020-06-19 00:52:57 [http-nio-8080-exec-4] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+""2020-06-19 00:53:08 [http-nio-8080-exec-5] INFO  c.p.controller.PropertyController - Property details for header fetched
+""2020-06-19 00:53:08 [http-nio-8080-exec-3] INFO  c.project.controller.UnitController - All units fetched successfully
+""2020-06-19 00:53:08 [http-nio-8080-exec-7] INFO  c.p.controller.CarrierController - Carrier Data fetched successfully
+""2020-06-19 00:53:08 [http-nio-8080-exec-6] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+""2020-06-19 00:53:08 [http-nio-8080-exec-8] INFO  c.p.controller.PropertyController - All properties retrieved successfully
+""2020-06-19 00:54:46 [http-nio-8080-exec-5] INFO  c.project.controller.UnitController - All units fetched successfully
+""2020-06-19 00:54:46 [http-nio-8080-exec-4] INFO  c.p.controller.PropertyController - Property details for header fetched
+""2020-06-19 00:54:46 [http-nio-8080-exec-7] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+""2020-06-19 00:54:46 [http-nio-8080-exec-3] INFO  c.p.controller.CarrierController - Carrier Data fetched successfully
+""2020-06-19 00:54:46 [http-nio-8080-exec-6] INFO  c.p.controller.PropertyController - All properties retrieved successfully
+""2020-06-19 00:54:59 [http-nio-8080-exec-8] INFO  c.p.controller.PropertyController - Property details for header fetched
+""2020-06-19 00:54:59 [http-nio-8080-exec-10] INFO  c.project.controller.UnitController - All units fetched successfully
+""2020-06-19 00:54:59 [http-nio-8080-exec-9] INFO  c.p.controller.CarrierController - Carrier Data fetched successfully
+""2020-06-19 00:54:59 [http-nio-8080-exec-1] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+""2020-06-19 00:54:59 [http-nio-8080-exec-2] INFO  c.p.controller.PropertyController - All properties retrieved successfully
+""2020-06-19 00:55:15 [http-nio-8080-exec-5] INFO  c.p.controller.PropertyController - Property details for header fetched
+""2020-06-19 00:55:15 [http-nio-8080-exec-4] INFO  c.project.controller.UnitController - All units fetched successfully
+""2020-06-19 00:55:15 [http-nio-8080-exec-3] INFO  c.p.controller.CarrierController - Carrier Names retrieved successfully
+"

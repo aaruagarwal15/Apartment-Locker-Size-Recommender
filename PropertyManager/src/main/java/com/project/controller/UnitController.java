@@ -2,6 +2,8 @@ package com.project.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,6 +25,8 @@ public class UnitController {
 	@Autowired
 	private UnitService unitService;
 	
+	final Logger logger = LoggerFactory.getLogger(UnitController.class);
+	
 	@RequestMapping(value = "/getallunits", method = RequestMethod.GET)
 	@ResponseBody
 	public String getAllUnitsData(@RequestParam("propertyId") String propertyId) {
@@ -30,9 +34,11 @@ public class UnitController {
 		try {
 			List<Unit> listUnit = unitService.getUnits(Long.parseLong(propertyId));
 			String gson = new Gson().toJson(listUnit);
+			logger.info("All units fetched successfully");
 			System.out.println(gson);
 			return gson;
 		} catch (Exception e) {
+			logger.error("Unable to fetch units");
 			System.out.println(e);
 			return "FAILED";
 		}
@@ -46,7 +52,9 @@ public class UnitController {
 		try {
 			unitService.deleteUnit(Long.parseLong(unitNumber), Long.parseLong(buildingNumber), Long.parseLong(propertyId) );
 			result = "SUCCESS";
+			logger.info("Unit is successfully deleted");
 		} catch (Exception e) {
+			logger.error("Error in deleting a unit");
 			System.out.println(e);
 			result = "Error";
 		}
@@ -68,13 +76,16 @@ public class UnitController {
 				Unit newUnit = new Unit(Long.parseLong(propertyId), Long.parseLong(unitNumber), Long.parseLong(buildingNumber),addressId);
 				String gson = new Gson().toJson(newUnit);
 				System.out.println(gson);
+				logger.info("New Unit is successfully added");
 				return gson;
 			}
 			else {
+				logger.error("New Unit Entries already exists");
 				return "FAILED";
 			}
 			
 		} catch (Exception e) {
+			logger.error("Error in adding a new unit");
 			System.out.println(e);
 			return "FAILED";
 		}

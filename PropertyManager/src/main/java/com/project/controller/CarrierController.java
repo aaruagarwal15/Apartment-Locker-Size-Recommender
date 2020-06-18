@@ -2,6 +2,8 @@ package com.project.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,6 +28,8 @@ public class CarrierController {
 
 	@Autowired
 	private CarrierDeliveryService carrierDeliveryService;
+	
+	final Logger logger = LoggerFactory.getLogger(CarrierController.class);
 
 	@RequestMapping(value = "/fetchCarrier", method = RequestMethod.GET)
 	@ResponseBody
@@ -34,9 +38,11 @@ public class CarrierController {
 		try {
 			List<CarrierCombined> carrierCombined = carrierDeliveryService.getCombinedData(Long.parseLong(propertyId));
 			String gson = new Gson().toJson(carrierCombined);
+			logger.info("Carrier Data fetched successfully");
 			System.out.println(gson);
 			return gson;
 		} catch (Exception e) {
+			logger.error("Unable to fetch carrier data");
 			System.out.println(e);
 			return "FAILED";
 		}
@@ -51,12 +57,6 @@ public class CarrierController {
 			Carrier carrier = new Carrier();
 			carrier.setId(Long.parseLong(carrierId));
 			carrier.setcarrierName(carrierName);
-			// try {
-			// carrierService.carrierSave(carrier);
-			// } catch (Exception e) {
-			// System.out.println(e);
-			// System.out.println("Entry already exists");
-			// }
 			List<CarrierDelivery> carrierDelivery = carrierDeliveryService
 					.carrierDeliveryCheck(Long.parseLong(carrierId), Long.parseLong(propertyId));
 			if (carrierDelivery.isEmpty()) {
@@ -73,13 +73,16 @@ public class CarrierController {
 				List<CarrierCombined> carrierCombined = carrierDeliveryService.getEntryData(Long.parseLong(propertyId),
 						Long.parseLong(carrierId));
 				String gson = new Gson().toJson(carrierCombined);
+				logger.info("New Carrier Details added successfully");
 				return gson;
 			} else {
+				logger.error("Entered carrier already exists");
 				System.out.println("Carrier Already Exists");
 				return "FAILED";
 			}
 
 		} catch (Exception e) {
+			logger.error("Can't add new carrier");
 			System.out.println(e);
 			return "FAILED";
 		}
@@ -95,12 +98,11 @@ public class CarrierController {
 			carrierDeliveryService.delete(Long.parseLong(carrierId), Long.parseLong(propertyId));
 			List<String> checkInCarrier = carrierDeliveryService.checkforcarrier(Long.parseLong(carrierId),
 					Long.parseLong(propertyId));
-			// if (checkInCarrier.isEmpty()) {
-			// carrierService.deleteCarrier(Long.parseLong(carrierId));
-			// }
 			System.out.println("SUCCESS");
+			logger.info("Carrier deleted successfully");
 			result = "SUCCESS";
 		} catch (Exception e) {
+			logger.error("Error in deleting carrier");
 			System.out.println(e);
 			result = "Error";
 		}
@@ -125,10 +127,12 @@ public class CarrierController {
 				carrierDeliveryService.carrierDeliverySave(cd);
 			}
 			List<CarrierCombined> carrierCombined = carrierDeliveryService.getCombinedData(Long.parseLong(propertyId));
+			logger.info("Carrier edited successfully");
 			String gson = new Gson().toJson(carrierCombined);
 			return gson;
 
 		} catch (Exception e) {
+			logger.error("Unable to edit carrier");
 			System.out.println(e);
 			return "FAILED";
 		}
@@ -141,8 +145,10 @@ public class CarrierController {
 		try {
 			List<String> carrierNames = carrierService.getAllNames();
 			String gson = new Gson().toJson(carrierNames);
+			logger.info("Carrier Names retrieved successfully");
 			return gson;
 		} catch (Exception e) {
+			logger.error("Unable to fetch carrier names");
 			System.out.println(e);
 			return "FAILED";
 		}

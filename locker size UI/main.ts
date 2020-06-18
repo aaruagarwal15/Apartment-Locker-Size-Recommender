@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { snackbar, greenSnackbar } from './UIComponenets/Snackbars';
 
 class Property {
   propertyId: number;
@@ -28,7 +29,7 @@ class Property {
 
 
 /* ====================== SNACKBARS ================== */
-
+/* 
 function snackbar(msg, time = 3000) {
 
   let x: HTMLElement = document.getElementById("snackbar");
@@ -43,7 +44,7 @@ function greenSnackbar(msg, time = 3000) {
   x.innerHTML = msg
   x.className = "greenShow";
   setTimeout(function () { x.className = x.className.replace("greenShow", ""); }, time);
-}
+} */
 
 
 window.onload = function () {
@@ -135,6 +136,11 @@ window.onload = function () {
       for (var i: number = 0; i < response.data.length; i++) {
         let p = new Property(response.data[i].propertyId, response.data[i].propertyName, response.data[i].propertyAddress);
         p.createList();
+        let all_buttons: NodeListOf<HTMLElement> = document.querySelectorAll('.get_details');
+        for (var i: number = 0; i < all_buttons.length; i++) {
+          all_buttons[i].onclick = getID;
+        }
+
       }
     }).catch(function (error) {
       console.log(error);
@@ -154,6 +160,10 @@ window.onload = function () {
       for (var i: number = 0; i < response.data.length; i++) {
         let p = new Property(response.data[i].propertyId, response.data[i].propertyName, response.data[i].propertyAddress);
         p.createList();
+        let all_buttons: NodeListOf<HTMLElement> = document.querySelectorAll('.get_details');
+        for (var i: number = 0; i < all_buttons.length; i++) {
+          all_buttons[i].onclick = getID;
+        }
       }
     }).catch(function (error) {
       console.log(error);

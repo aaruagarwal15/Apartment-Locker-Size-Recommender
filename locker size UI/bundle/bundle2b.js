@@ -187,6 +187,31 @@ process.umask = function() { return 0; };
 },{}],2:[function(require,module,exports){
 "use strict";
 exports.__esModule = true;
+var axios_1 = require("axios");
+/**=========================== UNIT CLASS ================================ */
+var Unit = /** @class */ (function () {
+    function Unit(propertyId, unitNumber, buildingNumber) {
+        this.propertyId = propertyId;
+        this.unitNumber = unitNumber;
+        this.buildingNumber = buildingNumber;
+    }
+    Unit.prototype.createList = function () {
+        var key = 'a' + Math.random().toString(36).slice(2);
+        var card = document.createElement('div');
+        var card_html = "<div class='card-body'><h5 class='card-title'>" + "Unit Number: " + this.unitNumber + "</h5><h6 class='card-subtitle mb-2 text-muted'>" + "Building Number: " + this.buildingNumber + "</h6>" +
+            "<button type='button' class='btn btn-outline-danger delete_unit_data' data-toggle='tooltip' data-placement='bottom' title='Delete Unit'><i class='fa fa-trash' aria-hidden='true'></i></button></div>";
+        card.innerHTML = card_html;
+        card.classList.add(key);
+        card.classList.add("card");
+        card.classList.add("border-3");
+        card.setAttribute('style', 'min-width: 18rem;margin:1%;');
+        document.getElementById('new_units_data').appendChild(card);
+        return key;
+    };
+    return Unit;
+}());
+;
+/* ====================== SNACKBARS ================== */
 function snackbar(msg, time) {
     if (time === void 0) { time = 3000; }
     var x = document.getElementById("snackbar");
@@ -194,7 +219,6 @@ function snackbar(msg, time) {
     x.className = "show";
     setTimeout(function () { x.className = x.className.replace("show", ""); }, time);
 }
-exports.snackbar = snackbar;
 function greenSnackbar(msg, time) {
     if (time === void 0) { time = 3000; }
     var x = document.getElementById("snackbar");
@@ -202,174 +226,102 @@ function greenSnackbar(msg, time) {
     x.className = "greenShow";
     setTimeout(function () { x.className = x.className.replace("greenShow", ""); }, time);
 }
-exports.greenSnackbar = greenSnackbar;
-
-},{}],3:[function(require,module,exports){
-"use strict";
-exports.__esModule = true;
-var axios_1 = require("axios");
-var Snackbars_1 = require("./UIComponenets/Snackbars");
-var Property = /** @class */ (function () {
-    function Property(propertyId, propertyName, propertyAddress) {
-        this.propertyId = propertyId;
-        this.propertyName = propertyName;
-        this.propertyAddress = propertyAddress;
+var propertyId = localStorage.getItem("PropertyId");
+/* ===================== DELETE UNIT DETAILS ================= */
+function deleteUnitData(e) {
+    var cardNode = e.srcElement.parentNode.parentNode;
+    e.srcElement.parentNode.parentNode.getElementsByTagName('h5')[0].innerHTML.substring(13);
+    var unitNumber = e.srcElement.parentNode.parentNode.getElementsByTagName('h5')[0].innerHTML.substring(13);
+    var buildingNumber = e.srcElement.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML.substring(17);
+    if (e.srcElement.nodeName == 'I') {
+        cardNode = e.srcElement.parentNode.parentNode.parentElement;
+        unitNumber = e.srcElement.parentNode.parentNode.parentNode.getElementsByTagName('h5')[0].innerHTML;
+        buildingNumber = e.srcElement.parentNode.parentNode.getElementsByTagName('h6')[0].innerHTML;
     }
-    Property.prototype.createList = function () {
-        var st;
-        var apartmentCard = document.createElement('div');
-        apartmentCard.innerHTML = "\n    <div class='card-header'>" + this.propertyName + "</div>\n    <div class='card-body'>\n      <p class='card-text'>" + this.propertyAddress + "</p>\n      <p hidden>" + this.propertyId.toString() + "</p>\n      <button type='button' class='btn btn-info get_details'> View Details </button>\n    </div>\n    ";
-        apartmentCard.classList.add('card');
-        apartmentCard.classList.add('border-info');
-        document.getElementById('propertyDisplay').appendChild(apartmentCard);
-    };
-    return Property;
-}());
-;
-/* ====================== SNACKBARS ================== */
-/*
-function snackbar(msg, time = 3000) {
-
-  let x: HTMLElement = document.getElementById("snackbar");
-  x.innerHTML = msg
-  x.className = "show";
-  setTimeout(function () { x.className = x.className.replace("show", ""); }, time);
-}
-
-function greenSnackbar(msg, time = 3000) {
-
-  let x: HTMLElement = document.getElementById("snackbar");
-  x.innerHTML = msg
-  x.className = "greenShow";
-  setTimeout(function () { x.className = x.className.replace("greenShow", ""); }, time);
-} */
-window.onload = function () {
-    function getID(e) {
-        //console.log(e.srcElement.previousElementSibling.innerHTML);
-        var id = e.srcElement.previousElementSibling.innerHTML;
-        localStorage.setItem("PropertyId", id.toString());
-        //window.open("index2.html?id="+ propertyId.toString());
-        window.open("index2.html");
-    }
-    var allProperties;
-    /* ================== GET LIST OF PROPERTIES ======================================== */
-    axios_1["default"].get('http://localhost:8080/getallProperty').then(function (response) {
-        console.log(response.data);
-        allProperties = response.data;
-        for (var i = 0; i < response.data.length; i++) {
-            var p = new Property(response.data[i].propertyId, response.data[i].propertyName, response.data[i].propertyAddress);
-            p.createList();
-        }
-    })["catch"](function (error) {
-        Snackbars_1.snackbar("Oops!! Some error occured");
-    }).then(function () {
-        /* ============================================ VIEW DETAILS ========================================= */
-        var all_buttons = document.querySelectorAll('.get_details');
-        console.log("imhere");
-        for (var i = 0; i < all_buttons.length; i++) {
-            all_buttons[i].onclick = getID;
-        }
-    });
-    /* ============================ ADD NEW PROPERTY ================================================ */
-    document.getElementById('addNewProperty').onclick = function () {
-        var params = new URLSearchParams();
-        var propertyName = document.getElementById('newProperty').value;
-        var propertyAddress = document.getElementById('newAddress').value;
-        //var p_status:string = ( < HTMLSelectElement > document.getElementById('new_status')).value;
-        if (propertyName != "" && propertyAddress != "") {
-            params.append('PropertyName', propertyName);
-            params.append('PropertyAddress', propertyAddress);
-            //params.append('Property_status', p_status);
-            axios_1["default"]({
-                method: 'POST',
-                url: 'http://localhost:8080/saveProperty',
-                data: params
-            }).then(function (response) {
-                console.log(response);
-                document.getElementById('propertyDisplay').innerHTML = "";
-                for (var i = 0; i < response.data.length; i++) {
-                    var p = new Property(response.data[i].propertyId, response.data[i].propertyName, response.data[i].propertyAddress);
-                    p.createList();
-                }
-                var all_buttons = document.querySelectorAll('.get_details');
-                for (var i = 0; i < all_buttons.length; i++) {
-                    all_buttons[i].onclick = getID;
-                }
-                document.getElementById('newProperty').value = "";
-                document.getElementById('newAddress').value = "";
-                Snackbars_1.greenSnackbar("Successfully Added");
-            })["catch"](function (error) {
-                console.log(error);
-                document.getElementById('newProperty').value = "";
-                document.getElementById('newAddress').value = "";
-                Snackbars_1.snackbar("Oops!! Some error occured");
-            });
+    var url2 = 'http://localhost:8080/deleteUnit?unitNumber=';
+    url2 = url2.concat(unitNumber);
+    url2 = url2.concat("&buildingNumber=");
+    url2 = url2.concat(buildingNumber);
+    url2 = url2.concat("&propertyId=");
+    url2 = url2.concat(propertyId);
+    axios_1["default"]["delete"](url2).then(function (response) {
+        if (response.data.toString() == "SUCCESS") {
+            cardNode.parentElement.removeChild(cardNode);
+            greenSnackbar("Successfully deleted.");
         }
         else {
-            Snackbars_1.snackbar("Fields cannot be empty", 4000);
+            snackbar("Oops Something went wrong. Please Try againg after sometime.", 4000);
         }
-        //document.getElementById('newEntry')
-    };
-    /* ==================== INCREASING ORDERED LIST ===================================== */
-    document.getElementById('increasingOrder').onclick = function () {
-        //var f_val:string = ( < HTMLSelectElement > document.getElementById('status_filter')).value;
-        var url = 'http://localhost:8080/increasingFilter';
-        //url = url.concat(f_val);
-        axios_1["default"].get(url).then(function (response) {
-            console.log(response.data);
-            document.getElementById('propertyDisplay').innerHTML = "";
-            for (var i = 0; i < response.data.length; i++) {
-                var p = new Property(response.data[i].propertyId, response.data[i].propertyName, response.data[i].propertyAddress);
-                p.createList();
-                var all_buttons = document.querySelectorAll('.get_details');
-                for (var i = 0; i < all_buttons.length; i++) {
-                    all_buttons[i].onclick = getID;
-                }
-            }
-        })["catch"](function (error) {
-            console.log(error);
-        });
-    };
-    /* ==================== DECREASING ORDERED LIST ===================================== */
-    document.getElementById('decreasingOrder').onclick = function () {
-        // var f_val:string = ( < HTMLSelectElement > document.getElementById('status_filter')).value;
-        var url = 'http://localhost:8080/decreasingFilter';
-        //url = url.concat(f_val);
-        axios_1["default"].get(url).then(function (response) {
-            console.log(response.data);
-            document.getElementById('propertyDisplay').innerHTML = "";
-            for (var i = 0; i < response.data.length; i++) {
-                var p = new Property(response.data[i].propertyId, response.data[i].propertyName, response.data[i].propertyAddress);
-                p.createList();
-                var all_buttons = document.querySelectorAll('.get_details');
-                for (var i = 0; i < all_buttons.length; i++) {
-                    all_buttons[i].onclick = getID;
-                }
-            }
-        })["catch"](function (error) {
-            console.log(error);
-        });
-    };
-    /* ==================== SEARCH BOX ===================================== */
-    function searchkey(e) {
-        var searchField = document.getElementById('txt-search').value;
-        var regex = new RegExp(searchField, "i");
-        console.log(regex);
-        document.getElementById('propertyDisplay').innerHTML = "";
-        console.log(allProperties);
-        allProperties.forEach(function (val, key) {
-            if ((val.propertyName.search(regex) != -1) || (val.propertyAddress.search(regex) != -1)) {
-                var property = new Property(val.propertyId, val.propertyName, val.propertyAddress);
-                property.createList();
-            }
+    })["catch"](function (error) {
+        snackbar("Oops!! Something went wrong. Please try again later.");
+        //console.log(error);
+    });
+}
+/* ======================== RETRIEVE ALL UNITS DATA ================================== */
+var url = 'http://localhost:8080/getallunits?propertyId=';
+url = url.concat(propertyId);
+axios_1["default"].get(url).then(function (response) {
+    for (var i = 0; i < response.data.length; i++) {
+        var p = new Unit(response.data[i].propertyId, response.data[i].unitNumber, response.data[i].buildingNumber);
+        var key = p.createList();
+        /* let edit_button: HTMLElement = document.querySelector('.' + key + ' .edit_unit_data'); */
+        var delete_button = document.querySelector('.' + key + ' .delete_unit_data');
+        /* edit_button.addEventListener('click', function (e) {
+          setunitData(e);
+        }) */
+        delete_button.addEventListener('click', function (e) {
+            deleteUnitData(e);
         });
     }
-    document.getElementById('txt-search').addEventListener('keyup', searchkey);
+})["catch"](function (error) {
+    snackbar("Oops!! Something went wrong. Please try again later.", 5000);
+    //console.log(error);
+});
+/* ==================================== ADD NEW UNIT ========================================== */
+document.getElementById('add_new_unit').onclick = function () {
+    var params = new URLSearchParams();
+    var unitNumber = document.getElementById('new_unit_number').value;
+    var buildingNumber = document.getElementById('new_building_number').value;
+    if (buildingNumber != "" && unitNumber != "") {
+        params.append('PropertyId', propertyId);
+        params.append('UnitNumber', unitNumber);
+        params.append('BuildingNumber', buildingNumber);
+        axios_1["default"]({
+            method: 'POST',
+            url: 'http://localhost:8080/saveUnit',
+            data: params
+        }).then(function (response) {
+            if (response.data == "FAILED") {
+                snackbar("Enter Valid Entries");
+            }
+            else {
+                var p = new Unit(response.data.propertyId, response.data.unitNumber, response.data.buildingNumber);
+                var key = p.createList();
+                /* let edit_button: HTMLElement = document.querySelector('.' + key + ' .edit_unit_data'); */
+                var delete_button = document.querySelector('.' + key + ' .delete_unit_data');
+                /*  edit_button.addEventListener('click', function (e) {
+                   setunitData(e);
+                 }); */
+                delete_button.addEventListener('click', function (e) {
+                    deleteUnitData(e);
+                });
+                document.getElementById('new_unit_number').value = "";
+                document.getElementById('new_building_number').value = "";
+                greenSnackbar("Unit added successfully!");
+            }
+        })["catch"](function (error) {
+            //console.log(error);
+            snackbar("Oops!! Something went wrong. Please try again later.");
+        });
+    }
+    else {
+        snackbar("Fields cannot be empty");
+    }
 };
 
-},{"./UIComponenets/Snackbars":2,"axios":4}],4:[function(require,module,exports){
+},{"axios":3}],3:[function(require,module,exports){
 module.exports = require('./lib/axios');
-},{"./lib/axios":6}],5:[function(require,module,exports){
+},{"./lib/axios":5}],4:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -551,7 +503,7 @@ module.exports = function xhrAdapter(config) {
   });
 };
 
-},{"../core/buildFullPath":12,"../core/createError":13,"./../core/settle":17,"./../helpers/buildURL":21,"./../helpers/cookies":23,"./../helpers/isURLSameOrigin":25,"./../helpers/parseHeaders":27,"./../utils":29}],6:[function(require,module,exports){
+},{"../core/buildFullPath":11,"../core/createError":12,"./../core/settle":16,"./../helpers/buildURL":20,"./../helpers/cookies":22,"./../helpers/isURLSameOrigin":24,"./../helpers/parseHeaders":26,"./../utils":28}],5:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -606,7 +558,7 @@ module.exports = axios;
 // Allow use of default import syntax in TypeScript
 module.exports.default = axios;
 
-},{"./cancel/Cancel":7,"./cancel/CancelToken":8,"./cancel/isCancel":9,"./core/Axios":10,"./core/mergeConfig":16,"./defaults":19,"./helpers/bind":20,"./helpers/spread":28,"./utils":29}],7:[function(require,module,exports){
+},{"./cancel/Cancel":6,"./cancel/CancelToken":7,"./cancel/isCancel":8,"./core/Axios":9,"./core/mergeConfig":15,"./defaults":18,"./helpers/bind":19,"./helpers/spread":27,"./utils":28}],6:[function(require,module,exports){
 'use strict';
 
 /**
@@ -627,7 +579,7 @@ Cancel.prototype.__CANCEL__ = true;
 
 module.exports = Cancel;
 
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 var Cancel = require('./Cancel');
@@ -686,14 +638,14 @@ CancelToken.source = function source() {
 
 module.exports = CancelToken;
 
-},{"./Cancel":7}],9:[function(require,module,exports){
+},{"./Cancel":6}],8:[function(require,module,exports){
 'use strict';
 
 module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
 
-},{}],10:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -789,7 +741,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = Axios;
 
-},{"../helpers/buildURL":21,"./../utils":29,"./InterceptorManager":11,"./dispatchRequest":14,"./mergeConfig":16}],11:[function(require,module,exports){
+},{"../helpers/buildURL":20,"./../utils":28,"./InterceptorManager":10,"./dispatchRequest":13,"./mergeConfig":15}],10:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -843,7 +795,7 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
 
 module.exports = InterceptorManager;
 
-},{"./../utils":29}],12:[function(require,module,exports){
+},{"./../utils":28}],11:[function(require,module,exports){
 'use strict';
 
 var isAbsoluteURL = require('../helpers/isAbsoluteURL');
@@ -865,7 +817,7 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
   return requestedURL;
 };
 
-},{"../helpers/combineURLs":22,"../helpers/isAbsoluteURL":24}],13:[function(require,module,exports){
+},{"../helpers/combineURLs":21,"../helpers/isAbsoluteURL":23}],12:[function(require,module,exports){
 'use strict';
 
 var enhanceError = require('./enhanceError');
@@ -885,7 +837,7 @@ module.exports = function createError(message, config, code, request, response) 
   return enhanceError(error, config, code, request, response);
 };
 
-},{"./enhanceError":15}],14:[function(require,module,exports){
+},{"./enhanceError":14}],13:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -966,7 +918,7 @@ module.exports = function dispatchRequest(config) {
   });
 };
 
-},{"../cancel/isCancel":9,"../defaults":19,"./../utils":29,"./transformData":18}],15:[function(require,module,exports){
+},{"../cancel/isCancel":8,"../defaults":18,"./../utils":28,"./transformData":17}],14:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1010,7 +962,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   return error;
 };
 
-},{}],16:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -1085,7 +1037,7 @@ module.exports = function mergeConfig(config1, config2) {
   return config;
 };
 
-},{"../utils":29}],17:[function(require,module,exports){
+},{"../utils":28}],16:[function(require,module,exports){
 'use strict';
 
 var createError = require('./createError');
@@ -1112,7 +1064,7 @@ module.exports = function settle(resolve, reject, response) {
   }
 };
 
-},{"./createError":13}],18:[function(require,module,exports){
+},{"./createError":12}],17:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1134,7 +1086,7 @@ module.exports = function transformData(data, headers, fns) {
   return data;
 };
 
-},{"./../utils":29}],19:[function(require,module,exports){
+},{"./../utils":28}],18:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1235,7 +1187,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 }).call(this,require('_process'))
-},{"./adapters/http":5,"./adapters/xhr":5,"./helpers/normalizeHeaderName":26,"./utils":29,"_process":1}],20:[function(require,module,exports){
+},{"./adapters/http":4,"./adapters/xhr":4,"./helpers/normalizeHeaderName":25,"./utils":28,"_process":1}],19:[function(require,module,exports){
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -1248,7 +1200,7 @@ module.exports = function bind(fn, thisArg) {
   };
 };
 
-},{}],21:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1321,7 +1273,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   return url;
 };
 
-},{"./../utils":29}],22:[function(require,module,exports){
+},{"./../utils":28}],21:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1337,7 +1289,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
     : baseURL;
 };
 
-},{}],23:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1392,7 +1344,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":29}],24:[function(require,module,exports){
+},{"./../utils":28}],23:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1408,7 +1360,7 @@ module.exports = function isAbsoluteURL(url) {
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
 };
 
-},{}],25:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1478,7 +1430,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":29}],26:[function(require,module,exports){
+},{"./../utils":28}],25:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -1492,7 +1444,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   });
 };
 
-},{"../utils":29}],27:[function(require,module,exports){
+},{"../utils":28}],26:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1547,7 +1499,7 @@ module.exports = function parseHeaders(headers) {
   return parsed;
 };
 
-},{"./../utils":29}],28:[function(require,module,exports){
+},{"./../utils":28}],27:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1576,7 +1528,7 @@ module.exports = function spread(callback) {
   };
 };
 
-},{}],29:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 'use strict';
 
 var bind = require('./helpers/bind');
@@ -1922,4 +1874,4 @@ module.exports = {
   trim: trim
 };
 
-},{"./helpers/bind":20}]},{},[3]);
+},{"./helpers/bind":19}]},{},[2]);

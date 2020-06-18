@@ -1,6 +1,7 @@
 "use strict";
 exports.__esModule = true;
 var axios_1 = require("axios");
+var Snackbars_1 = require("./UIComponenets/Snackbars");
 var Property = /** @class */ (function () {
     function Property(propertyId, propertyName, propertyAddress) {
         this.propertyId = propertyId;
@@ -19,20 +20,22 @@ var Property = /** @class */ (function () {
 }());
 ;
 /* ====================== SNACKBARS ================== */
-function snackbar(msg, time) {
-    if (time === void 0) { time = 3000; }
-    var x = document.getElementById("snackbar");
-    x.innerHTML = msg;
-    x.className = "show";
-    setTimeout(function () { x.className = x.className.replace("show", ""); }, time);
+/*
+function snackbar(msg, time = 3000) {
+
+  let x: HTMLElement = document.getElementById("snackbar");
+  x.innerHTML = msg
+  x.className = "show";
+  setTimeout(function () { x.className = x.className.replace("show", ""); }, time);
 }
-function greenSnackbar(msg, time) {
-    if (time === void 0) { time = 3000; }
-    var x = document.getElementById("snackbar");
-    x.innerHTML = msg;
-    x.className = "greenShow";
-    setTimeout(function () { x.className = x.className.replace("greenShow", ""); }, time);
-}
+
+function greenSnackbar(msg, time = 3000) {
+
+  let x: HTMLElement = document.getElementById("snackbar");
+  x.innerHTML = msg
+  x.className = "greenShow";
+  setTimeout(function () { x.className = x.className.replace("greenShow", ""); }, time);
+} */
 window.onload = function () {
     function getID(e) {
         //console.log(e.srcElement.previousElementSibling.innerHTML);
@@ -51,7 +54,7 @@ window.onload = function () {
             p.createList();
         }
     })["catch"](function (error) {
-        snackbar("Oops!! Some error occured");
+        Snackbars_1.snackbar("Oops!! Some error occured");
     }).then(function () {
         /* ============================================ VIEW DETAILS ========================================= */
         var all_buttons = document.querySelectorAll('.get_details');
@@ -87,16 +90,16 @@ window.onload = function () {
                 }
                 document.getElementById('newProperty').value = "";
                 document.getElementById('newAddress').value = "";
-                greenSnackbar("Successfully Added");
+                Snackbars_1.greenSnackbar("Successfully Added");
             })["catch"](function (error) {
                 console.log(error);
                 document.getElementById('newProperty').value = "";
                 document.getElementById('newAddress').value = "";
-                snackbar("Oops!! Some error occured");
+                Snackbars_1.snackbar("Oops!! Some error occured");
             });
         }
         else {
-            snackbar("Fields cannot be empty", 4000);
+            Snackbars_1.snackbar("Fields cannot be empty", 4000);
         }
         //document.getElementById('newEntry')
     };
@@ -111,6 +114,10 @@ window.onload = function () {
             for (var i = 0; i < response.data.length; i++) {
                 var p = new Property(response.data[i].propertyId, response.data[i].propertyName, response.data[i].propertyAddress);
                 p.createList();
+                var all_buttons = document.querySelectorAll('.get_details');
+                for (var i = 0; i < all_buttons.length; i++) {
+                    all_buttons[i].onclick = getID;
+                }
             }
         })["catch"](function (error) {
             console.log(error);
@@ -127,6 +134,10 @@ window.onload = function () {
             for (var i = 0; i < response.data.length; i++) {
                 var p = new Property(response.data[i].propertyId, response.data[i].propertyName, response.data[i].propertyAddress);
                 p.createList();
+                var all_buttons = document.querySelectorAll('.get_details');
+                for (var i = 0; i < all_buttons.length; i++) {
+                    all_buttons[i].onclick = getID;
+                }
             }
         })["catch"](function (error) {
             console.log(error);
